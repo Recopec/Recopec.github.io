@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>C 的有意思的 题目 - Recopec</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="description" content="C 的有意思的 题目多项式加法（5分）题目内容�? 一个多项式可以表达为x的各次幂与系数乘积的和，比如�? 2x6+3x5+12x3+6x+20 现在，你的程序要读入两个多项式，然后输出这两个多项式的和，也就是把对应的幂上的系数相加然后输出�? 程序要处理的幂最大为100�? 输入格式: 总共要输入两个多项式，每个多项式的输入格式如下： 每行输入两个数字，第一个表示幂次，第二个表示该幂次的系数，所">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C 的有意思的 题目">
+<meta property="og:url" content="https://blog.irec.moe/2022/04/19/C%20%E7%9A%84%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%20%E9%A2%98%E7%9B%AE/index.html">
+<meta property="og:site_name" content="Recopec">
+<meta property="og:description" content="C 的有意思的 题目多项式加法（5分）题目内容�? 一个多项式可以表达为x的各次幂与系数乘积的和，比如�? 2x6+3x5+12x3+6x+20 现在，你的程序要读入两个多项式，然后输出这两个多项式的和，也就是把对应的幂上的系数相加然后输出�? 程序要处理的幂最大为100�? 输入格式: 总共要输入两个多项式，每个多项式的输入格式如下： 每行输入两个数字，第一个表示幂次，第二个表示该幂次的系数，所">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-19T10:58:04.755Z">
+<meta property="article:modified_time" content="2022-05-18T11:30:28.590Z">
+<meta property="article:author" content="Recopec">
+<meta name="twitter:card" content="summary">
+    
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/justifiedGallery/justifiedGallery.min.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1652874819342">
+    
+    <link rel="stylesheet" href="/css/style.css?v=1652874819342">
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Recopec" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="Recopec"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Recopec">
+            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="Recopec" alt="Recopec">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>2</div>
+        <div><span>标签</span>0</div>
+        <div><span>分类</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+
+    
+    
+    
+    <!-- 一言 -->
+
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">
+      一言
+    </h3>
+    <div class="nexmoe-widget">
+      <ul class="hitokoto-box">
+        <li id="hitokoto_text_parent" class="hitokoto-text" hitokotoCategory="">
+          <a href="#" id="hitokoto_text">
+            
+          </a>
+          <a href="#" id="hitokoto_error_text" style="display: none;">
+            
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    let hitokotoText = document.getElementById('hitokoto_text')
+    let hitokotoErroText = document.getElementById('hitokoto_error_text')
+    let hitokotoCategory = document.getElementById('hitokoto_text_parent').getAttribute('hitokotoCategory')
+    window.onload = function () {
+      let url = 'https://v1.hitokoto.cn'
+      if (hitokotoCategory) {
+        url += '?c=' + hitokotoCategory
+      }
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          hitokotoText.innerText = "「 " + data.hitokoto + " 」 from " + data.from
+          hitokotoText.href = 'https://hitokoto.cn/?uuid=' + data.uuid
+        })
+        .catch((reason) => {
+          console.error(11, reason)
+          hitokotoText.style.display = 'none'
+          hitokotoErroText.style.display = 'block'
+        })
+    }
+  </script>
+  
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 Recopec
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://i.dawnlab.me/c0268c1e6cfd0863d6ba35be1575941a.png" width="150px"></a><script data-ad-client="ca-pub-2058306854838448" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+              <img data-fancybox="gallery" src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" alt="C 的有意思的 题目" loading="lazy">
+              <h1>C 的有意思的 题目</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年04月19日</a>
+</div>
+
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    
+        <a><i class="nexmoefont icon-areachart"></i>约692字</a>
+        <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要3分钟</a>
+    
+</div>
+
+      <h1 id="C-的有意思的-题目"><a href="#C-的有意思的-题目" class="headerlink" title="C 的有意思的 题目"></a>C 的有意思的 题目</h1><h2 id="多项式加法（5分）"><a href="#多项式加法（5分）" class="headerlink" title="多项式加法（5分）"></a>多项式加法（5分）</h2><p><strong>题目内容�?</strong></p>
+<p>一个多项式可以表达为x的各次幂与系数乘积的和，比如�?</p>
+<p>2x6+3x5+12x3+6x+20</p>
+<p>现在，你的程序要读入两个多项式，然后输出这两个多项式的和，也就是把对应的幂上的系数相加然后输出�?</p>
+<p>程序要处理的幂最大为100�?</p>
+<p><strong>输入格式:</strong></p>
+<p>总共要输入两个多项式，每个多项式的输入格式如下：</p>
+<p>每行输入两个数字，第一个表示幂次，第二个表示该幂次的系数，所有的系数都是整数。第一行一定是最高幂，最后一行一定是0次幂�?</p>
+<p>注意第一行和最后一行之间不一定按照幂次降低顺序排列；如果某个幂次的系数为0，就不出现在输入数据中了�?0次幂的系数为0时还是会出现在输入数据中�?</p>
+<p><strong>输出格式�?</strong></p>
+<p>从最高幂开始依次降�?0幂，如：</p>
+<p>2x6+3x5+12x3-6x+20</p>
+<p>注意其中的x是小写字母x，而且所有的符号之间都没有空格，如果某个幂的系数�?0则不需要有那项�?</p>
+<p><strong>输入样例�?</strong></p>
+<p>6 2</p>
+<p>5 3</p>
+<p>3 12</p>
+<p>1 6</p>
+<p>0 20</p>
+<p>6 2</p>
+<p>5 3</p>
+<p>2 12</p>
+<p>1 6</p>
+<p>0 20</p>
+<p><strong>输出样例�?</strong></p>
+<p>4x6+6x5+12x3+12x2+12x+40</p>
+<p>时间限制�?500ms内存限制�?32000kb</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">int</span> N = <span class="number">101</span>;</span><br><span class="line">	<span class="type">int</span> fac_arr[N];</span><br><span class="line">	<span class="type">int</span> count = <span class="number">0</span>, inputMod, inputPow, maxPow = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">		fac_arr[i] = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (count != <span class="number">2</span>) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;inputMod, &amp;inputPow);</span><br><span class="line">		fac_arr[inputMod] += inputPow;</span><br><span class="line">		<span class="keyword">if</span> (inputMod == <span class="number">0</span>) &#123;</span><br><span class="line">			count++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = N; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">		<span class="keyword">if</span> (fac_arr[i] != <span class="number">0</span>) &#123;</span><br><span class="line">			maxPow = i;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (maxPow == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, fac_arr[<span class="number">0</span>]);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = maxPow; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">			<span class="comment">// i 为幂 fac_arr[i] 为对应幂的系�?</span></span><br><span class="line">			<span class="comment">// 当幂 大于1 的时�?</span></span><br><span class="line">			<span class="keyword">if</span> (i &gt; <span class="number">1</span>) &#123;</span><br><span class="line">				<span class="comment">// 当系数大�?1的时�? 输出 系数x�? 这种格式</span></span><br><span class="line">				<span class="keyword">if</span> (<span class="built_in">abs</span>(fac_arr[i]) &gt; <span class="number">1</span>) &#123;</span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;%dx%d&quot;</span>, <span class="built_in">abs</span>(fac_arr[i]), i);</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">abs</span>(fac_arr[i]) == <span class="number">1</span>) &#123;</span><br><span class="line">					<span class="comment">// 如果系数等于1，则输出 x�? 这种格式</span></span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;x%d&quot;</span>, i);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="comment">// 当幂 等于1 的时�?</span></span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</span><br><span class="line">				<span class="comment">// 当系数大�?1 输出 系数x 这种格式</span></span><br><span class="line">				<span class="keyword">if</span> (<span class="built_in">abs</span>(fac_arr[i]) &gt; <span class="number">1</span>) &#123;</span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;%dx&quot;</span>, fac_arr[i]);</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">abs</span>(fac_arr[i]) == <span class="number">1</span>) &#123;</span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;x&quot;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="comment">// 当幂 等于 0 的时�?</span></span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="comment">// 判断 x0 的系�? 如果不等�?0就输出系�? 因为 x0 等于1 所以不做处�?</span></span><br><span class="line">				<span class="keyword">if</span> (<span class="built_in">abs</span>(fac_arr[i]) != <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, fac_arr[i]);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 单独判断系数情况，输出符�?</span></span><br><span class="line">			<span class="keyword">if</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">if</span> (fac_arr[i - <span class="number">1</span>] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (fac_arr[i - <span class="number">1</span>] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;+&quot;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Recopec<br>
+        <strong>本文链接：</strong><a href="https://blog.irec.moe/2022/04/19/C%20%E7%9A%84%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%20%E9%A2%98%E7%9B%AE/" title="https:&#x2F;&#x2F;blog.irec.moe&#x2F;2022&#x2F;04&#x2F;19&#x2F;C%20%E7%9A%84%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%20%E9%A2%98%E7%9B%AE&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;blog.irec.moe&#x2F;2022&#x2F;04&#x2F;19&#x2F;C%20%E7%9A%84%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%20%E9%A2%98%E7%9B%AE&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    
+<script src="/lib/mdui_043tiny/mdui.js"></script>
+<script src="/lib/jquery.min.js"></script>
+<script src="/lib/justifiedGallery/jquery.justifiedGallery.min.js"></script>
+<script src="/lib/fancybox/fancybox.umd.js"></script>
+
+
+ 
+
+<script async src="/js/app.js?v=1652874819343"></script>
+
+
+
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+</body>
+
+</html>
