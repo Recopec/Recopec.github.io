@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>在 OpenWrt 下使用 WireGuard 实现全局代理上网 - Recopec 的博客</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="description" content="在 OpenWrt 下使用 WireGuard 实现全局代理上网设备情况设备型号：360 T7 固件版本号：ImmortalWrt 18.06-5.4-SNAPSHOT r11814-ef0c86bdb0 &#x2F; LuCI branch (git-22.323.17670-f9380b5)   网络架构图如下   网络设置新建 WG 接口，修改协议为 WireGuard VPN 一般配置里填">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 OpenWrt 下使用 WireGuard 实现全局代理上网">
+<meta property="og:url" content="https://blog.irec.moe/openwrt_with_wireguard_proxy.html">
+<meta property="og:site_name" content="Recopec 的博客">
+<meta property="og:description" content="在 OpenWrt 下使用 WireGuard 实现全局代理上网设备情况设备型号：360 T7 固件版本号：ImmortalWrt 18.06-5.4-SNAPSHOT r11814-ef0c86bdb0 &#x2F; LuCI branch (git-22.323.17670-f9380b5)   网络架构图如下   网络设置新建 WG 接口，修改协议为 WireGuard VPN 一般配置里填">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622160616094.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230812051639947.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622154615466.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622154638126.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622154543710.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622155412335.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622155446824.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622155505659.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622155518649.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622160227228.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622160248957.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622164300520.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622164419608.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622161222503.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622163508283.png">
+<meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622163635986.png">
+<meta property="article:published_time" content="2023-06-22T12:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-19T04:16:00.000Z">
+<meta property="article:author" content="Recopec">
+<meta property="article:tag" content="OpenWrt">
+<meta property="article:tag" content="WireGuard">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622160616094.png">
+    
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1696523464248">
+    
+    <link rel="stylesheet" href="/css/style.css?v=1696523464248">
+
+    
+
+    
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+
+
+    <script async src="/js/app.js?v=1696523464248"></script>
+    
+     
+
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" 
+            style="background-image: url(https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/bg.jpg)"
+        ></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Recopec" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Recopec">
+            <img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec" alt="Recopec">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>9</div>
+        <div><span>标签</span>12</div>
+        <div><span>分类</span>4</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+        
+            
+            <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:irec.moe" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+            </form>
+         
+    </div>
+</div>
+
+
+
+
+        
+            
+            <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/8209358"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/Recopec/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://twitter.com/Recopec"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter'}"
+			style="
+				color: rgb(59, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://t.me/Recopec"
+			target="_blank"
+			mdui-tooltip="{content: 'TG'}"
+			style="
+				color: rgb(70, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-telegram"
+			></i> </a
+		>
+	</div>
+</div>
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/硬件/">硬件</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/网络/">网络</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/OpenClash/" style="font-size: 10px;">OpenClash</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/PC/" style="font-size: 10px;">PC</a> <a href="/tags/WireGuard/" style="font-size: 10px;">WireGuard</a> <a href="/tags/WireShark/" style="font-size: 10px;">WireShark</a> <a href="/tags/%E4%BF%9D%E5%81%A5/" style="font-size: 10px;">保健</a> <a href="/tags/%E5%85%89%E7%8C%AB/" style="font-size: 10px;">光猫</a> <a href="/tags/%E5%8D%87%E5%AD%A6/" style="font-size: 10px;">升学</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">笔记</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%AD%E5%91%BD/" style="font-size: 10px;">续命</a> <a href="/tags/%E8%80%83%E8%AF%95/" style="font-size: 10px;">考试</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(17);
+        var tags_length = parseInt(12);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+        
+            
+            <!-- 一言 -->
+<div class="nexmoe-widget-wrap">
+  <h3 class="nexmoe-widget-title">
+    一言
+  </h3>
+  <div class="nexmoe-widget">
+    <ul class="hitokoto-box">
+      <li id="hitokoto_text_parent" class="hitokoto-text" hitokotoCategory="">
+        <a href="#" id="hitokoto_text">
+          
+        </a>
+        <a href="#" id="hitokoto_error_text" style="display: none;">
+          
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  let hitokotoText = document.getElementById('hitokoto_text')
+  let hitokotoErroText = document.getElementById('hitokoto_error_text')
+  let hitokotoCategory = document.getElementById('hitokoto_text_parent').getAttribute('hitokotoCategory')
+  window.addEventListener('load', function () {
+    let url = 'https://v1.hitokoto.cn'
+    if (hitokotoCategory) {
+      url += '?c=' + hitokotoCategory
+    }
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        hitokotoText.innerText = "「 " + data.hitokoto + " 」 from " + data.from
+        hitokotoText.href = 'https://hitokoto.cn/?uuid=' + data.uuid
+      })
+      .catch((reason) => {
+        console.error(11, reason)
+        hitokotoText.style.display = 'none'
+        hitokotoErroText.style.display = 'block'
+      })
+  })
+</script>
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+        
+            
+            
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/iherb.html">iHerb 初体验</a>
+          </li>
+        
+          <li>
+            <a href="/fuck_chinamobile.html">更换 HS1845X6 光猫并且使用 EasyMesh 进行组网的记录</a>
+          </li>
+        
+          <li>
+            <a href="/wireshark_vlan_enable.html">在 RTL 网卡上启用 Wireshark VLAN 抓包功能</a>
+          </li>
+        
+          <li>
+            <a href="/openwrt_with_wireguard_proxy.html">在 OpenWrt 下使用 WireGuard 实现全局代理上网</a>
+          </li>
+        
+          <li>
+            <a href="/openclash_windows_nointernet.html">在 OpenClash 代理环境下 Windows 提示无 Internet</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+        
+            
+    </aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 Recopec
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+    <div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 31.25%;"> 
+            <img src="/openwrt_with_wireguard_proxy/image-20230622154543710.png" alt="在 OpenWrt 下使用 WireGuard 实现全局代理上网" loading="lazy">
+            <h1>在 OpenWrt 下使用 WireGuard 实现全局代理上网</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023年06月22日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约953字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要3分钟</a>
+
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <h1 id="在-OpenWrt-下使用-WireGuard-实现全局代理上网"><a href="#在-OpenWrt-下使用-WireGuard-实现全局代理上网" class="headerlink" title="在 OpenWrt 下使用 WireGuard 实现全局代理上网"></a>在 OpenWrt 下使用 WireGuard 实现全局代理上网</h1><h2 id="设备情况"><a href="#设备情况" class="headerlink" title="设备情况"></a>设备情况</h2><p>设备型号：360 T7</p>
+<p>固件版本号：ImmortalWrt 18.06-5.4-SNAPSHOT r11814-ef0c86bdb0 &#x2F; LuCI branch (git-22.323.17670-f9380b5)</p>
+<img src="/openwrt_with_wireguard_proxy/image-20230622160616094.png" class="" title="image-20230622160616094">
+
+<p><strong>网络架构图如下</strong></p>
+<img src="/openwrt_with_wireguard_proxy/image-20230812051639947.png" class="" title="image-20230812051639947">
+
+<h2 id="网络设置"><a href="#网络设置" class="headerlink" title="网络设置"></a>网络设置</h2><p>新建 WG 接口，修改协议为 WireGuard VPN</p>
+<p>一般配置里填好<strong>私钥</strong>（可以自行生成），<strong>IP地址</strong>（对端的允许的IP）</p>
+<p>Peers 里添加一个新的。</p>
+<p>然后填写对端的<strong>公钥</strong>，<strong>允许的IP</strong>话，看情况填写。</p>
+<ul>
+<li>如果只需要走部分网段的话（打通内网），填写对应的网段即可（CIDR格式），例如192.168.88.0&#x2F;24, 10.22.33.128&#x2F;25。点加号可以添加多条。</li>
+<li>如果需要全局代理的话，填写0.0.0.0&#x2F;0（默认路由）即可</li>
+</ul>
+<p><strong>路由允许的 IP</strong> 打钩，这一条是自动添加路由表的作用。</p>
+<p><strong>端点主机和端点端口</strong>填写对端的IP地址和端口即可。</p>
+<p><strong>持续 Keep-Alive</strong> 看情况填写，我使用的是默认值0。</p>
+<p>填写好是这样的：</p>
+<img src="/openwrt_with_wireguard_proxy/image-20230622154615466.png" class="" title="image-20230622154615466">
+
+<img src="/openwrt_with_wireguard_proxy/image-20230622154638126.png" class="" title="image-20230622154638126">
+
+<p>到这一步，如果只需要走部分网段的设置已经接近尾声了，把新建的 WG 接口加入到和 LAN 相同的防火墙区域，即可打通。或者新建一个新区域，配置规则也行，保存应用之后重连一下端口，就可以在 状态 - WireGuard 状态 看到链接信息了，有正常收发流量即为正常。</p>
+<img src="/openwrt_with_wireguard_proxy/image-20230622154543710.png" class="" title="image-20230622154543710">
+
+<h2 id="全局代理设置"><a href="#全局代理设置" class="headerlink" title="全局代理设置"></a>全局代理设置</h2><p>对于这个在网上相关的资料非常少<del>（也许是我想实现的效果比较扭曲）</del>，我到最后发现会自动给我添加 WAN 口的默认路由，导致走不下去，手动添加配置删除路由还是不太稳定，所以放弃。最近有了新发现，是 MWAN 搞的鬼。</p>
+<p>现在开始配置教程。</p>
+<h3 id="防火墙设置"><a href="#防火墙设置" class="headerlink" title="防火墙设置"></a>防火墙设置</h3><p>在防火墙区域<strong>新建一个 VPN 区域</strong>，把 <strong>IP 动态伪装</strong>打开（相当于在主路由那边是通过这台路由器 NAT 之后通信），再把 WG 接口添加到 VPN 区域。</p>
+<p>修改 VPN 区域的设置：</p>
+<p>​	<strong>允许转发到目标区域</strong>：WAN 区域打钩</p>
+<p>​	<strong>允许来自源区域的转发</strong>： LAN 区域打钩</p>
+<p>修改 WAN 区域的设置：</p>
+<p>​	<strong>允许转发到目标区域</strong>：空</p>
+<p>​	<strong>允许来自源区域的转发：</strong>VPN 区域打钩</p>
+<p>修改 LAN 区域的设置：</p>
+<p>​	<strong>允许转发到目标区域</strong>：VPN 区域打钩</p>
+<p>​	<strong>允许来自源区域的转发：</strong>空</p>
+<p>修改好应该是这样的</p>
+<h4 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h4><img src="/openwrt_with_wireguard_proxy/image-20230622155412335.png" class="" title="image-20230622155412335">
+
+<h5 id="LAN"><a href="#LAN" class="headerlink" title="LAN"></a><strong>LAN</strong></h5><img src="/openwrt_with_wireguard_proxy/image-20230622155446824.png" class="" title="image-20230622155446824">
+
+<h5 id="WAN"><a href="#WAN" class="headerlink" title="WAN"></a><strong>WAN</strong></h5><img src="/openwrt_with_wireguard_proxy/image-20230622155505659.png" class="" title="image-20230622155505659">
+
+<h5 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a><strong>VPN</strong></h5><img src="/openwrt_with_wireguard_proxy/image-20230622155518649.png" class="" title="image-20230622155518649">
+
+<p>到此防火墙设置结束。</p>
+<h3 id="接口设置"><a href="#接口设置" class="headerlink" title="接口设置"></a>接口设置</h3><p>WAN接口 -&gt; 高级设置 -&gt; 使用默认网关 <strong>去掉对钩</strong></p>
+<p>LAN接口 -&gt; 基本设置 -&gt; 使用自定义的 DNS 服务器 -&gt; 填写 WG 那边的网关，或者公共 DNS</p>
+<h3 id="路由设置"><a href="#路由设置" class="headerlink" title="路由设置"></a>路由设置</h3><p>网络 -&gt; 静态路由 -&gt; 静态 IPv4 路由</p>
+<p><strong>接口</strong>选择 WAN ，<strong>对象</strong>填写对端 WG 的 IP 地址，<strong>IPv4 子网掩码</strong>32位，<strong>IPv4 网关</strong>填写你 WAN 口上级路由器的网关地址，其他保持默认即可。</p>
+<p>网络 -&gt; 静态路由 -&gt; 静态 IPv4 路由</p>
+<p><strong>网络 -&gt; 负载均衡（MWAN） -&gt; 禁用所有 MWAN 接口</strong></p>
+<p>就是因为这个原因，所以他才会自动给我加路由表，明明我取消了使用默认网关，并且没有添加其他的路由项，还是会给我加默认路由，情况如下图。</p>
+<img src="/openwrt_with_wireguard_proxy/image-20230622160227228.png" class="" title="image-20230622160227228">
+
+<p><strong>关闭 MWAN 后</strong></p>
+<img src="/openwrt_with_wireguard_proxy/image-20230622160248957.png" class="" title="image-20230622160248957">
+
+<h2 id="测试联通性"><a href="#测试联通性" class="headerlink" title="测试联通性"></a>测试联通性</h2><img src="/openwrt_with_wireguard_proxy/image-20230622164300520.png" class="" title="image-20230622164300520">
+
+<img src="/openwrt_with_wireguard_proxy/image-20230622164419608.png" class="" title="image-20230622164419608">
+
+<p>Enjoy！</p>
+<h2 id="更换固件后测试"><a href="#更换固件后测试" class="headerlink" title="更换固件后测试"></a>更换固件后测试</h2><p>固件版本号：QWRT R23.6.1 &#x2F; LuCI Master (git-23.141.16773-28dd4b3)</p>
+<img src="/openwrt_with_wireguard_proxy/image-20230622161222503.png" class="" title="image-20230622161222503">
+
+<p>这个固件防火墙区域都不用配置，WAN也不用取消默认网关，默认即可上网（自动给添加了路由）。</p>
+<p><strong>默认路由表</strong></p>
+<img src="/openwrt_with_wireguard_proxy/image-20230622163508283.png" class="" title="image-20230622163508283">
+
+<p><strong>配置好 WG 后的路由表</strong></p>
+<img src="/openwrt_with_wireguard_proxy/image-20230622163635986.png" class="" title="image-20230622163635986">
+
+<p>大雕NB！</p>
+
+    
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Recopec<br>
+        <strong>本文链接：</strong><a href="https://blog.irec.moe/openwrt_with_wireguard_proxy.html" title="https:&#x2F;&#x2F;blog.irec.moe&#x2F;openwrt_with_wireguard_proxy.html" target="_blank" rel="noopener">https:&#x2F;&#x2F;blog.irec.moe&#x2F;openwrt_with_wireguard_proxy.html</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/OpenWrt/" rel="tag">OpenWrt</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/WireGuard/" rel="tag">WireGuard</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1696523464188"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          <script src="https://giscus.app/client.js"
+      data-repo="Recopec/Recopec.github.io"
+      data-repo-id="R_kgDOHWxLSA"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOHWxLSM4CYhGk"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+</script>
+
+      </div>
+  
+</div>
+</div>
+        <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                        
+                          
+                          
+                              <button class="mdui-fab catalog" style="overflow:unset;">
+                                  <i class="nexmoefont icon-i-catalog"></i>
+                                  <div class="nexmoe-toc">
+                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8-OpenWrt-%E4%B8%8B%E4%BD%BF%E7%94%A8-WireGuard-%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E4%B8%8A%E7%BD%91"><span class="toc-number">1.</span> <span class="toc-text">在 OpenWrt 下使用 WireGuard 实现全局代理上网</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E6%83%85%E5%86%B5"><span class="toc-number">1.1.</span> <span class="toc-text">设备情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">网络设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">全局代理设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">防火墙设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">防火墙</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#LAN"><span class="toc-number">1.3.1.1.1.</span> <span class="toc-text">LAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WAN"><span class="toc-number">1.3.1.1.2.</span> <span class="toc-text">WAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#VPN"><span class="toc-number">1.3.1.1.3.</span> <span class="toc-text">VPN</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.2.</span> <span class="toc-text">接口设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.3.</span> <span class="toc-text">路由设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E8%81%94%E9%80%9A%E6%80%A7"><span class="toc-number">1.4.</span> <span class="toc-text">测试联通性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%8D%A2%E5%9B%BA%E4%BB%B6%E5%90%8E%E6%B5%8B%E8%AF%95"><span class="toc-number">1.5.</span> <span class="toc-text">更换固件后测试</span></a></li></ol></li></ol>
+                                  </div>
+                              </button>
+                          
+                          
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+    </div>
+    <div id="nexmoe-search-space">
+	<div class="search-container">
+		<div class="search-header">
+			<div class="search-input-container">
+				<input
+					class="search-input"
+					type="text"
+					placeholder="搜索"
+					oninput="sinput();"
+				/>
+			</div>
+			<a class="search-close" onclick="sclose();">×</a>
+		</div>
+		<div class="search-body"></div>
+	</div>
+</div>
+
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
