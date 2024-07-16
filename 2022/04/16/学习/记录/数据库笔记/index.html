@@ -1,21 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh"><head>
+<title>数据库笔记 - Recopec 的博客</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
-<html lang="zh-CN">
-
-<head>
-    
-    <title>数据库笔记 - Recopec 的博客</title>
-    <meta charset="UTF-8">
-    <meta name="keywords" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <meta name="description" content="数据库笔记第1章 绪论1.1 数据库系统概论1.2 数据模型数据模型是对现实世界数据特征的抽象 数据模型是数据库系统的核心和基础 两类数据模型概念模型（信息模型）：按用户的观点来对数据和信息建模，用于数据库设计 逻辑模型（网状模型、层次模型、关系模型、面向对象数据模型….）：按计算机系统的观点对数据建模、数据库管理系统的实现 物理模型： 描述数据在系统内（磁盘上）的表示方法和存取方法 现实世界 –">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="数据库笔记 第1章 绪论 1.1 数据库系统概论 1.2 数据模型 数据模型是对现实世界数据特征的抽象 数据模型是数据库系统的核心和基础 两类数据模型 概念模型（信息模型）：按用户的观点来对数据和信息建模，用于数据库设计 逻辑模型（网状模型、层次模型、关系模型、面向对象数据模型…）：按计算机系统的观点对数据建模、数据库管理系统的实现 物理模型： 描述数据在系统内（磁盘上）的表示方法和存取方法 现实">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库笔记">
 <meta property="og:url" content="https://blog.irec.moe/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Recopec 的博客">
-<meta property="og:description" content="数据库笔记第1章 绪论1.1 数据库系统概论1.2 数据模型数据模型是对现实世界数据特征的抽象 数据模型是数据库系统的核心和基础 两类数据模型概念模型（信息模型）：按用户的观点来对数据和信息建模，用于数据库设计 逻辑模型（网状模型、层次模型、关系模型、面向对象数据模型….）：按计算机系统的观点对数据建模、数据库管理系统的实现 物理模型： 描述数据在系统内（磁盘上）的表示方法和存取方法 现实世界 –">
+<meta property="og:description" content="数据库笔记 第1章 绪论 1.1 数据库系统概论 1.2 数据模型 数据模型是对现实世界数据特征的抽象 数据模型是数据库系统的核心和基础 两类数据模型 概念模型（信息模型）：按用户的观点来对数据和信息建模，用于数据库设计 逻辑模型（网状模型、层次模型、关系模型、面向对象数据模型…）：按计算机系统的观点对数据建模、数据库管理系统的实现 物理模型： 描述数据在系统内（磁盘上）的表示方法和存取方法 现实">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.irec.moe/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411220452040.png">
 <meta property="og:image" content="https://blog.irec.moe/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411220351572.png">
@@ -29,53 +25,43 @@
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://blog.irec.moe/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411220452040.png">
-    
+
 <link rel="stylesheet" href="/lib/fancybox/fancybox.css">
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1717553807984">
-    
-    <link rel="stylesheet" href="/css/style.css?v=1717553807984">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1721147360797">
 
-    
+<link rel="stylesheet" href="/css/style.css?v=1721147360797">
 
-    
+
+
+
+
+
 <script src="/lib/mdui_043tiny/mdui.js" async></script>
 <script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
 
 
-    <script async src="/js/app.js?v=1717553807984"></script>
-    
-     
+<script async src="/js/app.js?v=1721147360797"></script>
 
-    
-<meta name="generator" content="Hexo 6.3.0"></head>
+ 
 
-<body class="mdui-drawer-body-left">
-    <div id="nexmoe-background">
-        <div class="nexmoe-bg" 
-            style="background-image: url(https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/bg.jpg)"
-        ></div>
-        <div class="mdui-appbar mdui-shadow-0">
-            <div class="mdui-toolbar">
-                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
-                <div class="mdui-toolbar-spacer"></div>
-                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-                <a href="/" title="Recopec" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec"></a>
-            </div>
-        </div>
-    </div>
-    <div id="nexmoe-header">
-        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-shiki-plugin@latest/lib/codeblock.css">
+<style>:root{--hl-color:#abb2bf;--hl-bg:#282c34;--hltools-bg:#21252b;--hltools-color:#bbbbbc;--hlnumber-bg:#282c34;--hlnumber-color:#495162;--hlscrollbar-bg:#373c47;--hlexpand-bg:linear-gradient(180deg,rgba(40,44,52,0.1),rgba(40,44,52,0.9))}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/bg.jpg)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Recopec"><img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
     <div class="nexmoe-avatar mdui-ripple">
         <a href="/" title="Recopec">
             <img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec" alt="Recopec">
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>文章</span>14</div>
-        <div><span>标签</span>18</div>
+        <div><span>文章</span>15</div>
+        <div><span>标签</span>19</div>
         <div><span>分类</span>4</div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -109,10 +95,10 @@
         </a>
         
     </div>
-    <aside id="nexmoe-sidebar">
+    
+    
         
-            
-            <div class="nexmoe-widget-wrap">
+        <div class="nexmoe-widget-wrap">
     <div class="nexmoe-widget nexmoe-search">
          
             <form id="search_form" action_e="https://cn.bing.com/search?q=site:irec.moe" onsubmit="return search();">
@@ -125,9 +111,9 @@
 
 
 
+    
         
-            
-            <div class="nexmoe-widget-wrap">
+        <div class="nexmoe-widget-wrap">
 	<div class="nexmoe-widget nexmoe-social">
 		<a
 			class="mdui-ripple"
@@ -185,9 +171,9 @@
 	</div>
 </div>
 
+    
         
-            
-            
+        
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">文章分类</h3>
     <div class="nexmoe-widget">
@@ -217,7 +203,7 @@
 
         <li class="category-list-item">
           <a class="category-list-link" href="/categories/硬件/">硬件</a>
-          <span class="category-list-count">6</span>
+          <span class="category-list-count">7</span>
         </li>
 
         
@@ -234,17 +220,17 @@
   </div>
 
 
+    
         
-            
-            
+        
   <div class="nexmoe-widget-wrap">
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/OpenClash/" style="font-size: 10px;">OpenClash</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/PC/" style="font-size: 10px;">PC</a> <a href="/tags/VR/" style="font-size: 10px;">VR</a> <a href="/tags/WireGuard/" style="font-size: 10px;">WireGuard</a> <a href="/tags/WireShark/" style="font-size: 10px;">WireShark</a> <a href="/tags/%E4%BF%9D%E5%81%A5/" style="font-size: 10px;">保健</a> <a href="/tags/%E5%85%89%E7%8C%AB/" style="font-size: 20px;">光猫</a> <a href="/tags/%E5%8D%87%E5%AD%A6/" style="font-size: 10px;">升学</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/" style="font-size: 10px;">无线电</a> <a href="/tags/%E7%94%B5%E6%B1%A0/" style="font-size: 10px;">电池</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">笔记</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%AD%E5%91%BD/" style="font-size: 10px;">续命</a> <a href="/tags/%E7%BE%8A%E6%AF%9B/" style="font-size: 10px;">羊毛</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 10px;">群晖</a> <a href="/tags/%E8%80%83%E8%AF%95/" style="font-size: 10px;">考试</a> <a href="/tags/%E9%93%B6%E8%A1%8C%E5%8D%A1/" style="font-size: 10px;">银行卡</a>
+      <a href="/tags/OpenClash/" style="font-size: 10px;">OpenClash</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/PC/" style="font-size: 10px;">PC</a> <a href="/tags/VR/" style="font-size: 10px;">VR</a> <a href="/tags/WireGuard/" style="font-size: 10px;">WireGuard</a> <a href="/tags/WireShark/" style="font-size: 10px;">WireShark</a> <a href="/tags/%E4%BF%9D%E5%81%A5/" style="font-size: 10px;">保健</a> <a href="/tags/%E5%85%89%E7%8C%AB/" style="font-size: 20px;">光猫</a> <a href="/tags/%E5%8D%87%E5%AD%A6/" style="font-size: 10px;">升学</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/" style="font-size: 10px;">无线电</a> <a href="/tags/%E7%94%B5%E6%B1%A0/" style="font-size: 10px;">电池</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">笔记</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%AD%E5%91%BD/" style="font-size: 10px;">续命</a> <a href="/tags/%E7%BD%91%E5%8D%A1/" style="font-size: 10px;">网卡</a> <a href="/tags/%E7%BE%8A%E6%AF%9B/" style="font-size: 10px;">羊毛</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 10px;">群晖</a> <a href="/tags/%E8%80%83%E8%AF%95/" style="font-size: 10px;">考试</a> <a href="/tags/%E9%93%B6%E8%A1%8C%E5%8D%A1/" style="font-size: 10px;">银行卡</a>
     </div>
     
       <script>
         var maxTagcloud = parseInt(17);
-        var tags_length = parseInt(18);
+        var tags_length = parseInt(19);
         var tags_arr = [];
         for(var i = 0; i < tags_length; i++){
           tags_arr.push(i);
@@ -260,9 +246,9 @@
     
   </div>
 
+    
         
-            
-            <!-- 一言 -->
+        <!-- 一言 -->
 <div class="nexmoe-widget-wrap">
   <h3 class="nexmoe-widget-title">
     一言
@@ -303,25 +289,29 @@
       })
   })
 </script>
+    
         
-            
-            
+        
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">文章归档</h3>
     <div class="nexmoe-widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
 
 
+    
         
-            
-            
+        
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">最新文章</h3>
     <div class="nexmoe-widget">
       <ul>
+        
+          <li>
+            <a href="/nvidia_boyfriend.html">NVIDIA BlueField-2 DPU 配置为 NIC 网卡的折腾过程</a>
+          </li>
         
           <li>
             <a href="/zhafeilaotie.html">炸飞老铁之自组电池组</a>
@@ -339,28 +329,20 @@
             <a href="/install_1panel_with_synology_docker.html">在群晖的 Docker 上安装 1Panel 面板</a>
           </li>
         
-          <li>
-            <a href="/quest2.html">Quest 2 新设备领取30刀商店点数 &amp; 折腾记录</a>
-          </li>
-        
       </ul>
     </div>
   </div>
 
+    
         
-            
-    </aside>
+   
     <div class="nexmoe-copyright">
         &copy; 2024 Recopec
         Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
         
     </div>
-</div><!-- .nexmoe-drawer -->
-    </div>
-    <div id="nexmoe-content">
-        <div class="nexmoe-primary">
-    <div class="nexmoe-post">
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
   <article>
     
         <div class="nexmoe-post-cover"> 
@@ -387,14 +369,20 @@
     
 </div>
 
-    <h1 id="数据库笔记"><a href="#数据库笔记" class="headerlink" title="数据库笔记"></a>数据库笔记</h1><h1 id="第1章-绪论"><a href="#第1章-绪论" class="headerlink" title="第1章 绪论"></a>第1章 绪论</h1><h2 id="1-1-数据库系统概论"><a href="#1-1-数据库系统概论" class="headerlink" title="1.1 数据库系统概论"></a>1.1 数据库系统概论</h2><h2 id="1-2-数据模型"><a href="#1-2-数据模型" class="headerlink" title="1.2 数据模型"></a>1.2 数据模型</h2><p>数据模型是对现实世界数据<strong>特征的抽象</strong></p>
+    <h1>数据库笔记</h1>
+<h1>第1章 绪论</h1>
+<h2 id="1-1-数据库系统概论">1.1 数据库系统概论</h2>
+<h2 id="1-2-数据模型">1.2 数据模型</h2>
+<p>数据模型是对现实世界数据<strong>特征的抽象</strong></p>
 <p>数据模型是<strong>数据库系统</strong>的<strong>核心和基础</strong></p>
-<h3 id="两类数据模型"><a href="#两类数据模型" class="headerlink" title="两类数据模型"></a>两类数据模型</h3><p><strong>概念模型（信息模型）</strong>：按用户的观点来对数据和信息建模，用于数据库设计</p>
-<p><strong>逻辑模型（网状模型、层次模型、关系模型、面向对象数据模型….）</strong>：按计算机系统的观点对数据建模、数据库管理系统的实现</p>
+<h3 id="两类数据模型">两类数据模型</h3>
+<p><strong>概念模型（信息模型）</strong>：按用户的观点来对数据和信息建模，用于数据库设计</p>
+<p><strong>逻辑模型（网状模型、层次模型、关系模型、面向对象数据模型…）</strong>：按计算机系统的观点对数据建模、数据库管理系统的实现</p>
 <p><strong>物理模型</strong>： 描述数据在系统内（<strong>磁盘</strong>上）的表示方法和存取方法</p>
-<p>现实世界 –&gt; 概念模型：数据库设计人员完成</p>
-<p>概念模型 –&gt; 逻辑模型：数据库设计人员完成、数据库设计工具协助完成</p>
-<h3 id="概念模型"><a href="#概念模型" class="headerlink" title="概念模型"></a>概念模型</h3><p><strong>实体-联系（Entity-Relationship）：用E-R图来描述现实世界的概念模型</strong></p>
+<p>现实世界 --&gt; 概念模型：数据库设计人员完成</p>
+<p>概念模型 --&gt; 逻辑模型：数据库设计人员完成、数据库设计工具协助完成</p>
+<h3 id="概念模型">概念模型</h3>
+<p><strong>实体-联系（Entity-Relationship）：用E-R图来描述现实世界的概念模型</strong></p>
 <p>实体：具体的人、事或抽象的概念（例如学生</p>
 <p>属性：就是属性</p>
 <p>码：唯一标识</p>
@@ -403,26 +391,32 @@
 <p>联系：就是联系</p>
 <p>实体内部的联系：各属性之间的关系</p>
 <p>实体之间的联系：不同实体集之间的联系（1 : 1、1 : M、M : N）</p>
-<h3 id="数据模型：是严格定义的一组概念的集合"><a href="#数据模型：是严格定义的一组概念的集合" class="headerlink" title="数据模型：是严格定义的一组概念的集合"></a>数据模型：是严格定义的一组概念的集合</h3><p><strong>数据结构：</strong>组成对象和对象之间的联系</p>
-<p><strong>数据操作：</strong>对数据库允许执行的操作的集合。就是对操作的规则</p>
-<p><strong>数据的完整性约束：</strong>要让数据库符合这种规则不让数据库乱七八糟（主键必须存在，如果有引用的外键，要怎么怎么样做之类</p>
+<h3 id="数据模型：是严格定义的一组概念的集合">数据模型：是严格定义的一组概念的集合</h3>
+<p>**数据结构：**组成对象和对象之间的联系</p>
+<p>**数据操作：**对数据库允许执行的操作的集合。就是对操作的规则</p>
+<p>**数据的完整性约束：**要让数据库符合这种规则不让数据库乱七八糟（主键必须存在，如果有引用的外键，要怎么怎么样做之类</p>
 <p>关系数据模型是目前最重要的一种<strong>数据模型</strong>，它的三个要素分别是（ ）</p>
 <ul>
-<li><p>A. 实体完整性、参照完整性、用户自定义完整性</p>
+<li>
+<p>A. 实体完整性、参照完整性、用户自定义完整性</p>
 </li>
-<li><p>B. 数据结构、关系操作、完整性约束</p>
+<li>
+<p>B. 数据结构、关系操作、完整性约束</p>
 </li>
-<li><p>C. 数据增加、数据修改、数据查询</p>
+<li>
+<p>C. 数据增加、数据修改、数据查询</p>
 </li>
-<li><p>D. 外模式、模式、内模式</p>
+<li>
+<p>D. 外模式、模式、内模式</p>
 <p>这题和哪种数据模型没关系，数据模型通常都由那三种组成的。</p>
 </li>
 </ul>
-<h3 id="常用的数据模型"><a href="#常用的数据模型" class="headerlink" title="常用的数据模型"></a>常用的数据模型</h3><img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411220452040.png" class="" title="image-20220411220452040">
-
+<h3 id="常用的数据模型">常用的数据模型</h3>
+<img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411220452040.png" class="" title="image-20220411220452040">
 <p><strong>格式化模型</strong>中的数据结构的单位：<strong>基本层次联系</strong></p>
 <p><strong><img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411220351572.png" class="" title="image-20220411220351572"></strong></p>
-<h3 id="层次模型"><a href="#层次模型" class="headerlink" title="层次模型"></a>层次模型</h3><p>表示方法：实体型、属性、联系</p>
+<h3 id="层次模型">层次模型</h3>
+<p>表示方法：实体型、属性、联系</p>
 <p>定义：1、只有一个节点没有双亲节点，这个节点叫根节点</p>
 <p>​			2、根以外的其他节点只有一个双亲节点</p>
 <p>特点：1、节点双亲唯一</p>
@@ -430,14 +424,14 @@
 <p>​			3、不能脱离双亲独立存在</p>
 <p>​			4、任何记录只能一层一层找下去</p>
 <img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411221154166.png" class="" title="image-20220411221154166">
-
 <p>优点：1、数据结构清晰</p>
 <p>​			2、查询效率高，性能优于关系模型</p>
 <p>​			3、良好的完整性支持</p>
 <p>缺点：1、多对多联系不太好</p>
 <p>​			2、插入和删除限制多</p>
 <p>​			3、查询子女节点必须经过双亲节点</p>
-<h3 id="网状模型"><a href="#网状模型" class="headerlink" title="网状模型"></a>网状模型</h3><p>表示方法同层次模型</p>
+<h3 id="网状模型">网状模型</h3>
+<p>表示方法同层次模型</p>
 <p>定义：1、允许一个以上的节点无双亲</p>
 <p>​			2、一个节点可以有多个双亲</p>
 <p>​			3、两个节点有多种联系</p>
@@ -449,7 +443,7 @@
 <p>1、支持码</p>
 <p>2、保证一个联系中双亲记录和子女记录之间是一对多联系</p>
 <p>3、可以定义双亲记录和子女记录之间某些约束条件</p>
-<pre><code>  例：要求双亲记录存在才能插入子女记录，双亲记录删除时也同时删除。
+<pre><code> 例：要求双亲记录存在才能插入子女记录，双亲记录删除时也同时删除。
 </code></pre>
 <p>​			  学生选课记录值中学号必须是学生记录中存在的某一学生学号，</p>
 <p>​			  课程号必须是课程记录中存在的某一门课程号。</p>
@@ -457,29 +451,31 @@
 <p>​			2、性能高</p>
 <p>缺点：1、结构复杂</p>
 <p>​			2、DDL、DML 语言太难</p>
-<h3 id="关系模型"><a href="#关系模型" class="headerlink" title="关系模型"></a>关系模型</h3><p>关系（Relation）：一张表</p>
+<h3 id="关系模型">关系模型</h3>
+<p>关系（Relation）：一张表</p>
 <p>元组（Tuple）：一行即为一个元组</p>
 <p>属性（Attribute）：一列即为一个属性</p>
 <p>主码（Key）：唯一确定一个元组</p>
-<p>域（Domain）：一组具有相同数据类型的值的集合，属性的取值范围<strong>来自域</strong>**</p>
+<p>域（Domain）：一组具有相同数据类型的值的集合，属性的取值范围**来自域****</p>
 <p>分量：元组中的一个属性值</p>
 <p>关系模式：对关系的描述</p>
 <p>​					学生（<u>学号</u>，姓名，年级，年龄）</p>
 <p>关系必须是规范化的，关系的每一个分量必须是一个不可再分的数据项（这个好理解周老师讲过了，列中有列）</p>
 <img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411223256250.png" class="" title="image-20220411223256250">
-
 <p><strong>数据操作都是集合操作：操作对象和操作结果都是关系</strong></p>
 <p>优点：1、建立在严格的数学概念的基础上</p>
 <p>​			2、概念单一：实体和各类联系都用关系来表示，对数据的检索结果也是关系</p>
 <p>​			3、关系模型的存储路径对用户透明</p>
 <p>缺点：由于存储路径透明，查询效率不如格式化数据模型。为了提高效率必须对用户的查询请求进行优化（例如缩小查询范围，多表关联的时候先筛一部分）</p>
-<h2 id="1-3-数据库系统的结构"><a href="#1-3-数据库系统的结构" class="headerlink" title="1.3 数据库系统的结构"></a>1.3 数据库系统的结构</h2><p>开发人员角度：三级模式结构。数据库系统内部的系统结构</p>
-<p>用户角度：单用户结构、主从式结构、分布式结构、客户-服务器、浏览器-应用服务器 &#x2F; 数据库服务器</p>
-<h3 id="模式的概念"><a href="#模式的概念" class="headerlink" title="模式的概念"></a>模式的概念</h3><p>模式：对数据库逻辑结构和特征的描述（学生表）</p>
+<h2 id="1-3-数据库系统的结构">1.3 数据库系统的结构</h2>
+<p>开发人员角度：三级模式结构。数据库系统内部的系统结构</p>
+<p>用户角度：单用户结构、主从式结构、分布式结构、客户-服务器、浏览器-应用服务器 / 数据库服务器</p>
+<h3 id="模式的概念">模式的概念</h3>
+<p>模式：对数据库逻辑结构和特征的描述（学生表）</p>
 <p>实例：模式的具体值（升本成功的所有学生的记录、没有升本成功的所有学生的记录）</p>
 <p>模式是固定的、示例是变化的</p>
-<h3 id="三级模式"><a href="#三级模式" class="headerlink" title="三级模式"></a>三级模式</h3><img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411230045200.png" class="" title="image-20220411230045200">
-
+<h3 id="三级模式">三级模式</h3>
+<img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411230045200.png" class="" title="image-20220411230045200">
 <p><strong>多个</strong> 外模式（子模式、用户模式）：数据库用户使用的<strong>局部</strong>数据的逻辑结构和特征的描述</p>
 <p>​		与模式的关系：通常是模式的子集、一个模式有多个外模式</p>
 <p>​		与应用的关系：一个外模式可以为多个应用系统所使用，一个应用程序只能使用一个外模式</p>
@@ -489,22 +485,23 @@
 <p>​					2、定义数据之间的联系</p>
 <p>​					3、定义数据有关的安全性、完整性要求</p>
 <p><strong>一个</strong> 内模式（存储模式）：物理结构和存储方式的描述</p>
-<h3 id="二级映像"><a href="#二级映像" class="headerlink" title="二级映像"></a>二级映像</h3><p>外模式 -&gt; 模式</p>
+<h3 id="二级映像">二级映像</h3>
+<p>外模式 -&gt; 模式</p>
 <p><strong>定义外模式和模式之间的对应关系</strong></p>
 <p>映像定义 通常包含在各外模式的描述中</p>
 <p>每一个外模式都有一个 外模式 -&gt; 模式 映像</p>
-<p>保证<strong>数据的逻辑独立性</strong>：当模式改变时，DBA 对 外模式 &#x2F; 模式 映像做相应改变，使外模式保持不变。应用程序是依据数据的外模式编写的，应用程序不用改，保证了数据与程序的逻辑独立性，简称RT</p>
+<p>保证<strong>数据的逻辑独立性</strong>：当模式改变时，DBA 对 外模式 / 模式 映像做相应改变，使外模式保持不变。应用程序是依据数据的外模式编写的，应用程序不用改，保证了数据与程序的逻辑独立性，简称RT</p>
 <p>模式 -&gt; 内模式</p>
 <p><strong>定义数据全局逻辑结构与存储结构之间的对应关系</strong></p>
 <p>这个映像是唯一的，<strong>保证数据的物理独立性</strong></p>
 <p>优势：保证了应用程序的稳定性</p>
 <p>​			以程序为中心 -&gt; 以数据为中心</p>
 <p>​			数据的存取由数据库管理系统管理</p>
-<h2 id="1-4-数据库系统的组成"><a href="#1-4-数据库系统的组成" class="headerlink" title="1.4 数据库系统的组成"></a>1.4 数据库系统的组成</h2><p>1、硬件平台及数据库：大内存、大磁盘、大通道</p>
+<h2 id="1-4-数据库系统的组成">1.4 数据库系统的组成</h2>
+<p>1、硬件平台及数据库：大内存、大磁盘、大通道</p>
 <p>2、软件：数据库管理系统、操作系统、与数据库接口的高级语言及其编译系统、应用开发工具、数据库应用系统</p>
 <p>3、人员：用户、应用程序员、系统分析员和数据库设计人员、数据库管理员</p>
 <img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411231029299.png" class="" title="image-20220411231029299">
-
 <p>1、数据库管理员：略</p>
 <p>2、系统分析员：负责应用系统的需求分析和规范说明</p>
 <p>​							与用户及数据库管理员结合，确定系统的硬软件配置</p>
@@ -513,18 +510,24 @@
 <p>​									 设计数据库<strong>各级模式</strong></p>
 <p>3、应用程序员：设计和编写应用系统的程序模块进行调试和安装</p>
 <p>4、用户：通过应用系统的用户接口使用数据库</p>
-<h2 id="1-5-小结"><a href="#1-5-小结" class="headerlink" title="1.5 小结"></a>1.5 小结</h2><p>重点：概念模型的基本概念、<strong>数据模型的3个组成要素</strong>、三模两映、数据库系统的逻辑独立性和物理独立性</p>
-<h1 id="第10章-数据库恢复技术"><a href="#第10章-数据库恢复技术" class="headerlink" title="第10章 数据库恢复技术"></a>第10章 数据库恢复技术</h1><p>事务的四大特性：ACID</p>
+<h2 id="1-5-小结">1.5 小结</h2>
+<p>重点：概念模型的基本概念、<strong>数据模型的3个组成要素</strong>、三模两映、数据库系统的逻辑独立性和物理独立性</p>
+<h1>第10章 数据库恢复技术</h1>
+<p>事务的四大特性：ACID</p>
 <p>Atom 原子性</p>
 <p>Consistent 一致性</p>
 <p>Isolate 隔离性</p>
 <p>Duration 持久性</p>
-<h1 id="第11章-并发控制"><a href="#第11章-并发控制" class="headerlink" title="第11章 并发控制"></a>第11章 并发控制</h1><h2 id="并发带来的问题"><a href="#并发带来的问题" class="headerlink" title="并发带来的问题"></a>并发带来的问题</h2><p>丢失修改</p>
+<h1>第11章 并发控制</h1>
+<h2 id="并发带来的问题">并发带来的问题</h2>
+<p>丢失修改</p>
 <p>读脏数据</p>
 <p>不可重复读</p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>排他锁：写锁 X锁</p>
+<h2 id="解决办法">解决办法</h2>
+<p>排他锁：写锁 X锁</p>
 <p>共享锁：读锁 S锁</p>
-<h2 id="封锁协议"><a href="#封锁协议" class="headerlink" title="封锁协议"></a>封锁协议</h2><p>一级封锁协议：修改时，必须加X锁，直到结束。</p>
+<h2 id="封锁协议">封锁协议</h2>
+<p>一级封锁协议：修改时，必须加X锁，直到结束。</p>
 <p>二级封锁协议：读的时候，加S锁，用完就放。</p>
 <p>三级封锁协议：读的时候，加S锁，直到结束。</p>
 
@@ -553,7 +556,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1717553807901"></script>
+    <script async src="/js/copy-codeblock.js?v=1721147360710"></script>
   
 
   
@@ -577,51 +580,46 @@
 
       </div>
   
-</div>
-</div>
-        <div class="nexmoe-post-right">
-              <div class="nexmoe-fixed">
-                  <div class="nexmoe-tool"> 
-                    
-                      
-                        
-                          
-                          
-                              <button class="mdui-fab catalog" style="overflow:unset;">
-                                  <i class="nexmoefont icon-i-catalog"></i>
-                                  <div class="nexmoe-toc">
-                                      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">数据库笔记</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC1%E7%AB%A0-%E7%BB%AA%E8%AE%BA"><span class="toc-number">2.</span> <span class="toc-text">第1章 绪论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 数据库系统概论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 数据模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%B1%BB%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">两类数据模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.2.</span> <span class="toc-text">概念模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%EF%BC%9A%E6%98%AF%E4%B8%A5%E6%A0%BC%E5%AE%9A%E4%B9%89%E7%9A%84%E4%B8%80%E7%BB%84%E6%A6%82%E5%BF%B5%E7%9A%84%E9%9B%86%E5%90%88"><span class="toc-number">2.2.3.</span> <span class="toc-text">数据模型：是严格定义的一组概念的集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.4.</span> <span class="toc-text">常用的数据模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.5.</span> <span class="toc-text">层次模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%8A%B6%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.6.</span> <span class="toc-text">网状模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.7.</span> <span class="toc-text">关系模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">2.3.</span> <span class="toc-text">1.3 数据库系统的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">2.3.1.</span> <span class="toc-text">模式的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%BA%A7%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.3.2.</span> <span class="toc-text">三级模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E6%98%A0%E5%83%8F"><span class="toc-number">2.3.3.</span> <span class="toc-text">二级映像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">2.4.</span> <span class="toc-text">1.4 数据库系统的组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E5%B0%8F%E7%BB%93"><span class="toc-number">2.5.</span> <span class="toc-text">1.5 小结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC10%E7%AB%A0-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%81%A2%E5%A4%8D%E6%8A%80%E6%9C%AF"><span class="toc-number">3.</span> <span class="toc-text">第10章 数据库恢复技术</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC11%E7%AB%A0-%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">第11章 并发控制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">并发带来的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">解决办法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E9%94%81%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.3.</span> <span class="toc-text">封锁协议</span></a></li></ol></li></ol>
-                                  </div>
-                              </button>
-                          
-                          
-                      
-                    
-                      <a href="#nexmoe-content" class="toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
-                  </div>
-              </div>
-            </div>
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">数据库笔记</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">第1章 绪论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 数据库系统概论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 数据模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%B1%BB%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">两类数据模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.2.</span> <span class="toc-text">概念模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%EF%BC%9A%E6%98%AF%E4%B8%A5%E6%A0%BC%E5%AE%9A%E4%B9%89%E7%9A%84%E4%B8%80%E7%BB%84%E6%A6%82%E5%BF%B5%E7%9A%84%E9%9B%86%E5%90%88"><span class="toc-number">2.2.3.</span> <span class="toc-text">数据模型：是严格定义的一组概念的集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.4.</span> <span class="toc-text">常用的数据模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.5.</span> <span class="toc-text">层次模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%8A%B6%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.6.</span> <span class="toc-text">网状模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.7.</span> <span class="toc-text">关系模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">2.3.</span> <span class="toc-text">1.3 数据库系统的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">2.3.1.</span> <span class="toc-text">模式的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%BA%A7%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.3.2.</span> <span class="toc-text">三级模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E6%98%A0%E5%83%8F"><span class="toc-number">2.3.3.</span> <span class="toc-text">二级映像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">2.4.</span> <span class="toc-text">1.4 数据库系统的组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E5%B0%8F%E7%BB%93"><span class="toc-number">2.5.</span> <span class="toc-text">1.5 小结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">第10章 数据库恢复技术</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">第11章 并发控制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">并发带来的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">解决办法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E9%94%81%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.3.</span> <span class="toc-text">封锁协议</span></a></li></ol></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
     </div>
-    <div id="nexmoe-search-space">
-	<div class="search-container">
-		<div class="search-header">
-			<div class="search-input-container">
-				<input
-					class="search-input"
-					type="text"
-					placeholder="搜索"
-					oninput="sinput();"
-				/>
-			</div>
-			<a class="search-close" onclick="sclose();">×</a>
-		</div>
-		<div class="search-body"></div>
-	</div>
-</div>
-
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
-
-</body>
-
-</html>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div><!-- hexo injector body_end start -->
+  <script>
+  const CODE_CONFIG = {
+    beautify: undefined,
+    highlightCopy: undefined,
+    highlightLang: undefined,
+    highlightHeightLimit: undefined,
+    isHighlightShrink: undefined,
+    copy: {
+      success: 'undefined',
+      error: 'undefined',
+      noSupport: 'undefined',
+    }
+  };
+  console.log(
+    `%c hexo-shiki-plugin %c v1.0.26 %c https://github.com/nova1751/hexo-shiki-plugin`,
+    "color: #fff; background: #5f5f5f",
+    "color: #fff; background: #80c8f8",
+    ""
+  );
+  </script>
+  <!-- hexo injector body_end end --></body></html>
