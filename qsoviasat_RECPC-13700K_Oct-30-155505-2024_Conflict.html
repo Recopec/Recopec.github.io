@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>如何正确的优雅的完成 FM 卫星通联 - Recopec 的博客</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="近期在打 ISS 的时候发现挺多的友台入坑了，晚间的 ISS 非常热闹。作为一个入坑 FM 卫星通联 6 个月的无线电爱好者，掌握了一定的通联技巧，所以在此分享一下我的经验。 前期准备硬件部分你需要有一台上了证的电台、一根八木天线，其实其他类型的天线也能上，但是我建议积累一定经验之后再来操作比较好。 八木天线推荐 JYR 的 U7V4，双极化对于 SO-50 这种卫星很舒服，我的建议是一步到位，虽">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何正确的优雅的完成 FM 卫星通联">
+<meta property="og:url" content="https://blog.irec.moe/qsoviasat.html">
+<meta property="og:site_name" content="Recopec 的博客">
+<meta property="og:description" content="近期在打 ISS 的时候发现挺多的友台入坑了，晚间的 ISS 非常热闹。作为一个入坑 FM 卫星通联 6 个月的无线电爱好者，掌握了一定的通联技巧，所以在此分享一下我的经验。 前期准备硬件部分你需要有一台上了证的电台、一根八木天线，其实其他类型的天线也能上，但是我建议积累一定经验之后再来操作比较好。 八木天线推荐 JYR 的 U7V4，双极化对于 SO-50 这种卫星很舒服，我的建议是一步到位，虽">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-09T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-30T07:53:43.704Z">
+<meta property="article:author" content="Recopec">
+<meta property="article:tag" content="卫星">
+<meta name="twitter:card" content="summary">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1730274904886">
+
+<link rel="stylesheet" href="/css/style.css?v=1730274904886">
+
+
+
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1730274904886"></script>
+
+ 
+
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-shiki-plugin@latest/lib/codeblock.css">
+<style>:root{--hl-color:#abb2bf;--hl-bg:#282c34;--hltools-bg:#21252b;--hltools-color:#bbbbbc;--hlnumber-bg:#282c34;--hlnumber-color:#495162;--hlscrollbar-bg:#373c47;--hlexpand-bg:linear-gradient(180deg,rgba(40,44,52,0.1),rgba(40,44,52,0.9))}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/bg.jpg)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Recopec"><img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Recopec">
+            <img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec" alt="Recopec">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>16</div>
+        <div><span>标签</span>20</div>
+        <div><span>分类</span>5</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:irec.moe" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+            </form>
+         
+    </div>
+</div>
+
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/8209358"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/Recopec/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://twitter.com/Recopec"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter'}"
+			style="
+				color: rgb(59, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://t.me/Recopec"
+			target="_blank"
+			mdui-tooltip="{content: 'TG'}"
+			style="
+				color: rgb(70, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-telegram"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/无线电/">无线电</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/硬件/">硬件</a>
+          <span class="category-list-count">7</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/网络/">网络</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/OpenClash/" style="font-size: 10px;">OpenClash</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/PC/" style="font-size: 10px;">PC</a> <a href="/tags/VR/" style="font-size: 10px;">VR</a> <a href="/tags/WireGuard/" style="font-size: 10px;">WireGuard</a> <a href="/tags/WireShark/" style="font-size: 10px;">WireShark</a> <a href="/tags/%E4%BF%9D%E5%81%A5/" style="font-size: 10px;">保健</a> <a href="/tags/%E5%85%89%E7%8C%AB/" style="font-size: 20px;">光猫</a> <a href="/tags/%E5%8D%87%E5%AD%A6/" style="font-size: 10px;">升学</a> <a href="/tags/%E5%8D%AB%E6%98%9F/" style="font-size: 10px;">卫星</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/" style="font-size: 10px;">无线电</a> <a href="/tags/%E7%94%B5%E6%B1%A0/" style="font-size: 10px;">电池</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">笔记</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%AD%E5%91%BD/" style="font-size: 10px;">续命</a> <a href="/tags/%E7%BD%91%E5%8D%A1/" style="font-size: 10px;">网卡</a> <a href="/tags/%E7%BE%8A%E6%AF%9B/" style="font-size: 10px;">羊毛</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 10px;">群晖</a> <a href="/tags/%E8%80%83%E8%AF%95/" style="font-size: 10px;">考试</a> <a href="/tags/%E9%93%B6%E8%A1%8C%E5%8D%A1/" style="font-size: 10px;">银行卡</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(17);
+        var tags_length = parseInt(20);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+    
+        
+        <!-- 一言 -->
+<div class="nexmoe-widget-wrap">
+  <h3 class="nexmoe-widget-title">
+    一言
+  </h3>
+  <div class="nexmoe-widget">
+    <ul class="hitokoto-box">
+      <li id="hitokoto_text_parent" class="hitokoto-text" hitokotoCategory="">
+        <a href="#" id="hitokoto_text">
+          
+        </a>
+        <a href="#" id="hitokoto_error_text" style="display: none;">
+          
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  let hitokotoText = document.getElementById('hitokoto_text')
+  let hitokotoErroText = document.getElementById('hitokoto_error_text')
+  let hitokotoCategory = document.getElementById('hitokoto_text_parent').getAttribute('hitokotoCategory')
+  window.addEventListener('load', function () {
+    let url = 'https://v1.hitokoto.cn'
+    if (hitokotoCategory) {
+      url += '?c=' + hitokotoCategory
+    }
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        hitokotoText.innerText = "「 " + data.hitokoto + " 」 from " + data.from
+        hitokotoText.href = 'https://hitokoto.cn/?uuid=' + data.uuid
+      })
+      .catch((reason) => {
+        console.error(11, reason)
+        hitokotoText.style.display = 'none'
+        hitokotoErroText.style.display = 'block'
+      })
+  })
+</script>
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/qsoviasat.html">如何正确的优雅的完成 FM 卫星通联</a>
+          </li>
+        
+          <li>
+            <a href="/nvidia_boyfriend.html">NVIDIA BlueField-2 DPU 配置为 NIC 网卡的折腾过程</a>
+          </li>
+        
+          <li>
+            <a href="/zhafeilaotie.html">炸飞老铁之自组电池组</a>
+          </li>
+        
+          <li>
+            <a href="/2024_bank_log.html">2024年银行网点体验记录</a>
+          </li>
+        
+          <li>
+            <a href="/hn_unicom.html">湖南联通固网折腾记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+        
+   
+    <div class="nexmoe-copyright">
+        &copy; 2024 Recopec
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 62.5%;"> 
+            <img src="/qsoviasat/cover.jpg" alt="如何正确的优雅的完成 FM 卫星通联" loading="lazy">
+            <h1>如何正确的优雅的完成 FM 卫星通联</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2024年09月09日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E6%97%A0%E7%BA%BF%E7%94%B5/">无线电</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约2.5k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要9分钟</a>
+
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <p>近期在打 ISS 的时候发现挺多的友台入坑了，晚间的 ISS 非常热闹。作为一个入坑 FM 卫星通联 6 个月的无线电爱好者，掌握了一定的通联技巧，所以在此分享一下我的经验。</p>
+<h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><h2 id="硬件部分"><a href="#硬件部分" class="headerlink" title="硬件部分"></a>硬件部分</h2><p>你需要有一台上了证的电台、一根八木天线，其实其他类型的天线也能上，但是我建议积累一定经验之后再来操作比较好。</p>
+<p>八木天线推荐 JYR 的 U7V4，双极化对于 SO-50 这种卫星很舒服，我的建议是一步到位，虽然天线的价格可以买3个 K6 了，曾经我也是从 U5V3 换过来的，打 SO-50 手拧成麻花了。</p>
+<p>需要一根两头都是M公的馈线，长度 1m - 0.5m 就够了，一个 SMA 母头转 M 母的的转接头。</p>
+<p>为啥不直接用 SMA 到 M 头的馈线？别问，问就是馈线会 QBG。</p>
+<p>辅助设备需要有一个手机支架，我用的是闪魔的骑行支架，可以直接夹在主梁上，他的设计拆装很方便。</p>
+<p>天馈部分所有用到的购买链接都在这里</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>SKU</th>
+<th>购买链接</th>
+<th>二维码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>馈线</td>
+<td>M公头-M公头 1m</td>
+<td><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?id=628307067506">https://item.taobao.com/item.htm?id=628307067506</a></td>
+<td><img onerror="imgOnError(this);" data-fancybox="gallery" src="data:image/png;base64,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" alt="生成的二维码" data-caption="生成的二维码" loading="lazy"></td>
+</tr>
+<tr>
+<td>天线</td>
+<td>JYR U7V4</td>
+<td><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?id=6365910487">https://item.taobao.com/item.htm?id=6365910487</a></td>
+<td><img onerror="imgOnError(this);" data-fancybox="gallery" src="data:image/png;base64,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" alt="img" data-caption="img" loading="lazy"></td>
+</tr>
+<tr>
+<td>转接头</td>
+<td>SMA母转M母</td>
+<td><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?id=616640602871">https://item.taobao.com/item.htm?id=616640602871</a></td>
+<td><img onerror="imgOnError(this);" data-fancybox="gallery" src="data:image/png;base64,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" alt="img" data-caption="img" loading="lazy"></td>
+</tr>
+<tr>
+<td>手机支架</td>
+<td>车把款</td>
+<td><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?id=787258619047">https://item.taobao.com/item.htm?id=787258619047</a></td>
+<td><img onerror="imgOnError(this);" data-fancybox="gallery" src="data:image/png;base64,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" alt="img" data-caption="img" loading="lazy"></td>
+</tr>
+</tbody></table>
+<h2 id="软件部分"><a href="#软件部分" class="headerlink" title="软件部分"></a>软件部分</h2><p>对于 FM 卫星通联，会受到一个叫多普勒效应的影响，这使得接受和发射的频率并不是固定的，所以我们一般会设置 5 个频率，并存储到信道中。这是在 <a target="_blank" rel="noopener" href="https://forum.hamcq.cn/d/351/2">HamCQ 论坛中分享的频率表</a>，找到想要上的卫星然后写入到电台中的信道中，并做好区域划分，在此不做过多叙述。</p>
+<p>对于卫星通联，还有一个问题是：如何知道卫星什么时候过境，什么时候出境？卫星什么时候开机？</p>
+<h3 id="卫星出入境"><a href="#卫星出入境" class="headerlink" title="卫星出入境"></a>卫星出入境</h3><p><a target="_blank" rel="noopener" href="https://github.com/rt-bishop/Look4Sat">Look4Sat</a> 可以帮你解决这个问题，他是一款开源免费的 Android 端追星软件，界面非常简洁直观。</p>
+<p>初次使用只需要去设置里面更新 GPS 和 转发器数据，再添加想要的卫星，就能到主界面看到了。在打卫星的时候软件的具体操作后续有演示。</p>
+<h3 id="卫星状况"><a href="#卫星状况" class="headerlink" title="卫星状况"></a>卫星状况</h3><p>卫星的状态可以在这个网站上查看到：<a target="_blank" rel="noopener" href="https://www.amsat.org/status/">https://www.amsat.org/status/</a> 这是爱好者自行反馈的状态。</p>
+<p>PO-101 和 UVSQ 卫星的 FM 转发器的开机时刻是在 X 上有发推文，ISS 的维护时刻表在 AMSAT 网站上有。</p>
+<p>前期准备部分就结束了，接下来就是最重要的部分，也是我最想告诉大家的。</p>
+<h1 id="如何提高-QSO-效率"><a href="#如何提高-QSO-效率" class="headerlink" title="如何提高 QSO 效率"></a>如何提高 QSO 效率</h1><h2 id="卫星的选择"><a href="#卫星的选择" class="headerlink" title="卫星的选择"></a>卫星的选择</h2><p>卫星的选择是非常重要的，我们目前常用的 FM 卫星有 ISS, SO-50, AO-91 和 PO-101。</p>
+<p>ISS 最近挤成菜市场了，还被各种高功率压制，很难完成 QSO。但是你可以在晚上3点到早上9点的时候去上，因为没人，就算你用原装天线也能上的去。</p>
+<p>SO-50 因为转发器体质不佳，转发质量越来越差，而且有频偏。不过最近又好起来了，他只有0.25W的功率，但声音质量也很棒。</p>
+<p>AO-91 好像是电池坏了，只在白天能用，并且转发器也有问题，断续很严重。</p>
+<p>相比之下 PO-101 则很棒了，唯一的缺点是需要等开机时间，并且上去的难度也挺高的，对天线和环境有一定的要求，PO-101 是我挺喜欢上的一颗卫星，QSO 效率很高，而且也不挤。</p>
+<p>还有一颗 SO-121，开机随缘，声音说实话还可以，很有意思，可以约别人一起去玩。</p>
+<p><strong>其实只要选对卫星，你通联的效率就会成倍的提升，并且可以直接避免被人压制导致空军，然后一肚子气<del>提控回家</del>。</strong></p>
+<p>所以总的来说，我的建议就是挑阴间时间上 ISS 和 SO-50，PO-101 看开机时间去上。 </p>
+<h2 id="如何正确完成卫星通联"><a href="#如何正确完成卫星通联" class="headerlink" title="如何正确完成卫星通联"></a>如何正确完成卫星通联</h2><h3 id="秩序"><a href="#秩序" class="headerlink" title="秩序"></a>秩序</h3><p>对于这个，我唯一强调的是通联的<strong>秩序</strong>，相信你肯定不想在和别人 QSO 的过程中被人一句 <code>CQ Satellite</code> 打断吧。</p>
+<p>对于正在通联的双方来说，可能某一方回复另一方的时候被压制了，导致 QSO 终端。然后另一方又开始回复对方，可能这个时候有其他友台回复你了，然后你压的那方又继续在和那一方在通联，把你也<strong>压了</strong>。这就是一个死循环了，最后谁也没完成 QSO。</p>
+<blockquote>
+<p>你们别吵啦，一个一个来</p>
+</blockquote>
+<h3 id="正确方法"><a href="#正确方法" class="headerlink" title="正确方法"></a>正确方法</h3><p>最重要的是先守听，等待听到有下行信号（载波&#x2F;话音）时，在别人 QSO 结束的结尾，找到间隙主动呼叫对方。</p>
+<p><strong>以下是示例</strong>：</p>
+<blockquote>
+<p><em>BG7QIW: Bravo Hotel Seven Foxtrot Bravo Papa, Bravo Golf Seven Quebec India Whiskey five nine</em></p>
+<p><em>BH7FBP: Bravo Golf Seven Quebec India Whiskey, Bravo Hotel Seven Foxtrot Bravo Papa U ALSO five nine seventeen three~</em></p>
+<p><em>BG7QIW: seventeen three!</em></p>
+</blockquote>
+<p>这时你可以插入，主动呼叫 BG7QIW 或者 BH7FBP，因为他俩上下行都很不错，呼叫他俩 QSO 的成功率对于你自己来说会很高。如果你主动 CQ 的话，这样就耽搁了一个时隙，别人需要呼叫你，你再回复。这样相较于主动呼叫别人时间耗费更多，降低了效率。</p>
+<p><strong>例如：</strong></p>
+<blockquote>
+<p><em>BH7FBP: Bravo Golf Seven <strong>Quebec India Whiskey</strong>, Bravo Hotel Seven <strong>Foxtrot Bravo Papa</strong>, U ALSO five nine seventeen three~</em></p>
+<p><em>BG7QIW: seventeen three!</em></p>
+<p><em>BI7BMB: Bravo Golf Seven <strong>Quebec India Whiskey</strong>, Bravo India Seven <strong>Bravo Mike Bravo</strong> five by nine</em></p>
+<p><em>BG7QIW: Bravo %$#Buzzzzz%$# Bravo %$#Buzzzzz%$# Seven Quebec %$#Buzzzzz%$#</em></p>
+</blockquote>
+<p>欸，怎么没抄完整，我应不应该回复他。没问题！大胆回复他，就算没抄完整，只要你有90%的把握他在呼叫你，直接回复。这时应该回复什么呢。</p>
+<blockquote>
+<p><em>BI7BMB: QSL Seventeen Three! &#x2F; 抄收了 73 再见</em></p>
+</blockquote>
+<h4 id="关于呼叫"><a href="#关于呼叫" class="headerlink" title="关于呼叫"></a>关于呼叫</h4><p>大家在卫星上呼叫的用语有挺多种的，我目前用的是呼号 + 网格。这是在 <a target="_blank" rel="noopener" href="https://www.amsat.org/station-and-operating-hints/">AMSAT 网站</a> 上关于 FM 卫星通联推荐的做法。关于这个也挺有争议的，我的意见是：不论你说什么，能简短迅速的让别人知道的呼号，就够了。</p>
+<p>什么时候可以主动呼叫呢，只有当你有十足的把握卫星当前是空闲没人在通联的状态，并且你的上行能上去，或你有全双工的设备，实时能返听到你的话音的情况下，那可以随意呼叫。</p>
+<p><del>我一般是某趟卫星在<strong>阴间时间</strong>，并且在仰角（5°-10°）发现没有下行，然后掐 PTT 发现有<strong>回波</strong>的时候，我会这样做。</del></p>
+<p><strong>但是热门时段就千万别这样做了，可能你没有下行信号的时候，你上行信号上去了把别人压制了，然后就是之前我说的惨状，这现象在 SO-50 上非常常见，聋子很多。</strong></p>
+<blockquote>
+<p><em>回波：指掐 PTT 之后能听到有空音频的载波信号下来，同时场强表有明显的上升，随后变成沙沙声，那段空音频就是回波。在卫星通联中只有 ISS 比较明显。受限于电台型号的不同，某些电台型号效果不明显，或者开了尾音消除。建议新手不要这样做，耐心等待有下行即可。</em></p>
+</blockquote>
+<h2 id="通联示范"><a href="#通联示范" class="headerlink" title="通联示范"></a>通联示范</h2><p>接下来就是我通联的示范了，我用的是 8600 + U7V4。</p>
+<p>视频演示</p>
+<h1 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h1><h2 id="通联的时候抄不清对方呼号怎么办？"><a href="#通联的时候抄不清对方呼号怎么办？" class="headerlink" title="通联的时候抄不清对方呼号怎么办？"></a>通联的时候抄不清对方呼号怎么办？</h2><p>多听，多练，这是一个熟能生巧的过程，不可能一天之内变得很熟练。</p>
+<p>我的技巧是每次打卫星都把手机的录音打开，当别人在呼叫你，而你吵不清别人呼号的时候或脑子反应不过来（我也是这样），直接鹦鹉学舌，他怎么样说过来的，你把他说的那段话带着你的呼号回给他，当这趟卫星打完了之后，再慢慢听录音，只要确保对方把你的呼号抄正确了就行。</p>
+<p>还有一个技巧就是挑没人的时候去上卫星，就算抄不清，你可以要求别人重复过来一遍，一般大家都会耐心的等你俩通联完再来通联。</p>
+<blockquote>
+<p><em>BI7BMB: Bravo Golf Question? &#x2F; Please Again &#x2F; 再来一下好吗</em></p>
+<p><em>BG7QIW: Bravo Golf Seven <strong>Quebec India Whiskey</strong> Queen Italian Whisky BG7QIW</em></p>
+<p><em>BI7BMB: BG7QIW BI7BMB 59 73</em></p>
+<p><em>BG7QIW: 73</em></p>
+</blockquote>
+<p>就像这样，这个时间段不会有人来压制 &#x2F; 插入你们俩之间。而是慢慢的等你们通联完，再来呼叫。然后你可能会被<del>轰炸</del>，叫你让你回到嘴巴冒烟，因为你是新台，23333。</p>
+<h2 id="别人反馈我的话音质量很差-我收到的下行很差"><a href="#别人反馈我的话音质量很差-我收到的下行很差" class="headerlink" title="别人反馈我的话音质量很差 &#x2F; 我收到的下行很差"></a>别人反馈我的话音质量很差 &#x2F; 我收到的下行很差</h2><p>首先检查的应该是天线情况，有可能你的八木的引向器装反了，或者是装错位置了，有条件的直接上驻波表测试。还有一个原因是你的手机指南针不准，对歪了。这个时候你可以靠感觉来调整，找到一个下行比较好的位置，同时观察手机屏幕角度的变化随之调整你手举着的天线的方位角和仰角。</p>
+<p>手机指南针失灵是很正常的，我打卫星几乎有一半的概率指南针会飘。不过自己玩得多了，靠感觉盲指也没问题，这也是一个熟练度的问题。</p>
+<p>2024.09.09</p>
+<p>BH7FBP</p>
+<p>审稿：BG7QIW BG7XWF</p>
+<p>素材提供：BG7QIW BI7BMB BG7XWF BH7FBP</p>
+
+    
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Recopec<br>
+        <strong>本文链接：</strong><a href="https://blog.irec.moe/qsoviasat.html" title="https:&#x2F;&#x2F;blog.irec.moe&#x2F;qsoviasat.html" target="_blank" rel="noopener">https:&#x2F;&#x2F;blog.irec.moe&#x2F;qsoviasat.html</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%8D%AB%E6%98%9F/" rel="tag">卫星</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1730274904803"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          <script src="https://giscus.app/client.js"
+      data-repo="Recopec/Recopec.github.io"
+      data-repo-id="R_kgDOHWxLSA"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOHWxLSM4CYhGk"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+</script>
+
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text">前期准备</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E9%83%A8%E5%88%86"><span class="toc-number">1.1.</span> <span class="toc-text">硬件部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E9%83%A8%E5%88%86"><span class="toc-number">1.2.</span> <span class="toc-text">软件部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%AB%E6%98%9F%E5%87%BA%E5%85%A5%E5%A2%83"><span class="toc-number">1.2.1.</span> <span class="toc-text">卫星出入境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%AB%E6%98%9F%E7%8A%B6%E5%86%B5"><span class="toc-number">1.2.2.</span> <span class="toc-text">卫星状况</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98-QSO-%E6%95%88%E7%8E%87"><span class="toc-number">2.</span> <span class="toc-text">如何提高 QSO 效率</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%AB%E6%98%9F%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">2.1.</span> <span class="toc-text">卫星的选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E5%AE%8C%E6%88%90%E5%8D%AB%E6%98%9F%E9%80%9A%E8%81%94"><span class="toc-number">2.2.</span> <span class="toc-text">如何正确完成卫星通联</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%A9%E5%BA%8F"><span class="toc-number">2.2.1.</span> <span class="toc-text">秩序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E7%A1%AE%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.2.</span> <span class="toc-text">正确方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%91%BC%E5%8F%AB"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">关于呼叫</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%81%94%E7%A4%BA%E8%8C%83"><span class="toc-number">2.3.</span> <span class="toc-text">通联示范</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FAQ"><span class="toc-number">3.</span> <span class="toc-text">FAQ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%81%94%E7%9A%84%E6%97%B6%E5%80%99%E6%8A%84%E4%B8%8D%E6%B8%85%E5%AF%B9%E6%96%B9%E5%91%BC%E5%8F%B7%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="toc-number">3.1.</span> <span class="toc-text">通联的时候抄不清对方呼号怎么办？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%AB%E4%BA%BA%E5%8F%8D%E9%A6%88%E6%88%91%E7%9A%84%E8%AF%9D%E9%9F%B3%E8%B4%A8%E9%87%8F%E5%BE%88%E5%B7%AE-%E6%88%91%E6%94%B6%E5%88%B0%E7%9A%84%E4%B8%8B%E8%A1%8C%E5%BE%88%E5%B7%AE"><span class="toc-number">3.2.</span> <span class="toc-text">别人反馈我的话音质量很差 &#x2F; 我收到的下行很差</span></a></li></ol></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div><!-- hexo injector body_end start -->
+  <script>
+  const CODE_CONFIG = {
+    beautify: undefined,
+    highlightCopy: undefined,
+    highlightLang: undefined,
+    highlightHeightLimit: undefined,
+    isHighlightShrink: undefined,
+    copy: {
+      success: 'undefined',
+      error: 'undefined',
+      noSupport: 'undefined',
+    }
+  };
+  console.log(
+    `%c hexo-shiki-plugin %c v1.0.26 %c https://github.com/nova1751/hexo-shiki-plugin`,
+    "color: #fff; background: #5f5f5f",
+    "color: #fff; background: #80c8f8",
+    ""
+  );
+  </script>
+  <!-- hexo injector body_end end --></body></html>
