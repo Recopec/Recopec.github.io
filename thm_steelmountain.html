@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://blog.irec.moe/thm_steelmountain/image-20250705005303024.png">
 <meta property="og:image" content="https://blog.irec.moe/thm_steelmountain/image-20250705014336022.png">
 <meta property="article:published_time" content="2025-07-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-07T17:35:53.277Z">
+<meta property="article:modified_time" content="2025-07-07T17:38:13.962Z">
 <meta property="article:author" content="Recopec">
 <meta property="article:tag" content="Windows">
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1751909835438">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1751909938148">
 
-<link rel="stylesheet" href="/css/style.css?v=1751909835438">
+<link rel="stylesheet" href="/css/style.css?v=1751909938148">
 
 
 
@@ -40,7 +40,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1751909835438"></script>
+<script async src="/js/app.js?v=1751909938148"></script>
 
  
 
@@ -379,17 +379,17 @@
     
 </div>
 
-    <h2 id="0x0">0x0</h2>
+    <h1>0x0</h1>
 <p>Room：<a target="_blank" rel="noopener" href="https://tryhackme.com/room/steelmountain">https://tryhackme.com/room/steelmountain</a></p>
 <p>这个房间可以说是我在 TryHackMe 上碰到的第一个需要用很多自己想法才能过的房间，其实别人也有很多题解的，但是每个人有不同的解法嘛，并且我觉得我把这个做出来之后感觉很有意思，也学了很多。</p>
-<h2 id="0x1">0x1</h2>
+<h1>0x1</h1>
 <p>刚开始就来了一个看不懂的题目，在这里卡了很久。</p>
 <blockquote>
 <p>Who is the employee of the month?</p>
 </blockquote>
 <p>去搜了一下知道是那个替罪羊，但是我就不知道问题是怎么和这个题目联系上的，直到访问了这个服务器的 IP 之后才发现，hhhh。</p>
 <img src="/thm_steelmountain/image-20250705005303024.png" class="" title="image-20250705005303024">
-<h2 id="0x2">0x2</h2>
+<h1>0x2</h1>
 <p>就常规扫端口呗，nmap 一把梭。</p>
 <figure class="shiki bash"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #61AFEF">nmap</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">-sV</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">10.10</span><span style="color: #98C379">.208.117</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">-T4</span></span>
 <span class="line"></span>
@@ -455,7 +455,7 @@
 <span class="line"></span>
 <span class="line"><span style="color: #61AFEF">meterpreter</span><span style="color: #ABB2BF"> &gt; </span><span style="color: #98C379">cat</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">user.txt</span></span>
 <span class="line"><span style="color: #61AFEF">b04763b6fcf51fcd7c13abc7db4fd365</span></span></code></pre></div></div></figure>
-<h2 id="0x3">0x3</h2>
+<h1>0x3</h1>
 <p>标题写的是提权，这里其实是用 Windows 的服务的缺陷。</p>
 <p>在 Windows 系统中，如果一个服务（Service）的可执行文件路径<strong>沒有用双引号完全括起來</strong>，且路径中<strong>包含空格</strong>，就会存在漏洞。</p>
 <p>举例来说，如果服务路径是 <code>C:\Program Files\My Service\service.exe</code> 但没有加引号，系统在启动时可能会误以为它要执行的是 <code>C:\Program.exe</code> 或 <code>C:\Program Files\My.exe</code>。</p>
@@ -498,7 +498,7 @@
 <span class="line"><span style="color: #ABB2BF">c:\</span><span style="color: #E06C75">Users</span><span style="color: #ABB2BF">\</span><span style="color: #E06C75">Administrator</span><span style="color: #ABB2BF">\</span><span style="color: #E06C75">Desktop</span><span style="color: #ABB2BF">&gt;</span><span style="color: #E06C75">type</span><span style="color: #ABB2BF"> root.txt       </span></span>
 <span class="line"><span style="color: #ABB2BF">type root.txt</span></span>
 <span class="line"><span style="color: #ABB2BF">9af5f314f57607c00fd09803a587db80</span></span></code></pre></div></div></figure>
-<h2 id="0x4">0x4</h2>
+<h1>0x4</h1>
 <p>第四部分呢，题目的用意就是让我们不要依赖 MSF，去下别人的 EXP 来利用，锻炼这个能力，说实话这个比第三问简单很多。</p>
 <p>这里用的是 HFS 的洞，我还经常用这个来建文件共享来着呢，不过一般在内网用，这个作者做的新版 HFS 又不好用。</p>
 <p>EXP 地址：<a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/39161">https://www.exploit-db.com/exploits/39161</a></p>
@@ -520,7 +520,7 @@
 <p>这个工具能显示的非常非常多，看不过来了都。他意思是让我们利用里面发现的注入点，我懒懒就没有去研究了。</p>
 <p>后面问了一个如何用 PowerShell 获取服务名字，这不是基操吗？</p>
 <figure class="shiki powershell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #ABB2BF">powershell </span><span style="color: #56B6C2">-</span><span style="color: #ABB2BF">c </span><span style="color: #98C379">&quot;Get-Service&quot;</span></span></code></pre></div></div></figure>
-<h2 id="0xff">0xff</h2>
+<h1>0xff</h1>
 <p>做完这个 Room，感觉收获很大，本来这个原文是做的小抄的，但是一下记了挺多东西的，想了想不如写一个 Writeup 了，就有了这篇文章。</p>
 
     
@@ -548,7 +548,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1751909835345"></script>
+    <script async src="/js/copy-codeblock.js?v=1751909938055"></script>
   
 
   
@@ -582,7 +582,7 @@
             <button class="mdui-fab catalog" style="overflow:unset;">
                 <i class="nexmoefont icon-i-catalog"></i>
                 <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x0"><span class="toc-number">1.</span> <span class="toc-text">0x0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x1"><span class="toc-number">2.</span> <span class="toc-text">0x1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x2"><span class="toc-number">3.</span> <span class="toc-text">0x2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x3"><span class="toc-number">4.</span> <span class="toc-text">0x3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x4"><span class="toc-number">5.</span> <span class="toc-text">0x4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0xff"><span class="toc-number">6.</span> <span class="toc-text">0xff</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">0x0</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">0x1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">0x2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">0x3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">0x4</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">0xff</span></a></li></ol>
                 </div>
             </button>
             
