@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-<meta name="description" content="在软路由上用了一段时间 OpenClash，由于我是自己写的规则，所以在很多地方都不完整，中途遇到多多少少的bug。 由于碰到这个无 Internet 的问题，导致某些微软服务登不上，有点烦人。所以折腾了一段时间，有了这样几种解决办法。 第一种方法 - 让域名走代理在这个地方也有讨论下，我是这样解决的。 同样是 FAKE-IP 模式，今天为了这问题折腾一天，最后发现是因为 OpenClash 的">
+<meta name="description" content="在软路由上用了一段时间 OpenClash，由于我是自己写的规则，所以在很多地方都不完整，中途遇到多多少少的bug。 由于碰到这个无 Internet 的问题，导致某些微软服务登不上，有点烦人。所以折腾了一段时间，有了这样几种解决办法。 第一种方法 - 让域名走代理 在这个地方也有讨论下，我是这样解决的。 同样是 FAKE-IP 模式，今天为了这问题折腾一天，最后发现是因为 OpenClash 的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在 OpenClash 代理环境下 Windows 提示无 Internet">
 <meta property="og:url" content="https://blog.irec.moe/openclash_windows_nointernet.html">
 <meta property="og:site_name" content="Recopec 的博客">
-<meta property="og:description" content="在软路由上用了一段时间 OpenClash，由于我是自己写的规则，所以在很多地方都不完整，中途遇到多多少少的bug。 由于碰到这个无 Internet 的问题，导致某些微软服务登不上，有点烦人。所以折腾了一段时间，有了这样几种解决办法。 第一种方法 - 让域名走代理在这个地方也有讨论下，我是这样解决的。 同样是 FAKE-IP 模式，今天为了这问题折腾一天，最后发现是因为 OpenClash 的">
+<meta property="og:description" content="在软路由上用了一段时间 OpenClash，由于我是自己写的规则，所以在很多地方都不完整，中途遇到多多少少的bug。 由于碰到这个无 Internet 的问题，导致某些微软服务登不上，有点烦人。所以折腾了一段时间，有了这样几种解决办法。 第一种方法 - 让域名走代理 在这个地方也有讨论下，我是这样解决的。 同样是 FAKE-IP 模式，今天为了这问题折腾一天，最后发现是因为 OpenClash 的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://user-images.githubusercontent.com/19749321/228871491-bafa7edb-c276-4ce4-a150-d44683a6015f.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/19749321/228872945-7c10bf86-cb7b-4d66-acbc-54787d26666c.png">
@@ -28,9 +28,9 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1751909124475">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1751909762039">
 
-<link rel="stylesheet" href="/css/style.css?v=1751909124475">
+<link rel="stylesheet" href="/css/style.css?v=1751909762039">
 
 
 
@@ -42,7 +42,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1751909124475"></script>
+<script async src="/js/app.js?v=1751909762040"></script>
 
  
 
@@ -59,8 +59,8 @@
     </div>
     <div class="nexmoe-count">
         <div><span>文章</span>20</div>
-        <div><span>标签</span>28</div>
-        <div><span>分类</span>5</div>
+        <div><span>标签</span>27</div>
+        <div><span>分类</span>6</div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
         
@@ -186,8 +186,15 @@
         
 
         <li class="category-list-item">
+          <a class="category-list-link" href="/categories/THM/">THM</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
           <a class="category-list-link" href="/categories/学习/">学习</a>
-          <span class="category-list-count">5</span>
+          <span class="category-list-count">3</span>
         </li>
 
         
@@ -230,12 +237,12 @@
         
   <div class="nexmoe-widget-wrap">
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/OpenClash/" style="font-size: 10px;">OpenClash</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/PC/" style="font-size: 10px;">PC</a> <a href="/tags/THM/" style="font-size: 20px;">THM</a> <a href="/tags/VR/" style="font-size: 10px;">VR</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/WireGuard/" style="font-size: 10px;">WireGuard</a> <a href="/tags/WireShark/" style="font-size: 10px;">WireShark</a> <a href="/tags/%E4%BF%9D%E5%81%A5/" style="font-size: 10px;">保健</a> <a href="/tags/%E5%85%89%E7%8C%AB/" style="font-size: 20px;">光猫</a> <a href="/tags/%E5%8D%87%E5%AD%A6/" style="font-size: 10px;">升学</a> <a href="/tags/%E5%8D%AB%E6%98%9F/" style="font-size: 10px;">卫星</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 20px;">数据库</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/" style="font-size: 10px;">无线电</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E7%81%B5%E8%BD%A6/" style="font-size: 10px;">灵车</a> <a href="/tags/%E7%94%B5%E6%B1%A0/" style="font-size: 10px;">电池</a> <a href="/tags/%E7%9F%AD%E6%B3%A2/" style="font-size: 10px;">短波</a> <a href="/tags/%E7%A1%AC%E7%9B%98/" style="font-size: 10px;">硬盘</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">笔记</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%AD%E5%91%BD/" style="font-size: 10px;">续命</a> <a href="/tags/%E7%BD%91%E5%8D%A1/" style="font-size: 10px;">网卡</a> <a href="/tags/%E7%BE%8A%E6%AF%9B/" style="font-size: 10px;">羊毛</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 20px;">群晖</a> <a href="/tags/%E8%80%83%E8%AF%95/" style="font-size: 10px;">考试</a> <a href="/tags/%E9%93%B6%E8%A1%8C%E5%8D%A1/" style="font-size: 10px;">银行卡</a>
+      <a href="/tags/OpenClash/" style="font-size: 10px;">OpenClash</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/PC/" style="font-size: 10px;">PC</a> <a href="/tags/VR/" style="font-size: 10px;">VR</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/WireGuard/" style="font-size: 10px;">WireGuard</a> <a href="/tags/WireShark/" style="font-size: 10px;">WireShark</a> <a href="/tags/%E4%BF%9D%E5%81%A5/" style="font-size: 10px;">保健</a> <a href="/tags/%E5%85%89%E7%8C%AB/" style="font-size: 20px;">光猫</a> <a href="/tags/%E5%8D%87%E5%AD%A6/" style="font-size: 10px;">升学</a> <a href="/tags/%E5%8D%AB%E6%98%9F/" style="font-size: 10px;">卫星</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 20px;">数据库</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/" style="font-size: 10px;">无线电</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E7%81%B5%E8%BD%A6/" style="font-size: 10px;">灵车</a> <a href="/tags/%E7%94%B5%E6%B1%A0/" style="font-size: 10px;">电池</a> <a href="/tags/%E7%9F%AD%E6%B3%A2/" style="font-size: 10px;">短波</a> <a href="/tags/%E7%A1%AC%E7%9B%98/" style="font-size: 10px;">硬盘</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">笔记</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%AD%E5%91%BD/" style="font-size: 10px;">续命</a> <a href="/tags/%E7%BD%91%E5%8D%A1/" style="font-size: 10px;">网卡</a> <a href="/tags/%E7%BE%8A%E6%AF%9B/" style="font-size: 10px;">羊毛</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 20px;">群晖</a> <a href="/tags/%E8%80%83%E8%AF%95/" style="font-size: 10px;">考试</a> <a href="/tags/%E9%93%B6%E8%A1%8C%E5%8D%A1/" style="font-size: 10px;">银行卡</a>
     </div>
     
       <script>
         var maxTagcloud = parseInt(17);
-        var tags_length = parseInt(28);
+        var tags_length = parseInt(27);
         var tags_arr = [];
         for(var i = 0; i < tags_length; i++){
           tags_arr.push(i);
@@ -363,7 +370,7 @@
             <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
         
         
-    <a><i class="nexmoefont icon-areachart"></i>约473字</a>
+    <a><i class="nexmoefont icon-areachart"></i>约471字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要1分钟</a>
 
     </div>
@@ -376,9 +383,18 @@
 
     <p>在软路由上用了一段时间 OpenClash，由于我是自己写的规则，所以在很多地方都不完整，中途遇到多多少少的bug。</p>
 <p>由于碰到这个无 Internet 的问题，导致某些微软服务登不上，有点烦人。所以折腾了一段时间，有了这样几种解决办法。</p>
-<h2 id="第一种方法-让域名走代理"><a href="#第一种方法-让域名走代理" class="headerlink" title="第一种方法 - 让域名走代理"></a>第一种方法 - 让域名走代理</h2><p>在<a target="_blank" rel="noopener" href="https://github.com/vernesong/OpenClash/issues/6#issuecomment-1490424197">这个地方</a>也有讨论下，我是这样解决的。</p>
-<p>同样是 FAKE-IP 模式，今天为了这问题折腾一天，最后发现是因为 OpenClash 的 DNS 代理解析出的 IP ，我本地访问会直接被 RESET，而我用本地网络环境解析到的 DNS 却可以正常访问。<br>还碰到一个坑是某些代理商会屏蔽 <a target="_blank" rel="noopener" href="http://www.msftconnecttest.com/">www.msftconnecttest.com</a> ，具体表现和上述一样。<br>最后我单独改了规则，让他走微软服务，然后微软服务再单独走不屏蔽的节点，完美解决。<br><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/19749321/228871491-bafa7edb-c276-4ce4-a150-d44683a6015f.png"><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://user-images.githubusercontent.com/19749321/228871491-bafa7edb-c276-4ce4-a150-d44683a6015f.png" alt="image" data-caption="image" loading="lazy"></a><br>其实还有其他解决办法，比如说让这个域名单独走本地DNS解析，我觉得这样<del>简单省事</del>就懒得弄了。<br>实测并不是IP段的问题，我还是默认的198.18.0.1&#x2F;16段。<br><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/19749321/228872945-7c10bf86-cb7b-4d66-acbc-54787d26666c.png"><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://user-images.githubusercontent.com/19749321/228872945-7c10bf86-cb7b-4d66-acbc-54787d26666c.png" alt="image" data-caption="image" loading="lazy"></a><br><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/19749321/228873469-ed5acddb-25dd-4b75-a9de-6af3de2f0e2b.png"><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://user-images.githubusercontent.com/19749321/228873469-ed5acddb-25dd-4b75-a9de-6af3de2f0e2b.png" alt="image" data-caption="image" loading="lazy"></a></p>
-<h2 id="另外一种方法-过滤域名请求"><a href="#另外一种方法-过滤域名请求" class="headerlink" title="另外一种方法 - 过滤域名请求"></a>另外一种方法 - 过滤域名请求</h2><p>这段配置是我从其他地方抄过来的，实测可用，记得把前面一种方法提到的 <a target="_blank" rel="noopener" href="http://www.msftconnecttest.com/">www.msftconnecttest.com</a> 改一下规则，让他不走代理即可。这种方法比上面的方法更简单省事。</p>
+<h2 id="第一种方法-让域名走代理">第一种方法 - 让域名走代理</h2>
+<p>在<a target="_blank" rel="noopener" href="https://github.com/vernesong/OpenClash/issues/6#issuecomment-1490424197">这个地方</a>也有讨论下，我是这样解决的。</p>
+<p>同样是 FAKE-IP 模式，今天为了这问题折腾一天，最后发现是因为 OpenClash 的 DNS 代理解析出的 IP ，我本地访问会直接被 RESET，而我用本地网络环境解析到的 DNS 却可以正常访问。<br>
+还碰到一个坑是某些代理商会屏蔽 <a target="_blank" rel="noopener" href="http://www.msftconnecttest.com/">www.msftconnecttest.com</a> ，具体表现和上述一样。<br>
+最后我单独改了规则，让他走微软服务，然后微软服务再单独走不屏蔽的节点，完美解决。<br>
+<a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/19749321/228871491-bafa7edb-c276-4ce4-a150-d44683a6015f.png"><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://user-images.githubusercontent.com/19749321/228871491-bafa7edb-c276-4ce4-a150-d44683a6015f.png" alt="image" data-caption="image" loading="lazy"></a><br>
+其实还有其他解决办法，比如说让这个域名单独走本地DNS解析，我觉得这样<s>简单省事</s>就懒得弄了。<br>
+实测并不是IP段的问题，我还是默认的198.18.0.1/16段。<br>
+<a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/19749321/228872945-7c10bf86-cb7b-4d66-acbc-54787d26666c.png"><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://user-images.githubusercontent.com/19749321/228872945-7c10bf86-cb7b-4d66-acbc-54787d26666c.png" alt="image" data-caption="image" loading="lazy"></a><br>
+<a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/19749321/228873469-ed5acddb-25dd-4b75-a9de-6af3de2f0e2b.png"><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://user-images.githubusercontent.com/19749321/228873469-ed5acddb-25dd-4b75-a9de-6af3de2f0e2b.png" alt="image" data-caption="image" loading="lazy"></a></p>
+<h2 id="另外一种方法-过滤域名请求">另外一种方法 - 过滤域名请求</h2>
+<p>这段配置是我从其他地方抄过来的，实测可用，记得把前面一种方法提到的 <a target="_blank" rel="noopener" href="http://www.msftconnecttest.com/">www.msftconnecttest.com</a> 改一下规则，让他不走代理即可。这种方法比上面的方法更简单省事。</p>
 <figure class="shiki yaml"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #E06C75">dns</span><span style="color: #ABB2BF">:</span></span>
 <span class="line"><span style="color: #ABB2BF"> </span><span style="color: #E06C75">fake-ip-filter</span><span style="color: #ABB2BF">:</span></span>
 <span class="line"><span style="color: #ABB2BF">    - </span><span style="color: #98C379">&#39;*.lan&#39;</span></span>
@@ -390,9 +406,9 @@
 <span class="line"><span style="color: #ABB2BF">    - </span><span style="color: #98C379">&#39;+.xboxlive.com&#39;</span></span>
 <span class="line"><span style="color: #ABB2BF">    - </span><span style="color: #98C379">&#39;msftconnecttest.com&#39;</span></span>
 <span class="line"><span style="color: #ABB2BF">    - </span><span style="color: #98C379">&#39;xbox.*.microsoft.com&#39;</span></span></code></pre></div></div></figure>
-
-<p>这一段的主要作用就是让 OpenClash 不解析在列表内的域名，直接返回源 IP 地址，这样获取到的 IP 就不会是 198.18.0.0&#x2F;16了。</p>
-<h2 id="Enjoy！"><a href="#Enjoy！" class="headerlink" title="Enjoy！"></a>Enjoy！</h2><img src="/openclash_windows_nointernet/image-20230622152603116.png" class="" title="image-20230622152603116">
+<p>这一段的主要作用就是让 OpenClash 不解析在列表内的域名，直接返回源 IP 地址，这样获取到的 IP 就不会是 198.18.0.0/16了。</p>
+<h2 id="Enjoy！">Enjoy！</h2>
+<img src="/openclash_windows_nointernet/image-20230622152603116.png" class="" title="image-20230622152603116">
 
     
   </article>
@@ -419,7 +435,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1751909124312"></script>
+    <script async src="/js/copy-codeblock.js?v=1751909761933"></script>
   
 
   
