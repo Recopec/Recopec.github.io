@@ -9,30 +9,31 @@
 <meta name="description" content="数据库笔记第1章 绪论1.1 数据库系统概论1.2 数据模型数据模型是对现实世界数据特征的抽象 数据模型是数据库系统的核心和基础 两类数据模型概念模型（信息模型）：按用户的观点来对数据和信息建模，用于数据库设计 逻辑模型（网状模型、层次模型、关系模型、面向对象数据模型….）：按计算机系统的观点对数据建模、数据库管理系统的实现 物理模型： 描述数据在系统内（磁盘上）的表示方法和存取方法 现实世界 –">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库笔记">
-<meta property="og:url" content="https://blog.irec.moe/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:url" content="https://blog.irec.moe/dbnote.html">
 <meta property="og:site_name" content="Recopec 的博客">
 <meta property="og:description" content="数据库笔记第1章 绪论1.1 数据库系统概论1.2 数据模型数据模型是对现实世界数据特征的抽象 数据模型是数据库系统的核心和基础 两类数据模型概念模型（信息模型）：按用户的观点来对数据和信息建模，用于数据库设计 逻辑模型（网状模型、层次模型、关系模型、面向对象数据模型….）：按计算机系统的观点对数据建模、数据库管理系统的实现 物理模型： 描述数据在系统内（磁盘上）的表示方法和存取方法 现实世界 –">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://blog.irec.moe/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411220452040.png">
-<meta property="og:image" content="https://blog.irec.moe/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411220351572.png">
-<meta property="og:image" content="https://blog.irec.moe/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411221154166.png">
-<meta property="og:image" content="https://blog.irec.moe/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411223256250.png">
-<meta property="og:image" content="https://blog.irec.moe/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411230045200.png">
-<meta property="og:image" content="https://blog.irec.moe/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411231029299.png">
+<meta property="og:image" content="https://blog.irec.moe/dbnote/image-20220411220452040.png">
+<meta property="og:image" content="https://blog.irec.moe/dbnote/image-20220411220351572.png">
+<meta property="og:image" content="https://blog.irec.moe/dbnote/image-20220411221154166.png">
+<meta property="og:image" content="https://blog.irec.moe/dbnote/image-20220411223256250.png">
+<meta property="og:image" content="https://blog.irec.moe/dbnote/image-20220411230045200.png">
+<meta property="og:image" content="https://blog.irec.moe/dbnote/image-20220411231029299.png">
 <meta property="article:published_time" content="2022-04-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-08-11T15:01:59.000Z">
+<meta property="article:modified_time" content="2025-07-07T17:24:56.967Z">
 <meta property="article:author" content="Recopec">
 <meta property="article:tag" content="笔记">
+<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://blog.irec.moe/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411220452040.png">
+<meta name="twitter:image" content="https://blog.irec.moe/dbnote/image-20220411220452040.png">
 
 <link rel="stylesheet" href="/lib/fancybox/fancybox.css">
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1751908848660">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1751909124481">
 
-<link rel="stylesheet" href="/css/style.css?v=1751908848660">
+<link rel="stylesheet" href="/css/style.css?v=1751909124481">
 
 
 
@@ -44,7 +45,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1751908848660"></script>
+<script async src="/js/app.js?v=1751909124481"></script>
 
  
 
@@ -61,7 +62,7 @@
     </div>
     <div class="nexmoe-count">
         <div><span>文章</span>20</div>
-        <div><span>标签</span>27</div>
+        <div><span>标签</span>28</div>
         <div><span>分类</span>5</div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -232,12 +233,12 @@
         
   <div class="nexmoe-widget-wrap">
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/OpenClash/" style="font-size: 10px;">OpenClash</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/PC/" style="font-size: 10px;">PC</a> <a href="/tags/THM/" style="font-size: 20px;">THM</a> <a href="/tags/VR/" style="font-size: 10px;">VR</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/WireGuard/" style="font-size: 10px;">WireGuard</a> <a href="/tags/WireShark/" style="font-size: 10px;">WireShark</a> <a href="/tags/%E4%BF%9D%E5%81%A5/" style="font-size: 10px;">保健</a> <a href="/tags/%E5%85%89%E7%8C%AB/" style="font-size: 20px;">光猫</a> <a href="/tags/%E5%8D%87%E5%AD%A6/" style="font-size: 10px;">升学</a> <a href="/tags/%E5%8D%AB%E6%98%9F/" style="font-size: 10px;">卫星</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/" style="font-size: 10px;">无线电</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E7%81%B5%E8%BD%A6/" style="font-size: 10px;">灵车</a> <a href="/tags/%E7%94%B5%E6%B1%A0/" style="font-size: 10px;">电池</a> <a href="/tags/%E7%9F%AD%E6%B3%A2/" style="font-size: 10px;">短波</a> <a href="/tags/%E7%A1%AC%E7%9B%98/" style="font-size: 10px;">硬盘</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">笔记</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%AD%E5%91%BD/" style="font-size: 10px;">续命</a> <a href="/tags/%E7%BD%91%E5%8D%A1/" style="font-size: 10px;">网卡</a> <a href="/tags/%E7%BE%8A%E6%AF%9B/" style="font-size: 10px;">羊毛</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 20px;">群晖</a> <a href="/tags/%E8%80%83%E8%AF%95/" style="font-size: 10px;">考试</a> <a href="/tags/%E9%93%B6%E8%A1%8C%E5%8D%A1/" style="font-size: 10px;">银行卡</a>
+      <a href="/tags/OpenClash/" style="font-size: 10px;">OpenClash</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/PC/" style="font-size: 10px;">PC</a> <a href="/tags/THM/" style="font-size: 20px;">THM</a> <a href="/tags/VR/" style="font-size: 10px;">VR</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/WireGuard/" style="font-size: 10px;">WireGuard</a> <a href="/tags/WireShark/" style="font-size: 10px;">WireShark</a> <a href="/tags/%E4%BF%9D%E5%81%A5/" style="font-size: 10px;">保健</a> <a href="/tags/%E5%85%89%E7%8C%AB/" style="font-size: 20px;">光猫</a> <a href="/tags/%E5%8D%87%E5%AD%A6/" style="font-size: 10px;">升学</a> <a href="/tags/%E5%8D%AB%E6%98%9F/" style="font-size: 10px;">卫星</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 20px;">数据库</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/" style="font-size: 10px;">无线电</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E7%81%B5%E8%BD%A6/" style="font-size: 10px;">灵车</a> <a href="/tags/%E7%94%B5%E6%B1%A0/" style="font-size: 10px;">电池</a> <a href="/tags/%E7%9F%AD%E6%B3%A2/" style="font-size: 10px;">短波</a> <a href="/tags/%E7%A1%AC%E7%9B%98/" style="font-size: 10px;">硬盘</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">笔记</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%AD%E5%91%BD/" style="font-size: 10px;">续命</a> <a href="/tags/%E7%BD%91%E5%8D%A1/" style="font-size: 10px;">网卡</a> <a href="/tags/%E7%BE%8A%E6%AF%9B/" style="font-size: 10px;">羊毛</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 20px;">群晖</a> <a href="/tags/%E8%80%83%E8%AF%95/" style="font-size: 10px;">考试</a> <a href="/tags/%E9%93%B6%E8%A1%8C%E5%8D%A1/" style="font-size: 10px;">银行卡</a>
     </div>
     
       <script>
         var maxTagcloud = parseInt(17);
-        var tags_length = parseInt(27);
+        var tags_length = parseInt(28);
         var tags_arr = [];
         for(var i = 0; i < tags_length; i++){
           tags_arr.push(i);
@@ -407,10 +408,10 @@
 <p>这题和哪种数据模型没关系，数据模型通常都由那三种组成的。</p>
 </li>
 </ul>
-<h3 id="常用的数据模型"><a href="#常用的数据模型" class="headerlink" title="常用的数据模型"></a>常用的数据模型</h3><img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411220452040.png" class="" title="image-20220411220452040">
+<h3 id="常用的数据模型"><a href="#常用的数据模型" class="headerlink" title="常用的数据模型"></a>常用的数据模型</h3><img src="/dbnote/image-20220411220452040.png" class="" title="image-20220411220452040">
 
 <p><strong>格式化模型</strong>中的数据结构的单位：<strong>基本层次联系</strong></p>
-<p><strong><img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411220351572.png" class="" title="image-20220411220351572"></strong></p>
+<p><strong><img src="/dbnote/image-20220411220351572.png" class="" title="image-20220411220351572"></strong></p>
 <h3 id="层次模型"><a href="#层次模型" class="headerlink" title="层次模型"></a>层次模型</h3><p>表示方法：实体型、属性、联系</p>
 <p>定义：1、只有一个节点没有双亲节点，这个节点叫根节点</p>
 <p>​			2、根以外的其他节点只有一个双亲节点</p>
@@ -418,7 +419,7 @@
 <p>​			2、只能直接处理一对多</p>
 <p>​			3、不能脱离双亲独立存在</p>
 <p>​			4、任何记录只能一层一层找下去</p>
-<img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411221154166.png" class="" title="image-20220411221154166">
+<img src="/dbnote/image-20220411221154166.png" class="" title="image-20220411221154166">
 
 <p>优点：1、数据结构清晰</p>
 <p>​			2、查询效率高，性能优于关系模型</p>
@@ -455,7 +456,7 @@
 <p>关系模式：对关系的描述</p>
 <p>​					学生（<u>学号</u>，姓名，年级，年龄）</p>
 <p>关系必须是规范化的，关系的每一个分量必须是一个不可再分的数据项（这个好理解周老师讲过了，列中有列）</p>
-<img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411223256250.png" class="" title="image-20220411223256250">
+<img src="/dbnote/image-20220411223256250.png" class="" title="image-20220411223256250">
 
 <p><strong>数据操作都是集合操作：操作对象和操作结果都是关系</strong></p>
 <p>优点：1、建立在严格的数学概念的基础上</p>
@@ -467,7 +468,7 @@
 <h3 id="模式的概念"><a href="#模式的概念" class="headerlink" title="模式的概念"></a>模式的概念</h3><p>模式：对数据库逻辑结构和特征的描述（学生表）</p>
 <p>实例：模式的具体值（升本成功的所有学生的记录、没有升本成功的所有学生的记录）</p>
 <p>模式是固定的、示例是变化的</p>
-<h3 id="三级模式"><a href="#三级模式" class="headerlink" title="三级模式"></a>三级模式</h3><img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411230045200.png" class="" title="image-20220411230045200">
+<h3 id="三级模式"><a href="#三级模式" class="headerlink" title="三级模式"></a>三级模式</h3><img src="/dbnote/image-20220411230045200.png" class="" title="image-20220411230045200">
 
 <p><strong>多个</strong> 外模式（子模式、用户模式）：数据库用户使用的<strong>局部</strong>数据的逻辑结构和特征的描述</p>
 <p>​		与模式的关系：通常是模式的子集、一个模式有多个外模式</p>
@@ -492,7 +493,7 @@
 <h2 id="1-4-数据库系统的组成"><a href="#1-4-数据库系统的组成" class="headerlink" title="1.4 数据库系统的组成"></a>1.4 数据库系统的组成</h2><p>1、硬件平台及数据库：大内存、大磁盘、大通道</p>
 <p>2、软件：数据库管理系统、操作系统、与数据库接口的高级语言及其编译系统、应用开发工具、数据库应用系统</p>
 <p>3、人员：用户、应用程序员、系统分析员和数据库设计人员、数据库管理员</p>
-<img src="/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/image-20220411231029299.png" class="" title="image-20220411231029299">
+<img src="/dbnote/image-20220411231029299.png" class="" title="image-20220411231029299">
 
 <p>1、数据库管理员：略</p>
 <p>2、系统分析员：负责应用系统的需求分析和规范说明</p>
@@ -524,7 +525,7 @@
       
     <div class="nexmoe-post-copyright">
         <strong>本文作者：</strong>Recopec<br>
-        <strong>本文链接：</strong><a href="https://blog.irec.moe/2022/04/16/%E5%AD%A6%E4%B9%A0/%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/" title="https:&#x2F;&#x2F;blog.irec.moe&#x2F;2022&#x2F;04&#x2F;16&#x2F;%E5%AD%A6%E4%B9%A0&#x2F;%E8%AE%B0%E5%BD%95&#x2F;%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;blog.irec.moe&#x2F;2022&#x2F;04&#x2F;16&#x2F;%E5%AD%A6%E4%B9%A0&#x2F;%E8%AE%B0%E5%BD%95&#x2F;%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0&#x2F;</a><br>
+        <strong>本文链接：</strong><a href="https://blog.irec.moe/dbnote.html" title="https:&#x2F;&#x2F;blog.irec.moe&#x2F;dbnote.html" target="_blank" rel="noopener">https:&#x2F;&#x2F;blog.irec.moe&#x2F;dbnote.html</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
 
@@ -537,12 +538,12 @@
   <div class="nexmoe-post-meta nexmoe-rainbow">
    
     
-        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a>
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a>
     
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1751908848494"></script>
+    <script async src="/js/copy-codeblock.js?v=1751909124316"></script>
   
 
   
