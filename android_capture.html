@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>Android 抓包配置 (Charles + Burp) - Recopec 的博客</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="Android 抓包配置 (Charles + Burp)背景知识Android 系统是有两种证书类型的，Release 包默认只信任系统证书，而 Debug 包默认信任系统证书和用户证书。 我们要劫持 SSL 流量就必须要做到 MITM，然而我们 MITM 后的数据包内的证书需要设备信任，所以需要把我们的根证书加进系统信任的证书列表里。作为普通用户，正常途径只能添加用户证书，而 APP 是一般构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 抓包配置 (Charles + Burp)">
+<meta property="og:url" content="https://blog.irec.moe/android_capture.html">
+<meta property="og:site_name" content="Recopec 的博客">
+<meta property="og:description" content="Android 抓包配置 (Charles + Burp)背景知识Android 系统是有两种证书类型的，Release 包默认只信任系统证书，而 Debug 包默认信任系统证书和用户证书。 我们要劫持 SSL 流量就必须要做到 MITM，然而我们 MITM 后的数据包内的证书需要设备信任，所以需要把我们的根证书加进系统信任的证书列表里。作为普通用户，正常途径只能添加用户证书，而 APP 是一般构">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.irec.moe/android_capture/image-20250904105229097.png">
+<meta property="og:image" content="https://blog.irec.moe/android_capture/image-20250904105321111.png">
+<meta property="og:image" content="https://blog.irec.moe/android_capture/image-20250904105421821.png">
+<meta property="og:image" content="https://blog.irec.moe/android_capture/Screenshot_2025-09-04-11-00-15-57_fc704e6b13c4fb26bf5e411f75da84f2.jpg">
+<meta property="og:image" content="https://blog.irec.moe/android_capture/image-20250904110421465.png">
+<meta property="og:image" content="https://blog.irec.moe/android_capture/Screenshot_2025-09-04-11-07-59-30_41a74ddf68be21faad2fbbb691b15143.jpg">
+<meta property="og:image" content="https://blog.irec.moe/android_capture/image-20250904113105666.png">
+<meta property="og:image" content="https://blog.irec.moe/android_capture/image-20250904121319007.png">
+<meta property="og:image" content="https://blog.irec.moe/android_capture/image-20250904110554415.png">
+<meta property="og:image" content="https://blog.irec.moe/android_capture/image-20250904111447428.png">
+<meta property="article:published_time" content="2025-09-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-04T15:37:35.341Z">
+<meta property="article:author" content="Recopec">
+<meta property="article:tag" content="抓包">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.irec.moe/android_capture/image-20250904105229097.png">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1757000275526">
+
+<link rel="stylesheet" href="/css/style.css?v=1757000275526">
+
+
+
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1757000275526"></script>
+
+ 
+
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-shiki-plugin@latest/lib/codeblock.css">
+<style>:root{--hl-color:#abb2bf;--hl-bg:#282c34;--hltools-bg:#21252b;--hltools-color:#bbbbbc;--hlnumber-bg:#282c34;--hlnumber-color:#495162;--hlscrollbar-bg:#373c47;--hlexpand-bg:linear-gradient(180deg,rgba(40,44,52,0.1),rgba(40,44,52,0.9))}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Recopec 的博客" type="application/atom+xml">
+</head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/bg.jpg)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Recopec"><img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Recopec">
+            <img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec" alt="Recopec">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>24</div>
+        <div><span>标签</span>32</div>
+        <div><span>分类</span>6</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:irec.moe" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+            </form>
+         
+    </div>
+</div>
+
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/8209358"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/Recopec/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://twitter.com/Recopec"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter'}"
+			style="
+				color: rgb(59, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://t.me/Recopec"
+			target="_blank"
+			mdui-tooltip="{content: 'TG'}"
+			style="
+				color: rgb(70, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-telegram"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/THM/">THM</a>
+          <span class="category-list-count">5</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/无线电/">无线电</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/硬件/">硬件</a>
+          <span class="category-list-count">8</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/网络/">网络</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/Active-Directory/" style="font-size: 10px;">Active Directory</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/OpenClash/" style="font-size: 10px;">OpenClash</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/PC/" style="font-size: 10px;">PC</a> <a href="/tags/VR/" style="font-size: 10px;">VR</a> <a href="/tags/WEB/" style="font-size: 10px;">WEB</a> <a href="/tags/Windows/" style="font-size: 20px;">Windows</a> <a href="/tags/WireGuard/" style="font-size: 10px;">WireGuard</a> <a href="/tags/WireShark/" style="font-size: 10px;">WireShark</a> <a href="/tags/%E4%BF%9D%E5%81%A5/" style="font-size: 10px;">保健</a> <a href="/tags/%E5%85%89%E7%8C%AB/" style="font-size: 15px;">光猫</a> <a href="/tags/%E5%8D%87%E5%AD%A6/" style="font-size: 10px;">升学</a> <a href="/tags/%E5%8D%AB%E6%98%9F/" style="font-size: 10px;">卫星</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 10px;">抓包</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/" style="font-size: 10px;">无线电</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E7%81%B5%E8%BD%A6/" style="font-size: 10px;">灵车</a> <a href="/tags/%E7%94%B5%E6%B1%A0/" style="font-size: 10px;">电池</a> <a href="/tags/%E7%9F%AD%E6%B3%A2/" style="font-size: 10px;">短波</a> <a href="/tags/%E7%A1%AC%E7%9B%98/" style="font-size: 10px;">硬盘</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">笔记</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%AD%E5%91%BD/" style="font-size: 10px;">续命</a> <a href="/tags/%E7%BD%91%E5%8D%A1/" style="font-size: 10px;">网卡</a> <a href="/tags/%E7%BE%8A%E6%AF%9B/" style="font-size: 10px;">羊毛</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 15px;">群晖</a> <a href="/tags/%E8%80%83%E8%AF%95/" style="font-size: 10px;">考试</a> <a href="/tags/%E9%93%B6%E8%A1%8C%E5%8D%A1/" style="font-size: 10px;">银行卡</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(17);
+        var tags_length = parseInt(32);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+    
+        
+        <!-- 一言 -->
+<div class="nexmoe-widget-wrap">
+  <h3 class="nexmoe-widget-title">
+    一言
+  </h3>
+  <div class="nexmoe-widget">
+    <ul class="hitokoto-box">
+      <li id="hitokoto_text_parent" class="hitokoto-text" hitokotoCategory="">
+        <a href="#" id="hitokoto_text">
+          
+        </a>
+        <a href="#" id="hitokoto_error_text" style="display: none;">
+          
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  let hitokotoText = document.getElementById('hitokoto_text')
+  let hitokotoErroText = document.getElementById('hitokoto_error_text')
+  let hitokotoCategory = document.getElementById('hitokoto_text_parent').getAttribute('hitokotoCategory')
+  window.addEventListener('load', function () {
+    let url = 'https://v1.hitokoto.cn'
+    if (hitokotoCategory) {
+      url += '?c=' + hitokotoCategory
+    }
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        hitokotoText.innerText = "「 " + data.hitokoto + " 」 from " + data.from
+        hitokotoText.href = 'https://hitokoto.cn/?uuid=' + data.uuid
+      })
+      .catch((reason) => {
+        console.error(11, reason)
+        hitokotoText.style.display = 'none'
+        hitokotoErroText.style.display = 'block'
+      })
+  })
+</script>
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/android_capture.html">Android 抓包配置 (Charles + Burp)</a>
+          </li>
+        
+          <li>
+            <a href="/thm_rthe.html">Try Hack Me - Red Teaming</a>
+          </li>
+        
+          <li>
+            <a href="/thm_ad.html">Try Hack Me - Active Directory</a>
+          </li>
+        
+          <li>
+            <a href="/thm_wap.html">Try Hack Me - Web Application Pentesting</a>
+          </li>
+        
+          <li>
+            <a href="/thm_bufferoverflow.html">Try Hack Me - Buffer Overflow Prep</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+        
+   
+    <div class="nexmoe-copyright">
+        &copy; 2025 Recopec
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 37.5%;"> 
+            <img src="/android_capture/cover.jpg" alt="Android 抓包配置 (Charles + Burp)" loading="lazy">
+            <h1>Android 抓包配置 (Charles + Burp)</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2025年09月04日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约858字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要3分钟</a>
+
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <h1 id="Android-抓包配置-Charles-Burp"><a href="#Android-抓包配置-Charles-Burp" class="headerlink" title="Android 抓包配置 (Charles + Burp)"></a>Android 抓包配置 (Charles + Burp)</h1><h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><p>Android 系统是有两种证书类型的，Release 包默认<strong>只信任系统证书</strong>，而 Debug 包默认信任系统证书和用户证书。</p>
+<p>我们要劫持 SSL 流量就必须要做到 MITM，然而我们 MITM 后的数据包内的证书需要设备信任，所以需要把我们的根证书加进系统信任的证书列表里。作为普通用户，正常途径只能添加用户证书，而 APP 是一般构建的是 Release 包，所以我们必须通过修改系统证书的方式来让我们的证书被信任。</p>
+<p>在 Android 14 之后，证书需要放在 <code>/system/etc/security/cacerts</code> 和 <code>/apex/com.android.conscrypt/cacerts</code> 目录下，我提供的 magisk 模块能做到这点。</p>
+<h2 id="所需资源"><a href="#所需资源" class="headerlink" title="所需资源"></a>所需资源</h2><ul>
+<li><p>需要一台有 Magisk 环境的手机L</p>
+</li>
+<li><p>Charles</p>
+<ul>
+<li>下载：<a target="_blank" rel="noopener" href="https://www.charlesproxy.com/">https://www.charlesproxy.com/</a></li>
+<li>激活码：<a target="_blank" rel="noopener" href="https://www.zzzmode.com/mytools/charles/">https://www.zzzmode.com/mytools/charles/</a></li>
+</ul>
+</li>
+<li><p>Burp：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1J_CUxLKqC0h3Ypg4sQV0_g">https://pan.baidu.com/s/1J_CUxLKqC0h3Ypg4sQV0_g</a> 提取码：52pj</p>
+</li>
+<li><p>module：<a href="https://blog.irec.moe/android_capture/reqable-magisk.zip">https://blog.irec.moe/android_capture/reqable-magisk.zip</a></p>
+</li>
+</ul>
+<h2 id="Charles-配置"><a href="#Charles-配置" class="headerlink" title="Charles 配置"></a>Charles 配置</h2><p>激活步骤略。把 Proxy -&gt; Windows proxy 关掉，File -&gt; Clear session 一下。</p>
+<h3 id="导出根证书"><a href="#导出根证书" class="headerlink" title="导出根证书"></a>导出根证书</h3><p>Help -&gt; SSL proxying -&gt; Save Charles Root certificate 保存一下根证书，如果有需要你也可以把根证书装你手机上。</p>
+<img src="/android_capture/image-20250904105229097.png" class="" title="image-20250904105229097">
+
+<p>找到刚刚的根证书目录，使用这条命令计算证书 Subject 的 Hash 值（Windows 使用 Git Bash），把输出的第一行作为文件名，改成这样的格式 <code>b51d9383.0</code>，这是用来创建证书的符号链接的。</p>
+<figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">openssl x509 -subject_hash_old -in cert.pem</span></span></code></pre></div></div></figure>
+
+<img src="/android_capture/image-20250904105321111.png" class="" title="image-20250904105321111">
+
+<p>改名好之后，打开这个模块的安装包，把证书丢到这个目录下 <code>reqable-magisk.zip\system\etc\security\cacerts</code>。这个模块是从 reqable 里面提取出来的，因为现在的 Android system 目录是不可写的，所以需要这样一个模块来挂载证书。</p>
+<img src="/android_capture/image-20250904105421821.png" class="" title="image-20250904105421821">
+
+<p>丢进去之后，传到手机上用 Magisk 安装即可。重启之后可以在系统设置 -&gt; 信任的证书看到我们导入的证书。</p>
+<style>.dhtdggkmcfxi{zoom: 25%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/android_capture/Screenshot_2025-09-04-11-00-15-57_fc704e6b13c4fb26bf5e411f75da84f2.jpg" class="dhtdggkmcfxi" alt="Screenshot_2025-09-04-11-00-15-57_fc704e6b13c4fb26bf5e411f75da84f2" data-caption="Screenshot_2025-09-04-11-00-15-57_fc704e6b13c4fb26bf5e411f75da84f2" loading="lazy">
+
+<h3 id="Charles-SSL-配置"><a href="#Charles-SSL-配置" class="headerlink" title="Charles SSL 配置"></a>Charles SSL 配置</h3><p>找到 Proxy -&gt; SSL proxying settings</p>
+<p>把 Enable SSL proxying 的勾打上，点击左下角的加号，Host 和 Port 都填写 <code>*</code></p>
+<img src="/android_capture/image-20250904110421465.png" class="" title="image-20250904110421465">
+
+<h3 id="手机端配置"><a href="#手机端配置" class="headerlink" title="手机端配置"></a>手机端配置</h3><p>手机打开 WLAN 设置，找到你连接的 WiFi 详情，修改代理设置为手动。主机名填写运行 Charles 设备的 IP，端口填写 Charles 的监听端口（默认 8888）。</p>
+<style>.rigdoyytkjcg{zoom:25%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/android_capture/Screenshot_2025-09-04-11-07-59-30_41a74ddf68be21faad2fbbb691b15143.jpg" class="rigdoyytkjcg" alt="Screenshot_2025-09-04-11-07-59-30_41a74ddf68be21faad2fbbb691b15143" data-caption="Screenshot_2025-09-04-11-07-59-30_41a74ddf68be21faad2fbbb691b15143" loading="lazy">
+
+<p>然后 Charles 会提示你是否允许连接请求，点击 Allow 即可。</p>
+<p>PS: 这里 Charles 的 Access control 有 bug，不论我填 10.2.2.119 还是 10.2.2.0&#x2F;24 还是 0.0.0.0&#x2F;24 都不行，只能这样让他弹窗然后点 Allow。这里我手贱点了 Deny 然后怎么样都没法恢复了，只好在手机上换了个 IP。</p>
+<img src="/android_capture/image-20250904113105666.png" class="" title="image-20250904113105666">
+
+<p>到这里你就能截获 SSL 流量了，你可以在 Charles 的主界面的左边的 sitemap 看到有动静。</p>
+<img src="/android_capture/image-20250904121319007.png" class="" title="image-20250904121319007">
+
+<p>不过仅仅抓包对我来说是不够的，我需要使用 Burp 对数据包进行修改。</p>
+<h2 id="Charles-转发到-Burp-配置"><a href="#Charles-转发到-Burp-配置" class="headerlink" title="Charles 转发到 Burp 配置"></a>Charles 转发到 Burp 配置</h2><p>找到 Proxy -&gt; External proxying settings</p>
+<p>把 Web Proxy (HTTP) 和 Secure Web Proxy 都打上，目的地址填 Burp 的监听地址和端口（默认8080），这里我 Charles 和 Burp 都运行在本机，所以用 <code>127.0.0.1</code>。</p>
+<img src="/android_capture/image-20250904110554415.png" class="" title="image-20250904110554415">
+
+<p>保存之后你就能在 Burp 里面看到数据包了，接下来就是你自己探索的时间了。</p>
+<p>Enjoy~</p>
+<img src="/android_capture/image-20250904111447428.png" class="" title="image-20250904111447428">
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.ryanshang.com/2024/06/10/Android14%E8%AE%BE%E7%BD%AECharles%E8%AF%81%E4%B9%A6%E4%B8%BA%E7%B3%BB%E7%BB%9F%E6%A0%B9%E8%AF%81%E4%B9%A6/">Android14设置Charles证书为系统根证书</a></p>
+<p><a target="_blank" rel="noopener" href="https://reqable.com/zh-CN/android/">Reqable</a></p>
+
+    
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Recopec<br>
+        <strong>本文链接：</strong><a href="https://blog.irec.moe/android_capture.html" title="https:&#x2F;&#x2F;blog.irec.moe&#x2F;android_capture.html" target="_blank" rel="noopener">https:&#x2F;&#x2F;blog.irec.moe&#x2F;android_capture.html</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Android/" rel="tag">Android</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1757000274586"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          <script src="https://giscus.app/client.js"
+      data-repo="Recopec/Recopec.github.io"
+      data-repo-id="R_kgDOHWxLSA"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOHWxLSM4CYhGk"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+</script>
+
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android-%E6%8A%93%E5%8C%85%E9%85%8D%E7%BD%AE-Charles-Burp"><span class="toc-number">1.</span> <span class="toc-text">Android 抓包配置 (Charles + Burp)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">背景知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%80%E9%9C%80%E8%B5%84%E6%BA%90"><span class="toc-number">1.2.</span> <span class="toc-text">所需资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Charles-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">Charles 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">1.3.1.</span> <span class="toc-text">导出根证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Charles-SSL-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.2.</span> <span class="toc-text">Charles SSL 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E6%9C%BA%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.3.</span> <span class="toc-text">手机端配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Charles-%E8%BD%AC%E5%8F%91%E5%88%B0-Burp-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.</span> <span class="toc-text">Charles 转发到 Burp 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.5.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div><!-- hexo injector body_end start -->
+  <script>
+  const CODE_CONFIG = {
+    beautify: undefined,
+    highlightCopy: undefined,
+    highlightLang: undefined,
+    highlightHeightLimit: undefined,
+    isHighlightShrink: undefined,
+    copy: {
+      success: 'undefined',
+      error: 'undefined',
+      noSupport: 'undefined',
+    }
+  };
+  console.log(
+    `%c hexo-shiki-plugin %c v1.0.26 %c https://github.com/nova1751/hexo-shiki-plugin`,
+    "color: #fff; background: #5f5f5f",
+    "color: #fff; background: #80c8f8",
+    ""
+  );
+  </script>
+  <!-- hexo injector body_end end --></body></html>
