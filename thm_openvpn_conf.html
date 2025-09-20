@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>TryHackMe OpenVPN 配置优化指北 - Recopec 的博客</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="TryHackMe OpenVPN 配置优化指北 前言 TryHackMe 是一个好平台，我已经在上面玩了有三个月的时间了，Free Path 走完之后就开了个会员，跟着把红队路线做完了，同时还完成了个 Offensive Pentesting。现在没开会员了，在刷免费的房间，刷完就转战 HTB 咯~        在我刚开始学习 Free Path 的时候，每天都是用的 Attack Box 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TryHackMe OpenVPN 配置优化指北">
+<meta property="og:url" content="https://blog.irec.moe/thm_openvpn_conf.html">
+<meta property="og:site_name" content="Recopec 的博客">
+<meta property="og:description" content="TryHackMe OpenVPN 配置优化指北 前言 TryHackMe 是一个好平台，我已经在上面玩了有三个月的时间了，Free Path 走完之后就开了个会员，跟着把红队路线做完了，同时还完成了个 Offensive Pentesting。现在没开会员了，在刷免费的房间，刷完就转战 HTB 咯~        在我刚开始学习 Free Path 的时候，每天都是用的 Attack Box 1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/OpenVPN_TLS_Failed.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/Clash_Verge_Setting.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/V2rayN_Setting.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/OpenVPN_Proxy_Setting.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/OpenVPN-1.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/OpenVPN-2.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/THM_10.10.10.10_Succ.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/THM_ping.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/VMware_1.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/VMware_2.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/VMware_3.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/VMware_4.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/kali_1.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/kali_2.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/kali_3.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/Clash_rule.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/Clash_Tab.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/THM_Region.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/AWS_ping.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/MTR_%E5%8C%97%E4%BA%AC%E8%81%94%E9%80%9A%E5%BE%B7%E5%9B%BD.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/MTR_%E5%B9%BF%E4%B8%9C%E7%A7%BB%E5%8A%A8%E5%BE%B7%E5%9B%BD.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/Flower_1.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/Flower_2.jpg">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_ALL.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E9%B9%BF%E8%AF%AD%E4%BA%91.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E5%A4%A9%E6%A2%AF%E5%9B%BE-%E9%B9%BF%E8%AF%AD%E4%BA%91%E6%B8%85%E9%80%80.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E8%8A%B1%E4%BA%91%E5%8C%97%E4%BA%AC%E6%B5%8B%E9%80%9F.jpg">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E8%8A%B1%E4%BA%91%E6%B7%B1%E5%9C%B3%E7%94%B5%E4%BF%A1-%E8%8D%B7%E5%85%B0.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E7%BB%BF%E5%8F%B6%E6%B7%B1%E5%9C%B3%E7%94%B5%E4%BF%A1-%E8%8D%B7%E5%85%B0.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/%E5%A4%A9%E6%A2%AF%E5%9B%BE.png">
+<meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/Flower_UDP_%E4%BB%A3%E7%90%86%E6%97%A0%E6%B3%95%E8%A7%A3%E5%86%B3.png">
+<meta property="article:published_time" content="2025-09-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-20T11:44:12.577Z">
+<meta property="article:author" content="Recopec">
+<meta property="article:tag" content="OpenVPN">
+<meta property="article:tag" content="机场">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.irec.moe/thm_openvpn_conf/OpenVPN_TLS_Failed.png">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758368662486">
+
+<link rel="stylesheet" href="/css/style.css?v=1758368662486">
+
+
+
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1758368662486"></script>
+
+ 
+
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-shiki-plugin@latest/lib/codeblock.css">
+<style>:root{--hl-color:#abb2bf;--hl-bg:#282c34;--hltools-bg:#21252b;--hltools-color:#bbbbbc;--hlnumber-bg:#282c34;--hlnumber-color:#495162;--hlscrollbar-bg:#373c47;--hlexpand-bg:linear-gradient(180deg,rgba(40,44,52,0.1),rgba(40,44,52,0.9))}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Recopec 的博客" type="application/atom+xml">
+</head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/bg.jpg)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Recopec"><img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Recopec">
+            <img src="https://cdn.jsdelivr.net/gh/Recopec/Recopec.github.io@latest/images/avatar.jpg" alt="Recopec" alt="Recopec">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>25</div>
+        <div><span>标签</span>34</div>
+        <div><span>分类</span>6</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:irec.moe" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+            </form>
+         
+    </div>
+</div>
+
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/8209358"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/Recopec/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://twitter.com/Recopec"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter'}"
+			style="
+				color: rgb(59, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://t.me/Recopec"
+			target="_blank"
+			mdui-tooltip="{content: 'TG'}"
+			style="
+				color: rgb(70, 151, 239);
+				background-color: rgba(59, 151, 239, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-telegram"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/THM/">THM</a>
+          <span class="category-list-count">6</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/无线电/">无线电</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/硬件/">硬件</a>
+          <span class="category-list-count">8</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/网络/">网络</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/Active-Directory/" style="font-size: 10px;">Active Directory</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/OpenClash/" style="font-size: 10px;">OpenClash</a> <a href="/tags/OpenVPN/" style="font-size: 10px;">OpenVPN</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/PC/" style="font-size: 10px;">PC</a> <a href="/tags/VR/" style="font-size: 10px;">VR</a> <a href="/tags/WEB/" style="font-size: 10px;">WEB</a> <a href="/tags/Windows/" style="font-size: 20px;">Windows</a> <a href="/tags/WireGuard/" style="font-size: 10px;">WireGuard</a> <a href="/tags/WireShark/" style="font-size: 10px;">WireShark</a> <a href="/tags/%E4%BF%9D%E5%81%A5/" style="font-size: 10px;">保健</a> <a href="/tags/%E5%85%89%E7%8C%AB/" style="font-size: 15px;">光猫</a> <a href="/tags/%E5%8D%87%E5%AD%A6/" style="font-size: 10px;">升学</a> <a href="/tags/%E5%8D%AB%E6%98%9F/" style="font-size: 10px;">卫星</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 10px;">抓包</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/" style="font-size: 10px;">无线电</a> <a href="/tags/%E6%9C%BA%E5%9C%BA/" style="font-size: 10px;">机场</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E7%81%B5%E8%BD%A6/" style="font-size: 10px;">灵车</a> <a href="/tags/%E7%94%B5%E6%B1%A0/" style="font-size: 10px;">电池</a> <a href="/tags/%E7%9F%AD%E6%B3%A2/" style="font-size: 10px;">短波</a> <a href="/tags/%E7%A1%AC%E7%9B%98/" style="font-size: 10px;">硬盘</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">笔记</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%AD%E5%91%BD/" style="font-size: 10px;">续命</a> <a href="/tags/%E7%BD%91%E5%8D%A1/" style="font-size: 10px;">网卡</a> <a href="/tags/%E7%BE%8A%E6%AF%9B/" style="font-size: 10px;">羊毛</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 15px;">群晖</a> <a href="/tags/%E8%80%83%E8%AF%95/" style="font-size: 10px;">考试</a> <a href="/tags/%E9%93%B6%E8%A1%8C%E5%8D%A1/" style="font-size: 10px;">银行卡</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(17);
+        var tags_length = parseInt(34);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+    
+        
+        <!-- 一言 -->
+<div class="nexmoe-widget-wrap">
+  <h3 class="nexmoe-widget-title">
+    一言
+  </h3>
+  <div class="nexmoe-widget">
+    <ul class="hitokoto-box">
+      <li id="hitokoto_text_parent" class="hitokoto-text" hitokotoCategory="">
+        <a href="#" id="hitokoto_text">
+          
+        </a>
+        <a href="#" id="hitokoto_error_text" style="display: none;">
+          
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  let hitokotoText = document.getElementById('hitokoto_text')
+  let hitokotoErroText = document.getElementById('hitokoto_error_text')
+  let hitokotoCategory = document.getElementById('hitokoto_text_parent').getAttribute('hitokotoCategory')
+  window.addEventListener('load', function () {
+    let url = 'https://v1.hitokoto.cn'
+    if (hitokotoCategory) {
+      url += '?c=' + hitokotoCategory
+    }
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        hitokotoText.innerText = "「 " + data.hitokoto + " 」 from " + data.from
+        hitokotoText.href = 'https://hitokoto.cn/?uuid=' + data.uuid
+      })
+      .catch((reason) => {
+        console.error(11, reason)
+        hitokotoText.style.display = 'none'
+        hitokotoErroText.style.display = 'block'
+      })
+  })
+</script>
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/thm_openvpn_conf.html">TryHackMe OpenVPN 配置优化指北</a>
+          </li>
+        
+          <li>
+            <a href="/android_capture.html">Android 抓包配置 (Charles + Burp)</a>
+          </li>
+        
+          <li>
+            <a href="/thm_rthe.html">Try Hack Me - Red Teaming</a>
+          </li>
+        
+          <li>
+            <a href="/thm_ad.html">Try Hack Me - Active Directory</a>
+          </li>
+        
+          <li>
+            <a href="/thm_wap.html">Try Hack Me - Web Application Pentesting</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+        
+   
+    <div class="nexmoe-copyright">
+        &copy; 2025 Recopec
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 37.5%;"> 
+            <img src="/thm_openvpn_conf/cover.jpg" alt="TryHackMe OpenVPN 配置优化指北" loading="lazy">
+            <h1>TryHackMe OpenVPN 配置优化指北</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2025年09月20日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/THM/">THM</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约5.6k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要20分钟</a>
+
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <h1>TryHackMe OpenVPN 配置优化指北</h1>
+<h2 id="前言">前言</h2>
+<p>TryHackMe 是一个好平台，我已经在上面玩了有三个月的时间了，Free Path 走完之后就开了个会员，跟着把红队路线做完了，同时还完成了个 <a target="_blank" rel="noopener" href="https://tryhackme.com/path/outline/pentesting">Offensive Pentesting</a>。现在没开会员了，在刷免费的房间，刷完就转战 HTB 咯~</p>
+<div style="text-align: center;">
+    <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4987810" style='border:none; width:400px; height:110px;'></iframe>
+</div>
+<p>在我刚开始学习 Free Path 的时候，每天都是用的 Attack Box 1 小时的免费时长，把每个前置任务点做完之后才敢开机器开打（1h 一天是真的不够玩）。免费路线刷完了，就开了个会员开始付费路线的学习。在学习的过程中愈发觉得 Attack Box 不够用，于是就转战本地的攻击机，选的 <a href="www.kali.org">Kali</a>，当然你用别的比如 <a target="_blank" rel="noopener" href="https://parrotsec.org/">Parrot</a> 也行。</p>
+<p>THM 为了安全考虑，是不会开放他们的机器到公网的，因为那些靶机丢到公网分分钟都会被橄榄，但是用本地的攻击机的话，是需要连接到 THM 的内网的，THM 提供了 <a target="_blank" rel="noopener" href="https://openvpn.net/">OpenVPN</a> 这种方式接入他们的内网。</p>
+<h2 id="通过-OpenVPN-接入-THM">通过 OpenVPN 接入 THM</h2>
+<p>THM 提供了一个<a target="_blank" rel="noopener" href="https://tryhackme.com/room/OpenVPN">房间</a>来讲述配置如何配置 OpenVPN，但是对于我们国内用户来说是不适用的。</p>
+<p>由于众所周知的原因，OpenVPN 的流量特征已经被精准识别了，如果直接使用下载下来的配置文件，通常在使用一段时间后你会发现连接被掐了，或者根本连不上，报错 <code>TLS handshake failed</code>，如下图。</p>
+<blockquote>
+<p>2025-09-20 00:38:23 TLS Error: TLS key negotiation failed to occur within 60 seconds (check your network connectivity)<br>
+2025-09-20 00:38:23 TLS Error: TLS handshake failed</p>
+</blockquote>
+<style>.xbwbsecebdwh{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/OpenVPN_TLS_Failed.png" class="xbwbsecebdwh" alt="OpenVPN_TLS_Failed" data-caption="OpenVPN_TLS_Failed" loading="lazy">
+<p>所以你需要给 OpenVPN 再嵌套一层<strong>代理</strong>，让你去往 THM 服务器的流量经过你的代理节点，这就是我们要做的。</p>
+<h3 id="我的使用方案">我的使用方案</h3>
+<p>首先分享一下我的使用方案吧，我的主力环境是 Windows，Kali 攻击机是跑在 Windows 里面的。</p>
+<p>Windows 的 OpenVPN 用 EU-VIP-2，连接跑在 Windows 上的 Clash。</p>
+<p>Kali 里面的 OpenVPN 用 EU-VIP-1，连接跑在 Windows 上的 Clash。</p>
+<p>这样的话，主机和攻击机都能作为单独的 IP 连进 THM 的内网，如果仅仅只是主机上单独跑一个 OpenVPN 的话，攻击机用主机 NAT 之后的网络，有些地方会挺受限的（需要单独配置端口转发），所以最好是每个端都单独跑一个 OpenVPN。</p>
+<h4 id="Windows-配置">Windows 配置</h4>
+<p>我使用的代理软件是 <a target="_blank" rel="noopener" href="https://github.com/Clash-verge-rev/Clash-verge-rev">Clash Verge</a>，如果你和我是一样的，且你没有改动配置文件，你可以照抄我的配置。</p>
+<p>首先需要找到你的代理软件的设置，打开局域网连接（或者是 Allow LAN 之类的设置），这是让你局域网的其他机器能连接到你的 Windows 机器的必要条件，然后在找到你的端口设置，记住他（默认是 7897），下图已圈出需要注意的地方。</p>
+<style>.enfjqsrjcivf{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Clash_Verge_Setting.png" class="enfjqsrjcivf" alt="Clash_Verge_Setting" data-caption="Clash_Verge_Setting" loading="lazy">
+<p>其他代理软件也是类似的设置，如下是 <a target="_blank" rel="noopener" href="https://github.com/2dust/v2rayN">V2rayN</a> 的配置，记住监听的端口号就行。</p>
+<style>.gskdyfdlprif{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/V2rayN_Setting.png" class="gskdyfdlprif" alt="V2rayN_Setting" data-caption="V2rayN_Setting" loading="lazy">
+<p>配置好了之后，就是配置 OpenVPN 本体了，首先右键他的图标 -&gt; 选项 -&gt; 代理，选择手动设置，地址填写你电脑的 IP（本机填写 127.0.0.1），端口就是你上面记住的监听端口，我的设置如下。</p>
+<style>.zgqsjefkdlkr{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/OpenVPN_Proxy_Setting.png" class="zgqsjefkdlkr" alt="OpenVPN_Proxy_Setting" data-caption="OpenVPN_Proxy_Setting" loading="lazy">
+<p>点击确定即可，至此，Windows 端的 OpenVPN 配置已经结束，右键托盘图标，选择导入的配置文件连接即可。</p>
+<style>.uoctkueirvbb{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/OpenVPN-1.png" class="uoctkueirvbb" alt="OpenVPN-1" data-caption="OpenVPN-1" loading="lazy">
+<p>若连接成功，会弹窗提示连接成功，以及你分配到的 THM 内网 IP，托盘图标的显示器背景变绿。</p>
+<style>.oujkspovrrcu{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/OpenVPN-2.png" class="oujkspovrrcu" alt="OpenVPN-2" data-caption="OpenVPN-2" loading="lazy">
+<p>可以打开 <a target="_blank" rel="noopener" href="http://10.10.10.10">http://10.10.10.10</a> 测试是否连接成功，如果成功连接，会看到你的内网 IP 和一个 flag，如下图所示：</p>
+<style>.guebjvqmxcqs{zoom: 25%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/THM_10.10.10.10_Succ.png" class="guebjvqmxcqs" alt="THM_10.10.10.10_Succ" data-caption="THM_10.10.10.10_Succ" loading="lazy">
+<p>同时你也可以 <code>ping 10.10.10.10</code>，查看你电脑到 THM 服务器的延迟，通常 200ms 以内就算比较好了。如果你的延迟高于 300ms，后面会告诉你怎么解决。</p>
+<style>.vuftlssmkcik{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/THM_ping.png" class="vuftlssmkcik" alt="THM_ping" data-caption="THM_ping" loading="lazy">
+<h4 id="Linux-Kali-配置">Linux(Kali) 配置</h4>
+<p>我的环境是 VMware + Kali，如果你的和我一样，可以照抄。</p>
+<p>VMware 下载地址：<a target="_blank" rel="noopener" href="https://www.423down.com/14542.html">423down - VMware Workstation PRO_v17.6.4_正式版</a></p>
+<p>我假定你已经导入好虚拟机，并且已经成功开机了，如果你没有完成到这一步，请自行解决。</p>
+<h5 id="获取通信网卡-IP">获取通信网卡 IP</h5>
+<p>在 VMware 的主界面，点击编辑 -&gt; 虚拟网络编辑器</p>
+<style>.qwydlymchxcq{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/VMware_1.png" class="qwydlymchxcq" alt="VMware_1" data-caption="VMware_1" loading="lazy">
+<p>打开之后选择 NAT 类型的网卡，找到<strong>子网 IP</strong> 这一项，记住他。</p>
+<style>.jopxhkeqerbo{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/VMware_2.png" class="jopxhkeqerbo" alt="VMware_2" data-caption="VMware_2" loading="lazy">
+<p>在默认设置下，你的电脑的给 VMware NAT 网卡的 IP 是 <strong>192.168.x.1</strong>，比如说我这里显示的是 192.168.244.0，我默认的 NAT 网卡的 IP 就是 192.168.244.1，你也可以通过多种方式去查看他，比如说去控制面板，或是用 <code>ipconfig</code> 等。</p>
+<style>.uolqimyxpgqp{zoom:33%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/VMware_3.png" class="uolqimyxpgqp" alt="VMware_3" data-caption="VMware_3" loading="lazy">
+<style>.ovbuzbgjjskw{zoom: 25%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/VMware_4.png" class="ovbuzbgjjskw" alt="VMware_4" data-caption="VMware_4" loading="lazy">
+<p>如果你是桥接模式，就是你<strong>桥接的那张网卡</strong>在你电脑上获取的 IP。我们的最终目的是找到虚拟机能和你电脑通信的网卡的 IP，从而能连接到我们宿主机上的代理软件。</p>
+<h5 id="配置-Kali-上的-OpenVPN">配置 Kali 上的 OpenVPN</h5>
+<p>我们目前掌握的信息：宿主机和虚拟机通信模式是 NAT，NAT 网卡的 IP 是 <code>192.168.244.1</code>，代理软件的监听端口是 <code>7897</code>。</p>
+<p>启动虚拟机，首先你需要把你的从 THM 获取到的配置文件复制到你 Kali 的随便一个目录下，如果复制不了，一般是 <code>vmware-tools</code> 有问题，如果你是直接用<a target="_blank" rel="noopener" href="https://www.kali.org/get-kali/#kali-virtual-machines">官方提供的 Kali VMware 镜像</a>是不会出现这个问题的。</p>
+<style>.tlhlgfbabwgy{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/kali_1.png" class="tlhlgfbabwgy" alt="kali_1" data-caption="kali_1" loading="lazy">
+<p>打开你刚刚复制进去配置文件，增加下面这一行，这是连接到你主机上代理软件上的 socks 监听端口的命令。</p>
+<figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">socks-proxy YOUR_IP_ADDRES 7897</span></span></code></pre></div></div></figure>
+<style>.wjnqwprlfpub{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/kali_2.png" class="wjnqwprlfpub" alt="kali_2" data-caption="kali_2" loading="lazy">
+<p>或者你可以用这段命令，直接写入到你的配置文件中，这一行在哪无所谓，只要在配置文件中，就能成功被应用。</p>
+<figure class="shiki sh"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #56B6C2">echo</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">&#39;socks-proxy YOUR_IP_ADDRESS 7897&#39;</span><span style="color: #ABB2BF"> &gt; </span><span style="color: #98C379">./YOUR_CONF.ovpn</span></span></code></pre></div></div></figure>
+<p>最后用这行命令启动在 Kali 上的 OpenVPN。</p>
+<figure class="shiki sh"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #61AFEF">sudo</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">openvpn</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">./YOUR_CONF.ovpn</span></span></code></pre></div></div></figure>
+<p>成功连接会看到如下提示：</p>
+<style>.eygujoxdagjh{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/kali_3.png" class="eygujoxdagjh" alt="kali_3" data-caption="kali_3" loading="lazy">
+<p>可以看到 OpenVPN 自动帮你加了去往靶机 IP 段的路由表，这时你就可以 <code>ping 10.10.10.10</code> 测试一下看通不通。</p>
+<h4 id="可能碰到的问题">可能碰到的问题</h4>
+<p>到这里，如果你碰到了如下两个问题，可以参照着解决：</p>
+<ol>
+<li>OpenVPN 连不上，提示 <code>TLS Error: TLS key negotiation failed to occur within 60 seconds (check your network connectivity)</code>
+<ul>
+<li>你用的节点<strong>不支持 UDP</strong>，需要更换支持 UDP 的节点</li>
+<li>检查代理软件的监听端口</li>
+<li>检查你的代理软件的规则，是否开了仅常用端口走代理。THM 用的端口是 1194，需要自行修改规则，<strong>后文会附解决办法</strong></li>
+</ul>
+</li>
+<li>Windows 能连上，但是 Linux 连接不上
+<ul>
+<li>检查你的虚拟机是否能正常上网，<code>ping baidu.com</code></li>
+<li>检查代理软件是否打开了 Allow LAN（允许局域网连接）之类的选项</li>
+<li>检查你本机和虚拟机通信的网卡，确定网卡 IP 正确</li>
+<li>检查代理软件设置的监听端口</li>
+</ul>
+</li>
+</ol>
+<h5 id="代理规则设置">代理规则设置</h5>
+<p>一般来说，大多数的配置文件都会加入一个 <code>🐟 漏网之鱼</code> <strong>类似这样的规则组</strong>去兜底访问<strong>非标端口</strong>需要代理的场景，请你检查这个代理组是否设置走代理。如果你通过切换解决了，那恭喜你，不用跟着下面操作了。</p>
+<p>编辑你的配置文件，找到 <code>rules:</code> 开头，加上这一行。</p>
+<figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">- DST-PORT,1194,🚀 节点选择</span></span></code></pre></div></div></figure>
+<style>.uoxujmramcsm{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Clash_rule.png" class="uoxujmramcsm" alt="Clash_rule" data-caption="Clash_rule" loading="lazy">
+<p>最后面的 <code>🚀 节点选择</code> 是你的代理组的名字，如果你的配置文件和我不一样，需要对应着修改，不然会报错。</p>
+<style>.wkpwmqswjqzw{zoom: 50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Clash_Tab.png" class="wkpwmqswjqzw" alt="Clash_Tab" data-caption="Clash_Tab" loading="lazy">
+<p>还有要注意的是，你修改过的 Clash 配置文件可能过一会就被替换掉了，这是自动更新订阅的原因，可以改成不自动更新订阅。也可以使用订阅聚合配置文件进行使用，这是我的一个<a target="_blank" rel="noopener" href="https://gist.github.com/Recopec/a88559ceba69f48927da8105cf1084c7">模板</a>。网上教程很多，请自行查阅修改。</p>
+<p>关于其他软件的设置，请自行查阅解决，在此不赘述。</p>
+<h2 id="网络优化">网络优化</h2>
+<p>首先想要拥有良好的打靶体验，你需要低 + 稳定的 <a target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/learning/cdn/glossary/round-trip-time-rtt/">RTT</a>（round-trip time）。通过本节的学习，你会得到 200ms 以内的 RTT，如果你的延迟是这个数，或者你觉得你现在的体验完全足够你使用，可以不用往下看了。</p>
+<h3 id="IP-路由原理">IP 路由原理</h3>
+<p>在深入探讨如何优化网络之前，我们首先需要理解一个核心概念：<strong>路由</strong>。</p>
+<p>很多人误以为，网络连接是简单的“点对点”直连。然而，真实的互联网世界要复杂得多。你的网络数据包从你的电脑出发，抵达 TryHackMe 的服务器，通常需要穿越多个国家，甚至跨越多个大洲。这个过程就像是一封信件在国际间旅行，它不会直接从你家飞到目的地，而是会经过多个邮政中转站。在网络中，这些“中转站”就是<strong>路由器（Router）</strong>，而路由器之间如何选择路径，则是由<strong>路由协议</strong>决定的。</p>
+<p>其中最重要、最复杂的协议就是 <strong>BGP（Border Gateway Protocol）</strong>。简单来说，BGP 就像是全球各大网络运营商（例如中国电信、中国移动、AT&amp;T 等）之间达成的一套“交通规则”，它决定了数据包如何跨越不同的网络，选择最佳的路径。运营商之间通过 <strong>Peer（对等互联）</strong> 的方式交换网络路由信息，共同构成了整个互联网的骨干。</p>
+<p>但问题就出在这里：运营商出于商业考量，Peer 线路的质量和优先级并不一致。你的数据包很可能因为运营商之间的利益关系或网络配置，被安排了一条“绕远路”。例如，你身在中国，想要访问欧洲的 TryHackMe 服务器，理想情况下应该走一条最近的路径。但实际情况可能是，你的数据包先绕到了日本，再去了美国，最后才抵达欧洲，走了很多不必要的<strong>跳数（Hop）</strong>，导致延迟居高不下。</p>
+<h4 id="CN2、CMI">CN2、CMI</h4>
+<ul>
+<li><strong>CN2（ChinaNet Next Generation）：</strong> 这是中国电信旗下的高端骨干网络。与传统的中国电信 163 骨干网相比，CN2 的路由节点更少，网络拥塞更低。</li>
+<li><strong>CMI（China Mobile International）：</strong> 这是中国移动的国际出口网络。近年来，CMI 线路的质量有了显著提升，尤其是在连接香港、日本、新加坡等地的国际方向上，表现非常出色。</li>
+</ul>
+<p>我们的最终目的是：用最优的路由，把去靶机的路<strong>拉直</strong>。</p>
+<h3 id="接入区域选择">接入区域选择</h3>
+<h4 id="美东靶机">美东靶机</h4>
+<p>THM 在 2025 年 8 月的时候悄悄上架了 N. Virginia（弗吉尼亚州） 的靶机，也就是 AWS 的 us-east-1 ，你可以在你的账户设置里面设置靶机区域。</p>
+<style>.omxsfwjwqupy{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/THM_Region.png" class="omxsfwjwqupy" alt="THM_Region" data-caption="THM_Region" loading="lazy">
+<p>从大陆到美西最快是 110ms 左右，而美西到美东需要 60ms（参考 <a target="_blank" rel="noopener" href="https://www.cloudping.co/">AWS Latency Monitoring</a>），加起来就是 170ms 打底了，这还是在理论情况下。在我实战中，打这个区域的靶机 RTT 最快是 220ms。</p>
+<p>所以这个新上架的区域就不考虑了，我们能选的只有<strong>欧洲区域的靶机</strong>，经过合理的优化达到 180ms 左右是不难的。</p>
+<h4 id="THM-接入节点">THM 接入节点</h4>
+<p><a target="_blank" rel="noopener" href="https://tryhackme.com/manage-account/access-open-vpn">THM 的 OpenVPN </a>提供了以下地区的接入节点：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>区域</th>
+<th>AWS region</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EU</td>
+<td>欧洲 - 爱尔兰</td>
+<td>eu-west-1</td>
+</tr>
+<tr>
+<td>US-West</td>
+<td>美国 - 弗吉尼亚州</td>
+<td>us-east-1</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>澳洲 - 悉尼</td>
+<td>ap-southeast-2</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>印度 - 孟买</td>
+<td>ap-south-1</td>
+</tr>
+</tbody>
+</table>
+<p>偷偷提一嘴，THM 的 OpenVPN 支持多个配置文件同时连接，但是不支持<strong>单个配置文件多个客户端</strong>连接。每个配置文件<strong>分配的 IP 都是不同的</strong>，可以试一下那几个配置文件有没有分到<strong>好记的 IP</strong>，就用那个配置文件作为主力使用（EU 有 6 个配置文件）。</p>
+<h4 id="测试-RTT">测试 RTT</h4>
+<p>你可以通过 <a target="_blank" rel="noopener" href="https://awsspeedtest.com/">AWS Speed Test</a> 测试你本地到 AWS 的每个区域的延迟。</p>
+<p>测试到 eu-west-1 的延时 - 10ms 左右就是你最终到靶机的延迟，我也不知道为什么这个网站测试出来的 RTT 偏大，反正最终你连上之后 <code>ping 10.10.10.10</code> 就是了。</p>
+<style>.ppiliunidjmh{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/AWS_ping.png" class="ppiliunidjmh" alt="AWS_ping" data-caption="AWS_ping" loading="lazy">
+<h3 id="线路优化原理">线路优化原理</h3>
+<p>在开头讲述了路由这个概念，我们现在的目标就是通过对线路的分析，挑选出一条最适合我们的路。</p>
+<h4 id="线路分析">线路分析</h4>
+<p>欧洲的靶机是在 eu-west-1，也就是爱尔兰，而我们国内到欧洲比较好的线路方案有两种：</p>
+<ol>
+<li>
+<p><strong>京德专线/优化线路 120ms 左右</strong></p>
+<p>这是北京联通 -&gt; Misaka 德国法兰克福的优化线路，联通移动最快 120ms，电信慢一些 160ms。</p>
+<style>.pfamgzubkgcy{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/MTR_%E5%8C%97%E4%BA%AC%E8%81%94%E9%80%9A%E5%BE%B7%E5%9B%BD.png" class="pfamgzubkgcy" alt="北京联通 - Misaka 德国" data-caption="北京联通 - Misaka 德国" loading="lazy">
+<blockquote>
+<p>使用 <a target="_blank" rel="noopener" href="https://www.itdog.cn/">https://www.itdog.cn/</a> 测试</p>
+</blockquote>
+<p>专线和优化线路的还有一个区别就是，专线不需要考虑出去的是哪条线路，只需要考虑国内 -&gt; 入口机器的延迟即可。而优化线路看是哪家运营商，走哪家运营商的优化线路，差异比较大，不过也可以套一个前置解决。</p>
+</li>
+<li>
+<p><strong>粤港入口 -&gt; 香港 RETN -&gt; 欧洲，150ms</strong></p>
+<p>算上入口物理延迟 160ms 左右，通过 RETN 的 <a target="_blank" rel="noopener" href="https://lg.retn.net/">Looking Glass</a> 测试出来香港到爱尔兰是 173ms。</p>
+</li>
+</ol>
+<p>根据这两条<strong>基础线路</strong>，针对不同区域的人群就有了不同的推荐。</p>
+<h4 id="区域推荐">区域推荐</h4>
+<h5 id="华北区域">华北区域</h5>
+<p>如果你在<strong>北方</strong>，不管是从物理链路还是实际线路，就只能选择<strong>京德方案</strong>了。我们的最终目的都是想把<strong>线路拉直</strong>，也就是到我们目的地走最短的线路。</p>
+<p><strong>理论极限：北京 -&gt; 德国 120ms + 德国 -&gt; 爱尔兰 25ms = 145ms</strong></p>
+<h5 id="华中华东区域">华中华东区域</h5>
+<p>推荐京德，因为离北京近。</p>
+<p><strong>理论值：华中 -&gt; 北京 10 - 20ms + 北京 -&gt; 德国 120ms + 德国 -&gt; 爱尔兰 25ms = 155 - 165ms</strong></p>
+<h5 id="华西区域">华西区域</h5>
+<p>据说有乌鲁木齐的出口，但是我没见到过，这一片还是推荐京德。</p>
+<p><strong>理论值：华西 -&gt; 北京 20 - 40ms + 北京 -&gt; 德国 120ms + 德国 -&gt; 爱尔兰 25ms = 155 - 175ms</strong></p>
+<h5 id="广东-华南">广东/华南</h5>
+<p>但是你在广东的话，情况就不一样了，因为 <strong>广东 -&gt; 北京 30ms + 京德 120ms + 德国 -&gt; 爱尔兰 25ms = 175ms</strong></p>
+<p>下图是优化线路的京德，可以看到广州 -&gt; 北京的 RTT 是 35ms，到德国 175ms 左右，再从德国到爱尔兰的靶机接近 200ms 了（我实测 180 - 200ms 左右，看时段）。</p>
+<style>.osklcxtcdqyl{zoom: 50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/MTR_%E5%B9%BF%E4%B8%9C%E7%A7%BB%E5%8A%A8%E5%BE%B7%E5%9B%BD.png" class="osklcxtcdqyl" alt="Misaka 京德优化线路" data-caption="Misaka 京德优化线路" loading="lazy">
+<p>而走香港 RETN 的话，可能是 <strong>本地 -&gt; 粤港入口 10 - 5ms + 香港 -&gt; 爱尔兰走 RETN 173ms = 178ms</strong>，两者的 RTT 差不多，所以不如走有优化的 RETN 了（更有性价比+更快）。</p>
+<p>湖南广西这类地区的话，就看你自己的选择了，其实位置挺尴尬的，选京德和香港 RETN 都可以。</p>
+<h4 id="并不是优化线路就一定好">并不是优化线路就一定好</h4>
+<p>当你获得了一条看似完美的优化线路，你可能会发现延迟（<strong>RTT</strong>）很低，但连接依旧不够稳定，时常感到卡顿。这背后一个常常被忽视的因素，就是 <strong>Jitter（网络抖动）</strong>。</p>
+<p>尽管大多数线路会尽量优化这项指标，但是由于各家的预算不一，可能会碰到入口/线路拥塞，导致卡顿。所以仅仅追求低延迟是不够的，你还需要确保这条线路能够提供<strong>稳定、低抖动</strong>的传输质量。</p>
+<h3 id="机场-线路选择">机场/线路选择</h3>
+<p>有了前文的铺垫，相信师傅们对如何<strong>优化到靶机的网络线路</strong>已经有了一定的了解了。</p>
+<p>对于师傅们我更建议是选择一个好的机场，可以参考<a target="_blank" rel="noopener" href="https://www.haitunt.org/hj.html">沪日&amp;中欧 天梯表</a>去选择机场，当然单独买线路或者 VPS 搭也是可以的。对我来说我比较适合机场，因为折腾这些需要大量的时间还有钱。（摊手</p>
+<h4 id="如何选购">如何选购</h4>
+<p>因为前面打靶机卡死我了，我硬是怼着美东 230ms 的延迟打了半个月。最近查了大量的资料，也找了很多家的测评，总结了下面的选购经验：</p>
+<p>看测速图<strong>德国、荷兰、伦敦</strong>的节点，如果有<strong>爱尔兰</strong>的更好，靶机就在家门口。</p>
+<p>同时注意测速<strong>后端地区</strong>，如果和你的地区和运营商一致，那么恭喜你，这就是你的真实体验。如果地区不一样但是你和他的物理距离不远，并且是同一运营商。比如说测速机是东莞电信，而你用的是阳江电信，这也能作为你的参考。因为这些线路的好坏<strong>受运营商影响非常大</strong>，所以必须要<strong>特别注意</strong>。</p>
+<style>.jecqdewfbzel{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Flower_1.png" class="jecqdewfbzel" alt="Flower_1" data-caption="Flower_1" loading="lazy">
+<p>找到和你类似地区/运营商的测速图了之后，主要是看里面的 <strong>RTT 参数</strong>，这就是决定你的体验的关键，比如说下图的 RTT 是 124，Jitter 是 4.9，很优秀了。</p>
+<table>
+<thead>
+<tr>
+<th>地区</th>
+<th>RTT 下限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>华北地区 -&gt; 德国、荷兰、伦敦</td>
+<td>160</td>
+</tr>
+<tr>
+<td>华东地区 -&gt; 德国、荷兰、伦敦</td>
+<td>180</td>
+</tr>
+<tr>
+<td>华南地区 -&gt; 德国、荷兰、伦敦</td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+<p>有些测速图是没有 RTT 标准差这一项的，下面的图是连通性测试，大多你能看到的测速图都是测速+解锁流媒体测试。</p>
+<style>.iztjqvvxcfvs{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Flower_2.jpg" class="iztjqvvxcfvs" alt="Flower_2" data-caption="Flower_2" loading="lazy">
+<p>还有要注意的就是测速的时间了，一般晚上 18 - 24 这个时间段是高峰期，测速时间在这个时间段更能看出来县粮食本身的实力。</p>
+<p>最后一点，线路是有时效性，可能用着用着线路就因为不可抗力的原因切了也有可能，建议在购买的时候不要买长期的，建议月/季付，确定稳定再长期购买。</p>
+<hr>
+<h4 id="个人体验">个人体验</h4>
+<p>下面是我体验过的，还算 OK 的机场。</p>
+<h5 id="FlowerCloud-专线">FlowerCloud #专线</h5>
+<p>🌷有京德专线，国内通过北京华为云接入。延迟很好看，但是 UDP 的线路有问题，延迟很高还丢包。TCP 没问题，THM AD 域的网络的配置文件是走的 TCP 1194 过去的，可以低延迟愉快玩耍 AD 域，<strong>实际体验 &lt; 180ms + 稳</strong>。</p>
+<p>还有就是有半个 RETN 优化过的香港，爱尔兰 -&gt; RETN -&gt; HKIX 165ms，<strong>实际体验 &lt; 195ms + 稳</strong>。</p>
+<p>注册链接：<a target="_blank" rel="noopener" href="https://api-flowercloud.com/aff.php?aff=7100">flowercloud</a></p>
+<h5 id="ctc02-直连优化">ctc02 #直连优化</h5>
+<p>ctc02 就是我前面放的 MTR 图的那家，德国节点用的 Misaka 优化过的线路，走京德，如果你在北京的话应该很爽了，150ms 打靶不是梦。<strong>实际体验 180 - 200ms + 稳 / 高峰期没法用</strong>。</p>
+<p>而他的其他线路就比较没用了，他全是直连优化线路，线路质量挺好的。不过我主力是花云，所以我基本用不上。</p>
+<p>这家挺便宜的，42块钱能买一年。我是买来测试德国节点用的，<strong>最主要的问题是高峰期 RTT 会爆炸💥</strong>，当个备用用还是 OK 的。</p>
+<p>注册链接：<a target="_blank" rel="noopener" href="https://www.ctc.run/#/register?code=4XF32kzm">ctc02</a> 优惠码：<code>20%OFF</code></p>
+<h4 id="顶流线路">顶流线路</h4>
+<p>我在前面提到的<a target="_blank" rel="noopener" href="https://www.haitunt.org/hj.html">天梯图</a>的群里潜伏，从他们3月13日的<a target="_blank" rel="noopener" href="https://t.me/haitunspeed/1169948">讨论</a>中找到了如下信息：</p>
+<style>.iugwtawevbll{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_ALL.png" class="iugwtawevbll" alt="顶级_ALL" data-caption="顶级_ALL" loading="lazy">
+<p>这张图可以看出来这几家都挺厉害的，都是一线机场，都是买不起的（</p>
+<p>注意测速点是在北京，而里面的节点是走的中转，实际的 RTT 要减去 北京 - 对应地区的 RTT。</p>
+<p><strong>其价格分别是：Nex 55/月，Dler 999/年，TAG 160/季，AIFUN 18.8/月，MESL 155/年。</strong></p>
+<p>这之中 TAG 和 MESL 的节点覆盖是最全的，有<strong>爱尔兰</strong>节点。</p>
+<ul>
+<li>
+<p>鹿语云 北京测速</p>
+<p>看到一个非常牛逼的机场，但是听说挺贵的。<style>.lfkmwukuapvp{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E9%B9%BF%E8%AF%AD%E4%BA%91.png" class="lfkmwukuapvp" alt="顶级_鹿语云" data-caption="顶级_鹿语云" loading="lazy"></p>
+<p>在他们讨论完的两天后就被清退了hhhh，3月13讨论的，3月15亖的。</p>
+<style>.uksfqbrnqvan{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E5%A4%A9%E6%A2%AF%E5%9B%BE-%E9%B9%BF%E8%AF%AD%E4%BA%91%E6%B8%85%E9%80%80.png" class="uksfqbrnqvan" alt="顶级_天梯图-鹿语云清退" data-caption="顶级_天梯图-鹿语云清退" loading="lazy">
+</li>
+<li>
+<p>花云 北京测速</p>
+<style>.qegqxrndivbw{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E8%8A%B1%E4%BA%91%E5%8C%97%E4%BA%AC%E6%B5%8B%E9%80%9F.jpg" class="qegqxrndivbw" alt="顶级_花云北京测速" data-caption="顶级_花云北京测速" loading="lazy">
+</li>
+<li>
+<p>花云 深圳电信 - 荷兰</p>
+<style>.unvjzpaujvwh{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E8%8A%B1%E4%BA%91%E6%B7%B1%E5%9C%B3%E7%94%B5%E4%BF%A1-%E8%8D%B7%E5%85%B0.png" class="unvjzpaujvwh" alt="顶级_花云深圳电信-荷兰" data-caption="顶级_花云深圳电信-荷兰" loading="lazy">
+</li>
+<li>
+<p>绿叶 深圳电信 - 荷兰</p>
+<style>.slzsliukzqff{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E7%BB%BF%E5%8F%B6%E6%B7%B1%E5%9C%B3%E7%94%B5%E4%BF%A1-%E8%8D%B7%E5%85%B0.png" class="slzsliukzqff" alt="顶级_绿叶深圳电信-荷兰" data-caption="顶级_绿叶深圳电信-荷兰" loading="lazy">
+</li>
+</ul>
+<h3 id="总结">总结</h3>
+<p>如果你是懒狗，又不太在意预算的话，无脑看<a target="_blank" rel="noopener" href="https://www.haitunt.org/hj.html">天梯图</a>，挑一家买就完事。极致优化线路/专线的价格不是一般机场能承受的起的，而对这种线路有需求的人又是少数，基本上小机场不会上这种线路，只有大机场才有，所以相应套餐的价格也是偏高的（一分钱一分货）。</p>
+<style>.qvcbidsgmtph{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E5%A4%A9%E6%A2%AF%E5%9B%BE.png" class="qvcbidsgmtph" alt="天梯图" data-caption="天梯图" loading="lazy">
+<p>鹿语云已经下架了，那个 <code>$d</code> 不知道是什么玩意，找了一下也没有有价值的信息</p>
+<p>上榜的价格如下：</p>
+<ul>
+<li>VikingLinks 35/月</li>
+<li>xipcloud 400/年</li>
+<li>tag 160/季</li>
+<li>花云 128/年</li>
+</ul>
+<p>上面这四家我都会买一遍体验一下，如果花云能解决 UDP TCP RTT 不一致的问题就好了（我已经发了工单），我猜是 UDP 过去走了不同的线路，或者没走专线。</p>
+<p><strong>2025-09-20 回复：没法解决</strong></p>
+<style>.quhorkvakzcl{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Flower_UDP_%E4%BB%A3%E7%90%86%E6%97%A0%E6%B3%95%E8%A7%A3%E5%86%B3.png" class="quhorkvakzcl" alt="Flower_UDP_代理无法解决" data-caption="Flower_UDP_代理无法解决" loading="lazy">
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-236957-1">日本到美国的线路是怎么走的呢？是往亚洲还是往太平洋？</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-303353-1">有美东的优化线路机吗？纽约延迟最低多少？</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-416366-1">其实JP地理位置比SG更好</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/695121">中德最低延迟该怎么走？</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-303373-1">Bage VPS HK Lite 与 HK Standard 欧洲路由(RETN)详细对比 (补充Akile retn对比)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-331639-1">简单汇总下个人所了解的几个方向稳定的优化线路方式（主观）</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-193599-1">请教一下广东联通小鸡到德国延迟140ms，走的物理线路可能是哪根呢（附路由）</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-204148-1">Misaka德国柏林 测评</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-450702-1">测评留档Misaka Berlin柏林CN2 10.50 USD / mo</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-280170-1">求推荐去欧洲低延迟的方案 玩游戏和语音用</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://retn.net/cn/network/network-map">RETN POP-MAP</a></p>
+</li>
+</ul>
+<h3 id="测试工具">测试工具</h3>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://lg.retn.net/">RETN Looking Glass</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.itdog.cn/">IT Dog</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.cloudping.co/">AWS Latency Monitoring</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://awsspeedtest.com/">AWS Speed Test</a></p>
+</li>
+</ul>
+<h3 id="测速站">测速站</h3>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://duangks.com/">性价比机场测速</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.duyaoss.com/">DuyaoSS-机场测速和简介</a></li>
+</ul>
+
+    
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Recopec<br>
+        <strong>本文链接：</strong><a href="https://blog.irec.moe/thm_openvpn_conf.html" title="https:&#x2F;&#x2F;blog.irec.moe&#x2F;thm_openvpn_conf.html" target="_blank" rel="noopener">https:&#x2F;&#x2F;blog.irec.moe&#x2F;thm_openvpn_conf.html</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/OpenVPN/" rel="tag">OpenVPN</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E6%9C%BA%E5%9C%BA/" rel="tag">机场</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1758368662241"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          <script src="https://giscus.app/client.js"
+      data-repo="Recopec/Recopec.github.io"
+      data-repo-id="R_kgDOHWxLSA"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOHWxLSM4CYhGk"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+</script>
+
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">TryHackMe OpenVPN 配置优化指北</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87-OpenVPN-%E6%8E%A5%E5%85%A5-THM"><span class="toc-number">1.2.</span> <span class="toc-text">通过 OpenVPN 接入 THM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%A1%88"><span class="toc-number">1.2.1.</span> <span class="toc-text">我的使用方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Windows-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Windows 配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-Kali-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Linux(Kali) 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E9%80%9A%E4%BF%A1%E7%BD%91%E5%8D%A1-IP"><span class="toc-number">1.2.1.2.1.</span> <span class="toc-text">获取通信网卡 IP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Kali-%E4%B8%8A%E7%9A%84-OpenVPN"><span class="toc-number">1.2.1.2.2.</span> <span class="toc-text">配置 Kali 上的 OpenVPN</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E8%83%BD%E7%A2%B0%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">可能碰到的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E8%A7%84%E5%88%99%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.2.1.3.1.</span> <span class="toc-text">代理规则设置</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">网络优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP-%E8%B7%AF%E7%94%B1%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.1.</span> <span class="toc-text">IP 路由原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CN2%E3%80%81CMI"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">CN2、CMI</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5%E5%8C%BA%E5%9F%9F%E9%80%89%E6%8B%A9"><span class="toc-number">1.3.2.</span> <span class="toc-text">接入区域选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BE%8E%E4%B8%9C%E9%9D%B6%E6%9C%BA"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">美东靶机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#THM-%E6%8E%A5%E5%85%A5%E8%8A%82%E7%82%B9"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">THM 接入节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-RTT"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">测试 RTT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E8%B7%AF%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.3.</span> <span class="toc-text">线路优化原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">线路分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%BA%E5%9F%9F%E6%8E%A8%E8%8D%90"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">区域推荐</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%8E%E5%8C%97%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.3.3.2.1.</span> <span class="toc-text">华北区域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%8E%E4%B8%AD%E5%8D%8E%E4%B8%9C%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.3.3.2.2.</span> <span class="toc-text">华中华东区域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%8E%E8%A5%BF%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.3.3.2.3.</span> <span class="toc-text">华西区域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B9%BF%E4%B8%9C-%E5%8D%8E%E5%8D%97"><span class="toc-number">1.3.3.2.4.</span> <span class="toc-text">广东&#x2F;华南</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B6%E4%B8%8D%E6%98%AF%E4%BC%98%E5%8C%96%E7%BA%BF%E8%B7%AF%E5%B0%B1%E4%B8%80%E5%AE%9A%E5%A5%BD"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">并不是优化线路就一定好</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%9C%BA-%E7%BA%BF%E8%B7%AF%E9%80%89%E6%8B%A9"><span class="toc-number">1.3.4.</span> <span class="toc-text">机场&#x2F;线路选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E8%B4%AD"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">如何选购</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E4%BD%93%E9%AA%8C"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">个人体验</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#FlowerCloud-%E4%B8%93%E7%BA%BF"><span class="toc-number">1.3.4.2.1.</span> <span class="toc-text">FlowerCloud #专线</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ctc02-%E7%9B%B4%E8%BF%9E%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.4.2.2.</span> <span class="toc-text">ctc02 #直连优化</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%B6%E6%B5%81%E7%BA%BF%E8%B7%AF"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">顶流线路</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.5.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.4.</span> <span class="toc-text">参考资料</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7"><span class="toc-number">1.4.1.</span> <span class="toc-text">测试工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E9%80%9F%E7%AB%99"><span class="toc-number">1.4.2.</span> <span class="toc-text">测速站</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div><!-- hexo injector body_end start -->
+  <script>
+  const CODE_CONFIG = {
+    beautify: undefined,
+    highlightCopy: undefined,
+    highlightLang: undefined,
+    highlightHeightLimit: undefined,
+    isHighlightShrink: undefined,
+    copy: {
+      success: 'undefined',
+      error: 'undefined',
+      noSupport: 'undefined',
+    }
+  };
+  console.log(
+    `%c hexo-shiki-plugin %c v1.0.27 %c https://github.com/nova1751/hexo-shiki-plugin`,
+    "color: #fff; background: #5f5f5f",
+    "color: #fff; background: #80c8f8",
+    ""
+  );
+  </script>
+  <!-- hexo injector body_end end --></body></html>

@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-<meta name="description" content="起初是家里 NAS 上 docker 跑的宝塔面板经常出问题，掉电重启之后 mysql 经常会异常停止，然后去面板上经常需要重新绑定账号，所以有迁移到 1Panel 的想法。 首先使用 moelin&#x2F;1panel 镜像，需要使用 SSH 进入NAS 后，使用 sudo -i 后用 root 权限执行安装命令 12345678910docker run -d \     --name 1p">
+<meta name="description" content="起初是家里 NAS 上 docker 跑的宝塔面板经常出问题，掉电重启之后 mysql 经常会异常停止，然后去面板上经常需要重新绑定账号，所以有迁移到 1Panel 的想法。 首先使用 moelin&#x2F;1panel 镜像，需要使用 SSH 进入NAS 后，使用 sudo -i 后用 root 权限执行安装命令 12345678910docker run -d \     --name 1panel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在群晖的 Docker 上安装 1Panel 面板">
 <meta property="og:url" content="https://blog.irec.moe/install_1panel_with_synology_docker.html">
 <meta property="og:site_name" content="Recopec 的博客">
-<meta property="og:description" content="起初是家里 NAS 上 docker 跑的宝塔面板经常出问题，掉电重启之后 mysql 经常会异常停止，然后去面板上经常需要重新绑定账号，所以有迁移到 1Panel 的想法。 首先使用 moelin&#x2F;1panel 镜像，需要使用 SSH 进入NAS 后，使用 sudo -i 后用 root 权限执行安装命令 12345678910docker run -d \     --name 1p">
+<meta property="og:description" content="起初是家里 NAS 上 docker 跑的宝塔面板经常出问题，掉电重启之后 mysql 经常会异常停止，然后去面板上经常需要重新绑定账号，所以有迁移到 1Panel 的想法。 首先使用 moelin&#x2F;1panel 镜像，需要使用 SSH 进入NAS 后，使用 sudo -i 后用 root 权限执行安装命令 12345678910docker run -d \     --name 1panel">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.irec.moe/install_1panel_with_synology_docker/image-20240109181029560.png">
 <meta property="og:image" content="https://blog.irec.moe/install_1panel_with_synology_docker/image-20240109184214820.png">
@@ -28,9 +28,9 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1757000275691">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758368662639">
 
-<link rel="stylesheet" href="/css/style.css?v=1757000275691">
+<link rel="stylesheet" href="/css/style.css?v=1758368662639">
 
 
 
@@ -42,7 +42,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1757000275691"></script>
+<script async src="/js/app.js?v=1758368662639"></script>
 
  
 
@@ -59,8 +59,8 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>文章</span>24</div>
-        <div><span>标签</span>32</div>
+        <div><span>文章</span>25</div>
+        <div><span>标签</span>34</div>
         <div><span>分类</span>6</div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -188,7 +188,7 @@
 
         <li class="category-list-item">
           <a class="category-list-link" href="/categories/THM/">THM</a>
-          <span class="category-list-count">5</span>
+          <span class="category-list-count">6</span>
         </li>
 
         
@@ -238,12 +238,12 @@
         
   <div class="nexmoe-widget-wrap">
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/Active-Directory/" style="font-size: 10px;">Active Directory</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/OpenClash/" style="font-size: 10px;">OpenClash</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/PC/" style="font-size: 10px;">PC</a> <a href="/tags/VR/" style="font-size: 10px;">VR</a> <a href="/tags/WEB/" style="font-size: 10px;">WEB</a> <a href="/tags/Windows/" style="font-size: 20px;">Windows</a> <a href="/tags/WireGuard/" style="font-size: 10px;">WireGuard</a> <a href="/tags/WireShark/" style="font-size: 10px;">WireShark</a> <a href="/tags/%E4%BF%9D%E5%81%A5/" style="font-size: 10px;">保健</a> <a href="/tags/%E5%85%89%E7%8C%AB/" style="font-size: 15px;">光猫</a> <a href="/tags/%E5%8D%87%E5%AD%A6/" style="font-size: 10px;">升学</a> <a href="/tags/%E5%8D%AB%E6%98%9F/" style="font-size: 10px;">卫星</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 10px;">抓包</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/" style="font-size: 10px;">无线电</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E7%81%B5%E8%BD%A6/" style="font-size: 10px;">灵车</a> <a href="/tags/%E7%94%B5%E6%B1%A0/" style="font-size: 10px;">电池</a> <a href="/tags/%E7%9F%AD%E6%B3%A2/" style="font-size: 10px;">短波</a> <a href="/tags/%E7%A1%AC%E7%9B%98/" style="font-size: 10px;">硬盘</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">笔记</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%AD%E5%91%BD/" style="font-size: 10px;">续命</a> <a href="/tags/%E7%BD%91%E5%8D%A1/" style="font-size: 10px;">网卡</a> <a href="/tags/%E7%BE%8A%E6%AF%9B/" style="font-size: 10px;">羊毛</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 15px;">群晖</a> <a href="/tags/%E8%80%83%E8%AF%95/" style="font-size: 10px;">考试</a> <a href="/tags/%E9%93%B6%E8%A1%8C%E5%8D%A1/" style="font-size: 10px;">银行卡</a>
+      <a href="/tags/Active-Directory/" style="font-size: 10px;">Active Directory</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/OpenClash/" style="font-size: 10px;">OpenClash</a> <a href="/tags/OpenVPN/" style="font-size: 10px;">OpenVPN</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/PC/" style="font-size: 10px;">PC</a> <a href="/tags/VR/" style="font-size: 10px;">VR</a> <a href="/tags/WEB/" style="font-size: 10px;">WEB</a> <a href="/tags/Windows/" style="font-size: 20px;">Windows</a> <a href="/tags/WireGuard/" style="font-size: 10px;">WireGuard</a> <a href="/tags/WireShark/" style="font-size: 10px;">WireShark</a> <a href="/tags/%E4%BF%9D%E5%81%A5/" style="font-size: 10px;">保健</a> <a href="/tags/%E5%85%89%E7%8C%AB/" style="font-size: 15px;">光猫</a> <a href="/tags/%E5%8D%87%E5%AD%A6/" style="font-size: 10px;">升学</a> <a href="/tags/%E5%8D%AB%E6%98%9F/" style="font-size: 10px;">卫星</a> <a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 10px;">抓包</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E7%94%B5/" style="font-size: 10px;">无线电</a> <a href="/tags/%E6%9C%BA%E5%9C%BA/" style="font-size: 10px;">机场</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E7%81%B5%E8%BD%A6/" style="font-size: 10px;">灵车</a> <a href="/tags/%E7%94%B5%E6%B1%A0/" style="font-size: 10px;">电池</a> <a href="/tags/%E7%9F%AD%E6%B3%A2/" style="font-size: 10px;">短波</a> <a href="/tags/%E7%A1%AC%E7%9B%98/" style="font-size: 10px;">硬盘</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">笔记</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%AD%E5%91%BD/" style="font-size: 10px;">续命</a> <a href="/tags/%E7%BD%91%E5%8D%A1/" style="font-size: 10px;">网卡</a> <a href="/tags/%E7%BE%8A%E6%AF%9B/" style="font-size: 10px;">羊毛</a> <a href="/tags/%E7%BE%A4%E6%99%96/" style="font-size: 15px;">群晖</a> <a href="/tags/%E8%80%83%E8%AF%95/" style="font-size: 10px;">考试</a> <a href="/tags/%E9%93%B6%E8%A1%8C%E5%8D%A1/" style="font-size: 10px;">银行卡</a>
     </div>
     
       <script>
         var maxTagcloud = parseInt(17);
-        var tags_length = parseInt(32);
+        var tags_length = parseInt(34);
         var tags_arr = [];
         for(var i = 0; i < tags_length; i++){
           tags_arr.push(i);
@@ -308,7 +308,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">文章归档</h3>
     <div class="nexmoe-widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -321,6 +321,10 @@
     <h3 class="nexmoe-widget-title">最新文章</h3>
     <div class="nexmoe-widget">
       <ul>
+        
+          <li>
+            <a href="/thm_openvpn_conf.html">TryHackMe OpenVPN 配置优化指北</a>
+          </li>
         
           <li>
             <a href="/android_capture.html">Android 抓包配置 (Charles + Burp)</a>
@@ -336,10 +340,6 @@
         
           <li>
             <a href="/thm_wap.html">Try Hack Me - Web Application Pentesting</a>
-          </li>
-        
-          <li>
-            <a href="/thm_bufferoverflow.html">Try Hack Me - Buffer Overflow Prep</a>
           </li>
         
       </ul>
@@ -371,7 +371,7 @@
             <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%A1%AC%E4%BB%B6/">硬件</a>
         
         
-    <a><i class="nexmoefont icon-areachart"></i>约501字</a>
+    <a><i class="nexmoefont icon-areachart"></i>约498字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要2分钟</a>
 
     </div>
@@ -383,7 +383,7 @@
 </div>
 
     <p>起初是家里 NAS 上 docker 跑的宝塔面板经常出问题，掉电重启之后 mysql 经常会异常停止，然后去面板上经常需要重新绑定账号，所以有迁移到 1Panel 的想法。</p>
-<p>首先使用 moelin&#x2F;1panel 镜像，需要使用 SSH 进入NAS 后，使用 sudo -i 后用 root 权限执行安装命令</p>
+<p>首先使用 moelin/1panel 镜像，需要使用 SSH 进入NAS 后，使用 sudo -i 后用 root 权限执行安装命令</p>
 <figure class="shiki bash"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #61AFEF">docker</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">run</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">-d</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">\</span></span>
 <span class="line"><span style="color: #ABB2BF">    </span><span style="color: #D19A66">--name</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">1</span><span style="color: #98C379">panel</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">\</span></span>
 <span class="line"><span style="color: #ABB2BF">    </span><span style="color: #D19A66">--restart</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">always</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">\</span></span>
@@ -394,11 +394,9 @@
 <span class="line"><span style="color: #ABB2BF">    </span><span style="color: #D19A66">-v</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">/volume2/docker/1panel/root:/root</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">\</span></span>
 <span class="line"><span style="color: #ABB2BF">    </span><span style="color: #D19A66">-e</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">TZ=Asia/Shanghai</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">\</span></span>
 <span class="line"><span style="color: #ABB2BF">    </span><span style="color: #98C379">moelin/1panel:latest</span></span></code></pre></div></div></figure>
-
 <p>正常进入系统后安装 openresty 和 mysql，查看到报错文件映射有问题。</p>
 <p>因为文档教程的宿主机和容器内外映射路径是一样的，所以问题出在这里。</p>
 <img src="/install_1panel_with_synology_docker/image-20240109181029560.png" class="" title="image-20240109181029560">
-
 <p>这里就拿 mysql举例，手动修改 compose 配置文件文件映射部分，我的实际目录是在 <code>/docker/1panel/opt/1panel/apps/mysql/mysql</code> 下（注意这里有两个 mysql）</p>
 <figure class="shiki dockerfile"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #7F848E; font-style: italic"># 原始配置文件</span></span>
 <span class="line"><span style="color: #ABB2BF">- ./data/:/var/lib/mysql</span></span>
@@ -413,20 +411,13 @@
 <span class="line"><span style="color: #ABB2BF">- /volume2/docker/1panel/opt/1panel/apps/mysql/mysql/log:/var/log/mysql</span></span>
 <span class="line"><span style="color: #ABB2BF">- /etc/timezone:/etc/timezone:ro</span></span>
 <span class="line"><span style="color: #ABB2BF">- /etc/localtime:/etc/localtime:ro</span></span></code></pre></div></div></figure>
-
 <p>同时在宿主机目录下面创建好没有创建的目录或者文件，空的就行，比如我这里就少了一个 <code>data</code> 文件夹和 <code>log</code> 文件，操作好后手动点击一下重建按钮。如果还是报错查看一下错误信息，如果是缺少文件之类的报错，操作之后直接点重启即可。</p>
 <img src="/install_1panel_with_synology_docker/image-20240109184214820.png" class="" title="image-20240109184214820">
-
 <img src="/install_1panel_with_synology_docker/image-20240109181340506.png" class="" title="image-20240109181340506">
-
-<p>如果提示 &#x2F;etc&#x2F;timezone can’t find 什么的，同样用 ssh 执行一下下面的命令即可。</p>
+<p>如果提示 /etc/timezone can’t find 什么的，同样用 ssh 执行一下下面的命令即可。</p>
 <figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">touch /etc/timezone</span></span>
 <span class="line"><span style="color: #abb2bf">echo &#39;Asia/Shanghai&#39; &gt; /etc/timezone</span></span></code></pre></div></div></figure>
-
 <img src="/install_1panel_with_synology_docker/image-20240109184012054.png" class="" title="image-20240109184012054">
-
-
-
 <p>最后还是不用套娃了，在 VMM 里装了个 Rocky Linux 再装了个 1Panel，省心好多。希望此经验能帮助到大家。</p>
 
     
@@ -454,7 +445,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1757000274697"></script>
+    <script async src="/js/copy-codeblock.js?v=1758368662334"></script>
   
 
   
@@ -507,7 +498,7 @@
     }
   };
   console.log(
-    `%c hexo-shiki-plugin %c v1.0.26 %c https://github.com/nova1751/hexo-shiki-plugin`,
+    `%c hexo-shiki-plugin %c v1.0.27 %c https://github.com/nova1751/hexo-shiki-plugin`,
     "color: #fff; background: #5f5f5f",
     "color: #fff; background: #80c8f8",
     ""
