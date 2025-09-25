@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-<meta name="description" content="在 OpenWrt 下使用 WireGuard 实现全局代理上网设备情况设备型号：360 T7 固件版本号：ImmortalWrt 18.06-5.4-SNAPSHOT r11814-ef0c86bdb0 &#x2F; LuCI branch (git-22.323.17670-f9380b5)   网络架构图如下   网络设置新建 WG 接口，修改协议为 WireGuard VPN 一般配置里填">
+<meta name="description" content="在 OpenWrt 下使用 WireGuard 实现全局代理上网 设备情况 设备型号：360 T7 固件版本号：ImmortalWrt 18.06-5.4-SNAPSHOT r11814-ef0c86bdb0 &#x2F; LuCI branch (git-22.323.17670-f9380b5)  网络架构图如下  网络设置 新建 WG 接口，修改协议为 WireGuard VPN 一般配置里填好私钥（">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在 OpenWrt 下使用 WireGuard 实现全局代理上网">
 <meta property="og:url" content="https://blog.irec.moe/openwrt_with_wireguard_proxy.html">
 <meta property="og:site_name" content="Recopec 的博客">
-<meta property="og:description" content="在 OpenWrt 下使用 WireGuard 实现全局代理上网设备情况设备型号：360 T7 固件版本号：ImmortalWrt 18.06-5.4-SNAPSHOT r11814-ef0c86bdb0 &#x2F; LuCI branch (git-22.323.17670-f9380b5)   网络架构图如下   网络设置新建 WG 接口，修改协议为 WireGuard VPN 一般配置里填">
+<meta property="og:description" content="在 OpenWrt 下使用 WireGuard 实现全局代理上网 设备情况 设备型号：360 T7 固件版本号：ImmortalWrt 18.06-5.4-SNAPSHOT r11814-ef0c86bdb0 &#x2F; LuCI branch (git-22.323.17670-f9380b5)  网络架构图如下  网络设置 新建 WG 接口，修改协议为 WireGuard VPN 一般配置里填好私钥（">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230622160616094.png">
 <meta property="og:image" content="https://blog.irec.moe/openwrt_with_wireguard_proxy/image-20230812051639947.png">
@@ -41,9 +41,9 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758795297209">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758796452166">
 
-<link rel="stylesheet" href="/css/style.css?v=1758795297209">
+<link rel="stylesheet" href="/css/style.css?v=1758796452166">
 
 
 
@@ -55,7 +55,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1758795297209"></script>
+<script async src="/js/app.js?v=1758796452166"></script>
 
  
 
@@ -384,7 +384,7 @@
             <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
         
         
-    <a><i class="nexmoefont icon-areachart"></i>约953字</a>
+    <a><i class="nexmoefont icon-areachart"></i>约948字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要3分钟</a>
 
     </div>
@@ -395,35 +395,35 @@
     
 </div>
 
-    <h1 id="在-OpenWrt-下使用-WireGuard-实现全局代理上网"><a href="#在-OpenWrt-下使用-WireGuard-实现全局代理上网" class="headerlink" title="在 OpenWrt 下使用 WireGuard 实现全局代理上网"></a>在 OpenWrt 下使用 WireGuard 实现全局代理上网</h1><h2 id="设备情况"><a href="#设备情况" class="headerlink" title="设备情况"></a>设备情况</h2><p>设备型号：360 T7</p>
-<p>固件版本号：ImmortalWrt 18.06-5.4-SNAPSHOT r11814-ef0c86bdb0 &#x2F; LuCI branch (git-22.323.17670-f9380b5)</p>
+    <h1>在 OpenWrt 下使用 WireGuard 实现全局代理上网</h1>
+<h2 id="设备情况">设备情况</h2>
+<p>设备型号：360 T7</p>
+<p>固件版本号：ImmortalWrt 18.06-5.4-SNAPSHOT r11814-ef0c86bdb0 / LuCI branch (git-22.323.17670-f9380b5)</p>
 <img src="/openwrt_with_wireguard_proxy/image-20230622160616094.png" class="" title="image-20230622160616094">
-
 <p><strong>网络架构图如下</strong></p>
 <img src="/openwrt_with_wireguard_proxy/image-20230812051639947.png" class="" title="image-20230812051639947">
-
-<h2 id="网络设置"><a href="#网络设置" class="headerlink" title="网络设置"></a>网络设置</h2><p>新建 WG 接口，修改协议为 WireGuard VPN</p>
+<h2 id="网络设置">网络设置</h2>
+<p>新建 WG 接口，修改协议为 WireGuard VPN</p>
 <p>一般配置里填好<strong>私钥</strong>（可以自行生成），<strong>IP地址</strong>（对端的允许的IP）</p>
 <p>Peers 里添加一个新的。</p>
 <p>然后填写对端的<strong>公钥</strong>，<strong>允许的IP</strong>话，看情况填写。</p>
 <ul>
-<li>如果只需要走部分网段的话（打通内网），填写对应的网段即可（CIDR格式），例如192.168.88.0&#x2F;24, 10.22.33.128&#x2F;25。点加号可以添加多条。</li>
-<li>如果需要全局代理的话，填写0.0.0.0&#x2F;0（默认路由）即可</li>
+<li>如果只需要走部分网段的话（打通内网），填写对应的网段即可（CIDR格式），例如192.168.88.0/24, 10.22.33.128/25。点加号可以添加多条。</li>
+<li>如果需要全局代理的话，填写0.0.0.0/0（默认路由）即可</li>
 </ul>
 <p><strong>路由允许的 IP</strong> 打钩，这一条是自动添加路由表的作用。</p>
 <p><strong>端点主机和端点端口</strong>填写对端的IP地址和端口即可。</p>
 <p><strong>持续 Keep-Alive</strong> 看情况填写，我使用的是默认值0。</p>
 <p>填写好是这样的：</p>
 <img src="/openwrt_with_wireguard_proxy/image-20230622154615466.png" class="" title="image-20230622154615466">
-
 <img src="/openwrt_with_wireguard_proxy/image-20230622154638126.png" class="" title="image-20230622154638126">
-
 <p>到这一步，如果只需要走部分网段的设置已经接近尾声了，把新建的 WG 接口加入到和 LAN 相同的防火墙区域，即可打通。或者新建一个新区域，配置规则也行，保存应用之后重连一下端口，就可以在 状态 - WireGuard 状态 看到链接信息了，有正常收发流量即为正常。</p>
 <img src="/openwrt_with_wireguard_proxy/image-20230622154543710.png" class="" title="image-20230622154543710">
-
-<h2 id="全局代理设置"><a href="#全局代理设置" class="headerlink" title="全局代理设置"></a>全局代理设置</h2><p>对于这个在网上相关的资料非常少<del>（也许是我想实现的效果比较扭曲）</del>，我到最后发现会自动给我添加 WAN 口的默认路由，导致走不下去，手动添加配置删除路由还是不太稳定，所以放弃。最近有了新发现，是 MWAN 搞的鬼。</p>
+<h2 id="全局代理设置">全局代理设置</h2>
+<p>对于这个在网上相关的资料非常少~~（也许是我想实现的效果比较扭曲）~~，我到最后发现会自动给我添加 WAN 口的默认路由，导致走不下去，手动添加配置删除路由还是不太稳定，所以放弃。最近有了新发现，是 MWAN 搞的鬼。</p>
 <p>现在开始配置教程。</p>
-<h3 id="防火墙设置"><a href="#防火墙设置" class="headerlink" title="防火墙设置"></a>防火墙设置</h3><p>在防火墙区域<strong>新建一个 VPN 区域</strong>，把 <strong>IP 动态伪装</strong>打开（相当于在主路由那边是通过这台路由器 NAT 之后通信），再把 WG 接口添加到 VPN 区域。</p>
+<h3 id="防火墙设置">防火墙设置</h3>
+<p>在防火墙区域<strong>新建一个 VPN 区域</strong>，把 <strong>IP 动态伪装</strong>打开（相当于在主路由那边是通过这台路由器 NAT 之后通信），再把 WG 接口添加到 VPN 区域。</p>
 <p>修改 VPN 区域的设置：</p>
 <p>​	<strong>允许转发到目标区域</strong>：WAN 区域打钩</p>
 <p>​	<strong>允许来自源区域的转发</strong>： LAN 区域打钩</p>
@@ -434,42 +434,39 @@
 <p>​	<strong>允许转发到目标区域</strong>：VPN 区域打钩</p>
 <p>​	**允许来自源区域的转发：**空</p>
 <p>修改好应该是这样的</p>
-<h4 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h4><img src="/openwrt_with_wireguard_proxy/image-20230622155412335.png" class="" title="image-20230622155412335">
-
-<h5 id="LAN"><a href="#LAN" class="headerlink" title="LAN"></a><strong>LAN</strong></h5><img src="/openwrt_with_wireguard_proxy/image-20230622155446824.png" class="" title="image-20230622155446824">
-
-<h5 id="WAN"><a href="#WAN" class="headerlink" title="WAN"></a><strong>WAN</strong></h5><img src="/openwrt_with_wireguard_proxy/image-20230622155505659.png" class="" title="image-20230622155505659">
-
-<h5 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a><strong>VPN</strong></h5><img src="/openwrt_with_wireguard_proxy/image-20230622155518649.png" class="" title="image-20230622155518649">
-
+<h4 id="防火墙">防火墙</h4>
+<img src="/openwrt_with_wireguard_proxy/image-20230622155412335.png" class="" title="image-20230622155412335">
+<h5 id="LAN"><strong>LAN</strong></h5>
+<img src="/openwrt_with_wireguard_proxy/image-20230622155446824.png" class="" title="image-20230622155446824">
+<h5 id="WAN"><strong>WAN</strong></h5>
+<img src="/openwrt_with_wireguard_proxy/image-20230622155505659.png" class="" title="image-20230622155505659">
+<h5 id="VPN"><strong>VPN</strong></h5>
+<img src="/openwrt_with_wireguard_proxy/image-20230622155518649.png" class="" title="image-20230622155518649">
 <p>到此防火墙设置结束。</p>
-<h3 id="接口设置"><a href="#接口设置" class="headerlink" title="接口设置"></a>接口设置</h3><p>WAN接口 -&gt; 高级设置 -&gt; 使用默认网关 <strong>去掉对钩</strong></p>
+<h3 id="接口设置">接口设置</h3>
+<p>WAN接口 -&gt; 高级设置 -&gt; 使用默认网关 <strong>去掉对钩</strong></p>
 <p>LAN接口 -&gt; 基本设置 -&gt; 使用自定义的 DNS 服务器 -&gt; 填写 WG 那边的网关，或者公共 DNS</p>
-<h3 id="路由设置"><a href="#路由设置" class="headerlink" title="路由设置"></a>路由设置</h3><p>网络 -&gt; 静态路由 -&gt; 静态 IPv4 路由</p>
+<h3 id="路由设置">路由设置</h3>
+<p>网络 -&gt; 静态路由 -&gt; 静态 IPv4 路由</p>
 <p><strong>接口</strong>选择 WAN ，<strong>对象</strong>填写对端 WG 的 IP 地址，<strong>IPv4 子网掩码</strong>32位，<strong>IPv4 网关</strong>填写你 WAN 口上级路由器的网关地址，其他保持默认即可。</p>
 <p>网络 -&gt; 静态路由 -&gt; 静态 IPv4 路由</p>
 <p><strong>网络 -&gt; 负载均衡（MWAN） -&gt; 禁用所有 MWAN 接口</strong></p>
 <p>就是因为这个原因，所以他才会自动给我加路由表，明明我取消了使用默认网关，并且没有添加其他的路由项，还是会给我加默认路由，情况如下图。</p>
 <img src="/openwrt_with_wireguard_proxy/image-20230622160227228.png" class="" title="image-20230622160227228">
-
 <p><strong>关闭 MWAN 后</strong></p>
 <img src="/openwrt_with_wireguard_proxy/image-20230622160248957.png" class="" title="image-20230622160248957">
-
-<h2 id="测试联通性"><a href="#测试联通性" class="headerlink" title="测试联通性"></a>测试联通性</h2><img src="/openwrt_with_wireguard_proxy/image-20230622164300520.png" class="" title="image-20230622164300520">
-
+<h2 id="测试联通性">测试联通性</h2>
+<img src="/openwrt_with_wireguard_proxy/image-20230622164300520.png" class="" title="image-20230622164300520">
 <img src="/openwrt_with_wireguard_proxy/image-20230622164419608.png" class="" title="image-20230622164419608">
-
 <p>Enjoy！</p>
-<h2 id="更换固件后测试"><a href="#更换固件后测试" class="headerlink" title="更换固件后测试"></a>更换固件后测试</h2><p>固件版本号：QWRT R23.6.1 &#x2F; LuCI Master (git-23.141.16773-28dd4b3)</p>
+<h2 id="更换固件后测试">更换固件后测试</h2>
+<p>固件版本号：QWRT R23.6.1 / LuCI Master (git-23.141.16773-28dd4b3)</p>
 <img src="/openwrt_with_wireguard_proxy/image-20230622161222503.png" class="" title="image-20230622161222503">
-
 <p>这个固件防火墙区域都不用配置，WAN也不用取消默认网关，默认即可上网（自动给添加了路由）。</p>
 <p><strong>默认路由表</strong></p>
 <img src="/openwrt_with_wireguard_proxy/image-20230622163508283.png" class="" title="image-20230622163508283">
-
 <p><strong>配置好 WG 后的路由表</strong></p>
 <img src="/openwrt_with_wireguard_proxy/image-20230622163635986.png" class="" title="image-20230622163635986">
-
 <p>大雕NB！</p>
 
     
@@ -497,7 +494,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1758795296039"></script>
+    <script async src="/js/copy-codeblock.js?v=1758796451457"></script>
   
 
   
@@ -531,7 +528,7 @@
             <button class="mdui-fab catalog" style="overflow:unset;">
                 <i class="nexmoefont icon-i-catalog"></i>
                 <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8-OpenWrt-%E4%B8%8B%E4%BD%BF%E7%94%A8-WireGuard-%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E4%B8%8A%E7%BD%91"><span class="toc-number">1.</span> <span class="toc-text">在 OpenWrt 下使用 WireGuard 实现全局代理上网</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E6%83%85%E5%86%B5"><span class="toc-number">1.1.</span> <span class="toc-text">设备情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">网络设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">全局代理设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">防火墙设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">防火墙</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#LAN"><span class="toc-number">1.3.1.1.1.</span> <span class="toc-text">LAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WAN"><span class="toc-number">1.3.1.1.2.</span> <span class="toc-text">WAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#VPN"><span class="toc-number">1.3.1.1.3.</span> <span class="toc-text">VPN</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.2.</span> <span class="toc-text">接口设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.3.</span> <span class="toc-text">路由设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E8%81%94%E9%80%9A%E6%80%A7"><span class="toc-number">1.4.</span> <span class="toc-text">测试联通性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%8D%A2%E5%9B%BA%E4%BB%B6%E5%90%8E%E6%B5%8B%E8%AF%95"><span class="toc-number">1.5.</span> <span class="toc-text">更换固件后测试</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">在 OpenWrt 下使用 WireGuard 实现全局代理上网</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E6%83%85%E5%86%B5"><span class="toc-number">1.1.</span> <span class="toc-text">设备情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">网络设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">全局代理设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">防火墙设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">防火墙</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#LAN"><span class="toc-number">1.3.1.1.1.</span> <span class="toc-text">LAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WAN"><span class="toc-number">1.3.1.1.2.</span> <span class="toc-text">WAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#VPN"><span class="toc-number">1.3.1.1.3.</span> <span class="toc-text">VPN</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.2.</span> <span class="toc-text">接口设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.3.3.</span> <span class="toc-text">路由设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E8%81%94%E9%80%9A%E6%80%A7"><span class="toc-number">1.4.</span> <span class="toc-text">测试联通性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%8D%A2%E5%9B%BA%E4%BB%B6%E5%90%8E%E6%B5%8B%E8%AF%95"><span class="toc-number">1.5.</span> <span class="toc-text">更换固件后测试</span></a></li></ol></li></ol>
                 </div>
             </button>
             

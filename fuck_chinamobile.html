@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-<meta name="description" content="设备情况湖南电信EPON版本的 HS8145X6         设备类型: Epon   生产厂家: 华为   设备型号: HS8145X6   设备标识号: 1413FB-408411413FB8D7959   硬件版本: 210D.A   软件版本: V5.21.C00S050       普通的超密无法进入，重置需要管理员密码   尝试使用论坛大佬制作的 R20 开 TELNET 工具。">
+<meta name="description" content="设备情况 湖南电信EPON版本的 HS8145X6          设备类型: Epon   生产厂家: 华为   设备型号: HS8145X6   设备标识号: 1413FB-408411413FB8D7959   硬件版本: 210D.A   软件版本: V5.21.C00S050      普通的超密无法进入，重置需要管理员密码  尝试使用论坛大佬制作的 R20 开 TELNET 工具。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="更换 HS1845X6 光猫并且使用 EasyMesh 进行组网的记录">
 <meta property="og:url" content="https://blog.irec.moe/fuck_chinamobile.html">
 <meta property="og:site_name" content="Recopec 的博客">
-<meta property="og:description" content="设备情况湖南电信EPON版本的 HS8145X6         设备类型: Epon   生产厂家: 华为   设备型号: HS8145X6   设备标识号: 1413FB-408411413FB8D7959   硬件版本: 210D.A   软件版本: V5.21.C00S050       普通的超密无法进入，重置需要管理员密码   尝试使用论坛大佬制作的 R20 开 TELNET 工具。">
+<meta property="og:description" content="设备情况 湖南电信EPON版本的 HS8145X6          设备类型: Epon   生产厂家: 华为   设备型号: HS8145X6   设备标识号: 1413FB-408411413FB8D7959   硬件版本: 210D.A   软件版本: V5.21.C00S050      普通的超密无法进入，重置需要管理员密码  尝试使用论坛大佬制作的 R20 开 TELNET 工具。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.irec.moe/fuck_chinamobile/image-20230808230051218.png">
 <meta property="og:image" content="https://blog.irec.moe/fuck_chinamobile/image-20230808225256250.png">
@@ -51,9 +51,9 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758795297198">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758796452158">
 
-<link rel="stylesheet" href="/css/style.css?v=1758795297198">
+<link rel="stylesheet" href="/css/style.css?v=1758796452158">
 
 
 
@@ -65,7 +65,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1758795297198"></script>
+<script async src="/js/app.js?v=1758796452158"></script>
 
  
 
@@ -405,7 +405,8 @@
     
 </div>
 
-    <h2 id="设备情况"><a href="#设备情况" class="headerlink" title="设备情况"></a>设备情况</h2><p>湖南电信EPON版本的 HS8145X6</p>
+    <h2 id="设备情况">设备情况</h2>
+<p>湖南电信EPON版本的 HS8145X6</p>
 <table>
 <thead>
 <tr>
@@ -413,7 +414,8 @@
 <th></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>设备类型:</td>
 <td>Epon</td>
 </tr>
@@ -437,26 +439,23 @@
 <td>软件版本:</td>
 <td>V5.21.C00S050</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <img src="/fuck_chinamobile/image-20230808230051218.png" class="" title="image-20230808230051218">
-
 <img src="/fuck_chinamobile/image-20230808225256250.png" class="" title="image-20230808225256250">
-
 <p>普通的超密无法进入，重置需要管理员密码</p>
 <img src="/fuck_chinamobile/image-20230808225332916.png" class="" title="image-20230808225332916">
-
 <p>尝试使用论坛大佬制作的 R20 开 TELNET 工具。</p>
 <img src="/fuck_chinamobile/image-20230808225526822.png" class="" title="image-20230808225526822">
-
 <p>telnet 无效，遂放弃。</p>
 <img src="/fuck_chinamobile/image-20230808225443017.png" class="" title="image-20230808225443017">
-
 <p>其实这种是有办法破解的，是使用上述提到的使能工具，能让光猫直接执行相关的命令，比如说获取里面的配置文件，tftp 传到电脑上然后解密即可。</p>
 <p>我是找咸鱼 <strong>hwont</strong> 大佬，他在我电脑上用使能工具然后传回来一个文件，他拉回去解密然后给我，5分钟搞定，当然文件他是不会给的，有兴趣的话可以自行研究。如果菊花把这个使能工具封禁了或者需要相关授权才能用的话，咸鱼上的配置光猫的会倒一片。</p>
-<h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><h3 id="改华为界面"><a href="#改华为界面" class="headerlink" title="改华为界面"></a>改华为界面</h3><p>首先去 192.168.1.1:8080 使用超密登录进去，把 TELNET 防火墙允许，没有补全的照常补全，这里因为我已经补全过了所以说不需要在此补全了。</p>
+<h2 id="具体步骤">具体步骤</h2>
+<h3 id="改华为界面">改华为界面</h3>
+<p>首先去 192.168.1.1:8080 使用超密登录进去，把 TELNET 防火墙允许，没有补全的照常补全，这里因为我已经补全过了所以说不需要在此补全了。</p>
 <p>PS：echo20_Telnet_Shell.bin 这个文件是自带开 telnet 功能的，可以用 HWFW 解包打开，提取出来 EFS 看看就知道了，稍微懂一点 Linux 的也能依葫芦画瓢做出来一些东西的。</p>
 <img src="/fuck_chinamobile/image-20230811215739061.png" class="" title="image-20230811215739061">
-
 <figure class="shiki shell"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #61AFEF">telnet</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">192.168</span><span style="color: #98C379">.1.1</span></span>
 <span class="line"><span style="color: #61AFEF">root</span></span>
 <span class="line"><span style="color: #61AFEF">adminHW</span></span>
@@ -466,49 +465,40 @@
 <span class="line"><span style="color: #61AFEF">tftp</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">-pl</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">hw_boardinfo</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">192.168</span><span style="color: #98C379">.1.10</span><span style="color: #ABB2BF">		</span><span style="color: #98C379">//</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">传回电脑</span></span>
 <span class="line"><span style="color: #61AFEF">tftp</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">-gr</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">hw_boardinfo</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">192.168</span><span style="color: #98C379">.1.10</span><span style="color: #ABB2BF">		</span><span style="color: #98C379">//</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">传回光猫</span></span>
 <span class="line"><span style="color: #61AFEF">cp</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">hw_boardinfo</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">hw_boardinfo.bak</span><span style="color: #ABB2BF">		</span><span style="color: #98C379">//</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">复制一份</span></span></code></pre></div></div></figure>
-
 <p>使用 tftp 传回 hw_boardinfo ，用 HW Dollar 打开，1a,1b 改 COMMON，如图所示</p>
 <img src="/fuck_chinamobile/image-20230811214513259.png" class="" title="image-20230811214513259">
-
 <p>之后再传回光猫，重启即可，再次进入网关界面就会变成华为界面了。</p>
-<h3 id="配置ONT认证及上网参数"><a href="#配置ONT认证及上网参数" class="headerlink" title="配置ONT认证及上网参数"></a>配置ONT认证及上网参数</h3><p>首先要修改认证方式和 SN，配置好上网参数。</p>
+<h3 id="配置ONT认证及上网参数">配置ONT认证及上网参数</h3>
+<p>首先要修改认证方式和 SN，配置好上网参数。</p>
 <p>注：我所在区域只认证光猫SN，以及用的光猫都没有 LOID 选项。有一次改了一个友华光猫换地区之后出现 LOID，结果在电信宽带上认证不过，其他猫改LOID 和 PASSWORD 是可以的，基本确定我这边光猫固件锁死模式了。都是些二线厂商的猫。</p>
 <img src="/fuck_chinamobile/image-20230809002947794.png" class="" title="image-20230809002947794">
-
 <p>我这里是湖南郴州移动的参数，不同地市VID都不同，仅供参考。</p>
 <img src="/fuck_chinamobile/image-20230809003235124.png" class="" title="image-20230809003235124">
-
 <p>然后修改一下 DHCP 服务器，无缝替换到原来的设备上。</p>
 <img src="/fuck_chinamobile/image-20230809004636039.png" class="" title="image-20230809004636039">
-
-<h3 id="拆机-上机"><a href="#拆机-上机" class="headerlink" title="拆机&amp;上机"></a>拆机&amp;上机</h3><img src="/fuck_chinamobile/image-20230809025031047.png" class="" title="image-20230809025031047">
-
+<h3 id="拆机-上机">拆机&amp;上机</h3>
+<img src="/fuck_chinamobile/image-20230809025031047.png" class="" title="image-20230809025031047">
 <img src="/fuck_chinamobile/image-20230809025039614.png" class="" title="image-20230809025039614">
-
 <img src="/fuck_chinamobile/image-20230809025051077.png" class="" title="image-20230809025051077">
-
 <img src="/fuck_chinamobile/image-20230809025058990.png" class="" title="image-20230809025058990">
-
-<h3 id="实测效果"><a href="#实测效果" class="headerlink" title="实测效果"></a>实测效果</h3><p>正常认证以及成功拨号，可以看到 BRAS 是 ME60，并且 IPV6 前缀拿到 &#x2F;60。</p>
+<h3 id="实测效果">实测效果</h3>
+<p>正常认证以及成功拨号，可以看到 BRAS 是 ME60，并且 IPV6 前缀拿到 /60。</p>
 <img src="/fuck_chinamobile/image-20230809010927146.png" class="" title="image-20230809010927146">
-
 <img src="/fuck_chinamobile/image-20230809011600558.png" class="" title="image-20230809011600558">
-
 <img src="/fuck_chinamobile/image-20230809011324871.png" class="" title="image-20230809011324871">
-
-<h4 id="FullCone-NAT"><a href="#FullCone-NAT" class="headerlink" title="FullCone NAT"></a>FullCone NAT</h4><img src="/fuck_chinamobile/image-20230809011423339.png" class="" title="image-20230809011423339">
-
-<h4 id="和-K662d-正常-Mesh-组网"><a href="#和-K662d-正常-Mesh-组网" class="headerlink" title="和 K662d 正常 Mesh 组网"></a>和 K662d 正常 Mesh 组网</h4><img src="/fuck_chinamobile/image-20230811215907637.png" class="" title="image-20230811215907637">
-
+<h4 id="FullCone-NAT">FullCone NAT</h4>
+<img src="/fuck_chinamobile/image-20230809011423339.png" class="" title="image-20230809011423339">
+<h4 id="和-K662d-正常-Mesh-组网">和 K662d 正常 Mesh 组网</h4>
+<img src="/fuck_chinamobile/image-20230811215907637.png" class="" title="image-20230811215907637">
 <img src="/fuck_chinamobile/image-20230811220213541.png" class="" title="image-20230811220213541">
-
 <p>这里我没有关闭 Wi-Fi覆盖业务(修改后，重启生效)，我觉得原帖说的可能是老版本系统有 BUG 导致的。</p>
-<h2 id="碰到的一些问题"><a href="#碰到的一些问题" class="headerlink" title="碰到的一些问题"></a>碰到的一些问题</h2><h3 id="问题1：IPV6-禁止入站"><a href="#问题1：IPV6-禁止入站" class="headerlink" title="问题1：IPV6 禁止入站"></a>问题1：IPV6 禁止入站</h3><p>其实在电信界面是有关闭 IPV6 防火墙的设置的，不过在华为界面就没看到了。</p>
-<h4 id="第一种方法-telnet-修改文件（不推荐）"><a href="#第一种方法-telnet-修改文件（不推荐）" class="headerlink" title="第一种方法  telnet 修改文件（不推荐）"></a>第一种方法  telnet 修改文件（不推荐）</h4><img src="/fuck_chinamobile/image-20230809012929409.png" class="" title="image-20230809012929409">
-
+<h2 id="碰到的一些问题">碰到的一些问题</h2>
+<h3 id="问题1：IPV6-禁止入站">问题1：IPV6 禁止入站</h3>
+<p>其实在电信界面是有关闭 IPV6 防火墙的设置的，不过在华为界面就没看到了。</p>
+<h4 id="第一种方法-telnet-修改文件（不推荐）">第一种方法  telnet 修改文件（不推荐）</h4>
+<img src="/fuck_chinamobile/image-20230809012929409.png" class="" title="image-20230809012929409">
 <p>使用解密工具解密后，搜索 X_HW_IPv6FWDFireWallEnable</p>
 <img src="/fuck_chinamobile/image-20230809013113964.png" class="" title="image-20230809013113964">
-
 <p>把 1 改成 0，保存加密导入回去重启即可。</p>
 <p>注意如果提示 tftp: can’t open ‘hw_ctree.xml’: Permission denied</p>
 <p>则需要获取 root 权限，步骤如下</p>
@@ -517,30 +507,30 @@
 <span class="line"><span style="color: #abb2bf">继续你的上传操作</span></span>
 <span class="line"><span style="color: #abb2bf">rm /mnt/jffs2/Equip.sh          //关闭root权限!</span></span>
 <span class="line"><span style="color: #abb2bf">reboot                                 //重启</span></span></code></pre></div></div></figure>
-
 <p><strong>我用这种方法修改文件之后 WiFi 消失，设置界面中 WiFi 设置一片空白</strong></p>
-<h4 id="第二种方法-适用于华为公版界面，直接导出修改即可"><a href="#第二种方法-适用于华为公版界面，直接导出修改即可" class="headerlink" title="第二种方法 适用于华为公版界面，直接导出修改即可"></a>第二种方法 适用于华为公版界面，直接导出修改即可</h4><img src="/fuck_chinamobile/image-20230809022456582.png" class="" title="image-20230809022456582">
-
+<h4 id="第二种方法-适用于华为公版界面，直接导出修改即可">第二种方法 适用于华为公版界面，直接导出修改即可</h4>
+<img src="/fuck_chinamobile/image-20230809022456582.png" class="" title="image-20230809022456582">
 <img src="/fuck_chinamobile/image-20230809022525180.png" class="" title="image-20230809022525180">
-
 <p>我用的第二种方法，改好之后上传还原即可。</p>
 <img src="/fuck_chinamobile/image-20230809022700215.png" class="" title="image-20230809022700215">
-
 <p>测试OK</p>
 <img src="/fuck_chinamobile/image-20230809023113678.png" class="" title="image-20230809023113678">
-
 <p>PT 正常，IPV4 甚至有入站连接。</p>
 <img src="/fuck_chinamobile/image-20230809023306122.png" class="" title="image-20230809023306122">
-
-<h3 id="问题2：DHCP失效"><a href="#问题2：DHCP失效" class="headerlink" title="问题2：DHCP失效"></a>问题2：DHCP失效</h3><p>如果恢复出厂设置之后或者备份还原 hw_boardinfo 文件出现拿不到 IP 的情况，可以手动开关一下 DHCP 服务器，可以解决。</p>
-<h3 id="一些小Tips"><a href="#一些小Tips" class="headerlink" title="一些小Tips"></a>一些小Tips</h3><p>1、华为界面恢复出厂设置之后，PON模式会变为原来的，但修改的 GPON SN 不会变，同时恢复出厂不掉的超级密码也会被替换成电信默认的nE7jA%5m</p>
+<h3 id="问题2：DHCP失效">问题2：DHCP失效</h3>
+<p>如果恢复出厂设置之后或者备份还原 hw_boardinfo 文件出现拿不到 IP 的情况，可以手动开关一下 DHCP 服务器，可以解决。</p>
+<h3 id="一些小Tips">一些小Tips</h3>
+<p>1、华为界面恢复出厂设置之后，PON模式会变为原来的，但修改的 GPON SN 不会变，同时恢复出厂不掉的超级密码也会被替换成电信默认的nE7jA%5m</p>
 <p>待补充…</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>用下来还是挺不错的，总花费不算人工费55+100，我家因为户型原因这俩也够全覆盖了。华为固件的 FullCone NAT 也挺好用，局端设备都能 NAT1，总之性价比拉满。唯一缺点是固件不自带限速功能，其他功能还是挺强大的。</p>
-<h3 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h3><p><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-8147423-1-1.html">https://www.right.com.cn/forum/thread-8147423-1-1.html</a></p>
+<h2 id="总结">总结</h2>
+<p>用下来还是挺不错的，总花费不算人工费55+100，我家因为户型原因这俩也够全覆盖了。华为固件的 FullCone NAT 也挺好用，局端设备都能 NAT1，总之性价比拉满。唯一缺点是固件不自带限速功能，其他功能还是挺强大的。</p>
+<h3 id="参考资料：">参考资料：</h3>
+<p><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-8147423-1-1.html">https://www.right.com.cn/forum/thread-8147423-1-1.html</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.chinadsl.net/thread-168378-1-1.html">https://www.chinadsl.net/thread-168378-1-1.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.chinadsl.net/forum.php?mod=viewthread&tid=168309&extra=">https://www.chinadsl.net/forum.php?mod=viewthread&amp;tid=168309&amp;extra=</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.chinadsl.net/forum.php?mod=viewthread&amp;tid=168309&amp;extra=">https://www.chinadsl.net/forum.php?mod=viewthread&amp;tid=168309&amp;extra=</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-4091764-1-1.html">https://www.right.com.cn/forum/thread-4091764-1-1.html</a></p>
-<h3 id="所用到的工具："><a href="#所用到的工具：" class="headerlink" title="所用到的工具："></a>所用到的工具：</h3><p><a target="_blank" rel="noopener" href="https://alist.irec.moe/@login">网盘链接</a></p>
+<h3 id="所用到的工具：">所用到的工具：</h3>
+<p><a target="_blank" rel="noopener" href="https://alist.irec.moe/@login">网盘链接</a></p>
 <p>账号：ont</p>
 <p>密码：ont12345</p>
 
@@ -569,7 +559,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1758795296035"></script>
+    <script async src="/js/copy-codeblock.js?v=1758796451455"></script>
   
 
   
