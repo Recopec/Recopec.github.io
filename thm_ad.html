@@ -50,9 +50,9 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758794476178">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758795297078">
 
-<link rel="stylesheet" href="/css/style.css?v=1758794476178">
+<link rel="stylesheet" href="/css/style.css?v=1758795297078">
 
 
 
@@ -64,7 +64,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1758794476178"></script>
+<script async src="/js/app.js?v=1758795297078"></script>
 
  
 
@@ -1915,7 +1915,7 @@ Enter-PSSession -ComputerName thmserver1.za.tryhackme.loc</code></pre></div></di
 <li>申请时，可以<strong>伪造主体名称</strong>为 <code>Administrator</code>。</li>
 <li>获得的证书的私钥<strong>可以被导出</strong>，从而实现持久化。</li>
 </ol>
-<h4 id="伪造证书"><a href="#伪造证书" class="headerlink" title="伪造证书"></a>伪造证书</h4><p>去 MMC 生成一张伪造 <a href="mailto:&#x41;&#x64;&#x6d;&#x69;&#110;&#105;&#115;&#116;&#114;&#97;&#x74;&#111;&#114;&#x40;&#122;&#x61;&#46;&#x74;&#x72;&#x79;&#104;&#x61;&#99;&#x6b;&#x6d;&#101;&#x2e;&#108;&#x6f;&#99;">Administrator@za.tryhackme.loc</a> 的证书，然后<strong>带私钥</strong>导出来，带私钥是为了生成 TGT，不懂的可以回顾之前 Kerberos 认证过程。</p>
+<h4 id="伪造证书"><a href="#伪造证书" class="headerlink" title="伪造证书"></a>伪造证书</h4><p>去 MMC 生成一张伪造 <a href="mailto:&#65;&#100;&#109;&#105;&#110;&#105;&#x73;&#116;&#114;&#97;&#116;&#x6f;&#x72;&#x40;&#122;&#x61;&#46;&#116;&#x72;&#x79;&#x68;&#x61;&#x63;&#107;&#109;&#101;&#x2e;&#x6c;&#111;&#x63;">Administrator@za.tryhackme.loc</a> 的证书，然后<strong>带私钥</strong>导出来，带私钥是为了生成 TGT，不懂的可以回顾之前 Kerberos 认证过程。</p>
 <p>现在，我们终于可以冒充用户了。要做到这一点，需要两个步骤：</p>
 <ul>
 <li>使用证书申请 TGT</li>
@@ -2578,7 +2578,7 @@ Enter-PSSession -ComputerName thmserver1.za.tryhackme.loc</code></pre></div></di
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1758794475124"></script>
+    <script async src="/js/copy-codeblock.js?v=1758795295953"></script>
   
 
   
