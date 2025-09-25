@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-<meta name="description" content="在软路由上用了一段时间 OpenClash，由于我是自己写的规则，所以在很多地方都不完整，中途遇到多多少少的bug。 由于碰到这个无 Internet 的问题，导致某些微软服务登不上，有点烦人。所以折腾了一段时间，有了这样几种解决办法。 第一种方法 - 让域名走代理 在这个地方也有讨论下，我是这样解决的。 同样是 FAKE-IP 模式，今天为了这问题折腾一天，最后发现是因为 OpenClash 的">
+<meta name="description" content="在软路由上用了一段时间 OpenClash，由于我是自己写的规则，所以在很多地方都不完整，中途遇到多多少少的bug。 由于碰到这个无 Internet 的问题，导致某些微软服务登不上，有点烦人。所以折腾了一段时间，有了这样几种解决办法。 第一种方法 - 让域名走代理在这个地方也有讨论下，我是这样解决的。 同样是 FAKE-IP 模式，今天为了这问题折腾一天，最后发现是因为 OpenClash 的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在 OpenClash 代理环境下 Windows 提示无 Internet">
 <meta property="og:url" content="https://blog.irec.moe/openclash_windows_nointernet.html">
 <meta property="og:site_name" content="Recopec 的博客">
-<meta property="og:description" content="在软路由上用了一段时间 OpenClash，由于我是自己写的规则，所以在很多地方都不完整，中途遇到多多少少的bug。 由于碰到这个无 Internet 的问题，导致某些微软服务登不上，有点烦人。所以折腾了一段时间，有了这样几种解决办法。 第一种方法 - 让域名走代理 在这个地方也有讨论下，我是这样解决的。 同样是 FAKE-IP 模式，今天为了这问题折腾一天，最后发现是因为 OpenClash 的">
+<meta property="og:description" content="在软路由上用了一段时间 OpenClash，由于我是自己写的规则，所以在很多地方都不完整，中途遇到多多少少的bug。 由于碰到这个无 Internet 的问题，导致某些微软服务登不上，有点烦人。所以折腾了一段时间，有了这样几种解决办法。 第一种方法 - 让域名走代理在这个地方也有讨论下，我是这样解决的。 同样是 FAKE-IP 模式，今天为了这问题折腾一天，最后发现是因为 OpenClash 的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://user-images.githubusercontent.com/19749321/228871491-bafa7edb-c276-4ce4-a150-d44683a6015f.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/19749321/228872945-7c10bf86-cb7b-4d66-acbc-54787d26666c.png">
@@ -28,9 +28,9 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758796452164">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758806527500">
 
-<link rel="stylesheet" href="/css/style.css?v=1758796452164">
+<link rel="stylesheet" href="/css/style.css?v=1758806527500">
 
 
 
@@ -42,7 +42,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1758796452164"></script>
+<script async src="/js/app.js?v=1758806527500"></script>
 
  
 
@@ -371,7 +371,7 @@
             <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
         
         
-    <a><i class="nexmoefont icon-areachart"></i>约471字</a>
+    <a><i class="nexmoefont icon-areachart"></i>约473字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要1分钟</a>
 
     </div>
@@ -384,18 +384,9 @@
 
     <p>在软路由上用了一段时间 OpenClash，由于我是自己写的规则，所以在很多地方都不完整，中途遇到多多少少的bug。</p>
 <p>由于碰到这个无 Internet 的问题，导致某些微软服务登不上，有点烦人。所以折腾了一段时间，有了这样几种解决办法。</p>
-<h2 id="第一种方法-让域名走代理">第一种方法 - 让域名走代理</h2>
-<p>在<a target="_blank" rel="noopener" href="https://github.com/vernesong/OpenClash/issues/6#issuecomment-1490424197">这个地方</a>也有讨论下，我是这样解决的。</p>
-<p>同样是 FAKE-IP 模式，今天为了这问题折腾一天，最后发现是因为 OpenClash 的 DNS 代理解析出的 IP ，我本地访问会直接被 RESET，而我用本地网络环境解析到的 DNS 却可以正常访问。<br>
-还碰到一个坑是某些代理商会屏蔽 <a target="_blank" rel="noopener" href="http://www.msftconnecttest.com/">www.msftconnecttest.com</a> ，具体表现和上述一样。<br>
-最后我单独改了规则，让他走微软服务，然后微软服务再单独走不屏蔽的节点，完美解决。<br>
-<a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/19749321/228871491-bafa7edb-c276-4ce4-a150-d44683a6015f.png"><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://user-images.githubusercontent.com/19749321/228871491-bafa7edb-c276-4ce4-a150-d44683a6015f.png" alt="image" data-caption="image" loading="lazy"></a><br>
-其实还有其他解决办法，比如说让这个域名单独走本地DNS解析，我觉得这样<s>简单省事</s>就懒得弄了。<br>
-实测并不是IP段的问题，我还是默认的198.18.0.1/16段。<br>
-<a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/19749321/228872945-7c10bf86-cb7b-4d66-acbc-54787d26666c.png"><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://user-images.githubusercontent.com/19749321/228872945-7c10bf86-cb7b-4d66-acbc-54787d26666c.png" alt="image" data-caption="image" loading="lazy"></a><br>
-<a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/19749321/228873469-ed5acddb-25dd-4b75-a9de-6af3de2f0e2b.png"><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://user-images.githubusercontent.com/19749321/228873469-ed5acddb-25dd-4b75-a9de-6af3de2f0e2b.png" alt="image" data-caption="image" loading="lazy"></a></p>
-<h2 id="另外一种方法-过滤域名请求">另外一种方法 - 过滤域名请求</h2>
-<p>这段配置是我从其他地方抄过来的，实测可用，记得把前面一种方法提到的 <a target="_blank" rel="noopener" href="http://www.msftconnecttest.com/">www.msftconnecttest.com</a> 改一下规则，让他不走代理即可。这种方法比上面的方法更简单省事。</p>
+<h2 id="第一种方法-让域名走代理"><a href="#第一种方法-让域名走代理" class="headerlink" title="第一种方法 - 让域名走代理"></a>第一种方法 - 让域名走代理</h2><p>在<a target="_blank" rel="noopener" href="https://github.com/vernesong/OpenClash/issues/6#issuecomment-1490424197">这个地方</a>也有讨论下，我是这样解决的。</p>
+<p>同样是 FAKE-IP 模式，今天为了这问题折腾一天，最后发现是因为 OpenClash 的 DNS 代理解析出的 IP ，我本地访问会直接被 RESET，而我用本地网络环境解析到的 DNS 却可以正常访问。<br>还碰到一个坑是某些代理商会屏蔽 <a target="_blank" rel="noopener" href="http://www.msftconnecttest.com/">www.msftconnecttest.com</a> ，具体表现和上述一样。<br>最后我单独改了规则，让他走微软服务，然后微软服务再单独走不屏蔽的节点，完美解决。<br><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/19749321/228871491-bafa7edb-c276-4ce4-a150-d44683a6015f.png"><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://user-images.githubusercontent.com/19749321/228871491-bafa7edb-c276-4ce4-a150-d44683a6015f.png" alt="image" data-caption="image" loading="lazy"></a><br>其实还有其他解决办法，比如说让这个域名单独走本地DNS解析，我觉得这样<del>简单省事</del>就懒得弄了。<br>实测并不是IP段的问题，我还是默认的198.18.0.1&#x2F;16段。<br><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/19749321/228872945-7c10bf86-cb7b-4d66-acbc-54787d26666c.png"><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://user-images.githubusercontent.com/19749321/228872945-7c10bf86-cb7b-4d66-acbc-54787d26666c.png" alt="image" data-caption="image" loading="lazy"></a><br><a target="_blank" rel="noopener" href="https://user-images.githubusercontent.com/19749321/228873469-ed5acddb-25dd-4b75-a9de-6af3de2f0e2b.png"><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://user-images.githubusercontent.com/19749321/228873469-ed5acddb-25dd-4b75-a9de-6af3de2f0e2b.png" alt="image" data-caption="image" loading="lazy"></a></p>
+<h2 id="另外一种方法-过滤域名请求"><a href="#另外一种方法-过滤域名请求" class="headerlink" title="另外一种方法 - 过滤域名请求"></a>另外一种方法 - 过滤域名请求</h2><p>这段配置是我从其他地方抄过来的，实测可用，记得把前面一种方法提到的 <a target="_blank" rel="noopener" href="http://www.msftconnecttest.com/">www.msftconnecttest.com</a> 改一下规则，让他不走代理即可。这种方法比上面的方法更简单省事。</p>
 <figure class="shiki yaml"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #E06C75">dns</span><span style="color: #ABB2BF">:</span></span>
 <span class="line"><span style="color: #ABB2BF"> </span><span style="color: #E06C75">fake-ip-filter</span><span style="color: #ABB2BF">:</span></span>
 <span class="line"><span style="color: #ABB2BF">    - </span><span style="color: #98C379">&#39;*.lan&#39;</span></span>
@@ -407,9 +398,9 @@
 <span class="line"><span style="color: #ABB2BF">    - </span><span style="color: #98C379">&#39;+.xboxlive.com&#39;</span></span>
 <span class="line"><span style="color: #ABB2BF">    - </span><span style="color: #98C379">&#39;msftconnecttest.com&#39;</span></span>
 <span class="line"><span style="color: #ABB2BF">    - </span><span style="color: #98C379">&#39;xbox.*.microsoft.com&#39;</span></span></code></pre></div></div></figure>
-<p>这一段的主要作用就是让 OpenClash 不解析在列表内的域名，直接返回源 IP 地址，这样获取到的 IP 就不会是 198.18.0.0/16了。</p>
-<h2 id="Enjoy！">Enjoy！</h2>
-<img src="/openclash_windows_nointernet/image-20230622152603116.png" class="" title="image-20230622152603116">
+
+<p>这一段的主要作用就是让 OpenClash 不解析在列表内的域名，直接返回源 IP 地址，这样获取到的 IP 就不会是 198.18.0.0&#x2F;16了。</p>
+<h2 id="Enjoy！"><a href="#Enjoy！" class="headerlink" title="Enjoy！"></a>Enjoy！</h2><img src="/openclash_windows_nointernet/image-20230622152603116.png" class="" title="image-20230622152603116">
 
     
   </article>
@@ -436,7 +427,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1758796451457"></script>
+    <script async src="/js/copy-codeblock.js?v=1758806526484"></script>
   
 
   

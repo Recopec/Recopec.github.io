@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-<meta name="description" content="Android 抓包配置 (Charles + Burp) 背景知识 Android 系统是有两种证书类型的，Release 包默认只信任系统证书，而 Debug 包默认信任系统证书和用户证书。 我们要劫持 SSL 流量就必须要做到 MITM，然而我们 MITM 后的数据包内的证书需要设备信任，所以需要把我们的根证书加进系统信任的证书列表里。作为普通用户，正常途径只能添加用户证书，而 APP 是一">
+<meta name="description" content="Android 抓包配置 (Charles + Burp)背景知识Android 系统是有两种证书类型的，Release 包默认只信任系统证书，而 Debug 包默认信任系统证书和用户证书。 我们要劫持 SSL 流量就必须要做到 MITM，然而我们 MITM 后的数据包内的证书需要设备信任，所以需要把我们的根证书加进系统信任的证书列表里。作为普通用户，正常途径只能添加用户证书，而 APP 是一般构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 抓包配置 (Charles + Burp)">
 <meta property="og:url" content="https://blog.irec.moe/android_capture.html">
 <meta property="og:site_name" content="Recopec 的博客">
-<meta property="og:description" content="Android 抓包配置 (Charles + Burp) 背景知识 Android 系统是有两种证书类型的，Release 包默认只信任系统证书，而 Debug 包默认信任系统证书和用户证书。 我们要劫持 SSL 流量就必须要做到 MITM，然而我们 MITM 后的数据包内的证书需要设备信任，所以需要把我们的根证书加进系统信任的证书列表里。作为普通用户，正常途径只能添加用户证书，而 APP 是一">
+<meta property="og:description" content="Android 抓包配置 (Charles + Burp)背景知识Android 系统是有两种证书类型的，Release 包默认只信任系统证书，而 Debug 包默认信任系统证书和用户证书。 我们要劫持 SSL 流量就必须要做到 MITM，然而我们 MITM 后的数据包内的证书需要设备信任，所以需要把我们的根证书加进系统信任的证书列表里。作为普通用户，正常途径只能添加用户证书，而 APP 是一般构">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.irec.moe/android_capture/image-20250904105229097.png">
 <meta property="og:image" content="https://blog.irec.moe/android_capture/image-20250904105321111.png">
@@ -35,9 +35,9 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758796452029">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758806527308">
 
-<link rel="stylesheet" href="/css/style.css?v=1758796452029">
+<link rel="stylesheet" href="/css/style.css?v=1758806527308">
 
 
 
@@ -49,7 +49,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1758796452029"></script>
+<script async src="/js/app.js?v=1758806527308"></script>
 
  
 
@@ -378,7 +378,7 @@
             <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
         
         
-    <a><i class="nexmoefont icon-areachart"></i>约856字</a>
+    <a><i class="nexmoefont icon-areachart"></i>约858字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要3分钟</a>
 
     </div>
@@ -389,64 +389,62 @@
     
 </div>
 
-    <h1>Android 抓包配置 (Charles + Burp)</h1>
-<h2 id="背景知识">背景知识</h2>
-<p>Android 系统是有两种证书类型的，Release 包默认<strong>只信任系统证书</strong>，而 Debug 包默认信任系统证书和用户证书。</p>
+    <h1 id="Android-抓包配置-Charles-Burp"><a href="#Android-抓包配置-Charles-Burp" class="headerlink" title="Android 抓包配置 (Charles + Burp)"></a>Android 抓包配置 (Charles + Burp)</h1><h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><p>Android 系统是有两种证书类型的，Release 包默认<strong>只信任系统证书</strong>，而 Debug 包默认信任系统证书和用户证书。</p>
 <p>我们要劫持 SSL 流量就必须要做到 MITM，然而我们 MITM 后的数据包内的证书需要设备信任，所以需要把我们的根证书加进系统信任的证书列表里。作为普通用户，正常途径只能添加用户证书，而 APP 是一般构建的是 Release 包，所以我们必须通过修改系统证书的方式来让我们的证书被信任。</p>
 <p>在 Android 14 之后，证书需要放在 <code>/system/etc/security/cacerts</code> 和 <code>/apex/com.android.conscrypt/cacerts</code> 目录下，我提供的 magisk 模块能做到这点。</p>
-<h2 id="所需资源">所需资源</h2>
-<ul>
-<li>
-<p>需要一台有 Magisk 环境的手机L</p>
+<h2 id="所需资源"><a href="#所需资源" class="headerlink" title="所需资源"></a>所需资源</h2><ul>
+<li><p>需要一台有 Magisk 环境的手机L</p>
 </li>
-<li>
-<p>Charles</p>
+<li><p>Charles</p>
 <ul>
 <li>下载：<a target="_blank" rel="noopener" href="https://www.charlesproxy.com/">https://www.charlesproxy.com/</a></li>
 <li>激活码：<a target="_blank" rel="noopener" href="https://www.zzzmode.com/mytools/charles/">https://www.zzzmode.com/mytools/charles/</a></li>
 </ul>
 </li>
-<li>
-<p>Burp：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1J_CUxLKqC0h3Ypg4sQV0_g">https://pan.baidu.com/s/1J_CUxLKqC0h3Ypg4sQV0_g</a> 提取码：52pj</p>
+<li><p>Burp：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1J_CUxLKqC0h3Ypg4sQV0_g">https://pan.baidu.com/s/1J_CUxLKqC0h3Ypg4sQV0_g</a> 提取码：52pj</p>
 </li>
-<li>
-<p>module：<a href="https://blog.irec.moe/android_capture/reqable-magisk.zip">https://blog.irec.moe/android_capture/reqable-magisk.zip</a></p>
+<li><p>module：<a href="https://blog.irec.moe/android_capture/reqable-magisk.zip">https://blog.irec.moe/android_capture/reqable-magisk.zip</a></p>
 </li>
 </ul>
-<h2 id="Charles-配置">Charles 配置</h2>
-<p>激活步骤略。把 Proxy -&gt; Windows proxy 关掉，File -&gt; Clear session 一下。</p>
-<h3 id="导出根证书">导出根证书</h3>
-<p>Help -&gt; SSL proxying -&gt; Save Charles Root certificate 保存一下根证书，如果有需要你也可以把根证书装你手机上。</p>
+<h2 id="Charles-配置"><a href="#Charles-配置" class="headerlink" title="Charles 配置"></a>Charles 配置</h2><p>激活步骤略。把 Proxy -&gt; Windows proxy 关掉，File -&gt; Clear session 一下。</p>
+<h3 id="导出根证书"><a href="#导出根证书" class="headerlink" title="导出根证书"></a>导出根证书</h3><p>Help -&gt; SSL proxying -&gt; Save Charles Root certificate 保存一下根证书，如果有需要你也可以把根证书装你手机上。</p>
 <img src="/android_capture/image-20250904105229097.png" class="" title="image-20250904105229097">
+
 <p>找到刚刚的根证书目录，使用这条命令计算证书 Subject 的 Hash 值（Windows 使用 Git Bash），把输出的第一行作为文件名，改成这样的格式 <code>b51d9383.0</code>，这是用来创建证书的符号链接的。</p>
 <figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">openssl x509 -subject_hash_old -in cert.pem</span></span></code></pre></div></div></figure>
+
 <img src="/android_capture/image-20250904105321111.png" class="" title="image-20250904105321111">
+
 <p>改名好之后，打开这个模块的安装包，把证书丢到这个目录下 <code>reqable-magisk.zip\system\etc\security\cacerts</code>。这个模块是从 reqable 里面提取出来的，因为现在的 Android system 目录是不可写的，所以需要这样一个模块来挂载证书。</p>
 <img src="/android_capture/image-20250904105421821.png" class="" title="image-20250904105421821">
+
 <p>丢进去之后，传到手机上用 Magisk 安装即可。重启之后可以在系统设置 -&gt; 信任的证书看到我们导入的证书。</p>
-<style>.ipxpuiecofot{zoom: 25%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/android_capture/Screenshot_2025-09-04-11-00-15-57_fc704e6b13c4fb26bf5e411f75da84f2.jpg" class="ipxpuiecofot" alt="Screenshot_2025-09-04-11-00-15-57_fc704e6b13c4fb26bf5e411f75da84f2" data-caption="Screenshot_2025-09-04-11-00-15-57_fc704e6b13c4fb26bf5e411f75da84f2" loading="lazy">
-<h3 id="Charles-SSL-配置">Charles SSL 配置</h3>
-<p>找到 Proxy -&gt; SSL proxying settings</p>
+<style>.tbkqciehdlsp{zoom: 25%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/android_capture/Screenshot_2025-09-04-11-00-15-57_fc704e6b13c4fb26bf5e411f75da84f2.jpg" class="tbkqciehdlsp" alt="Screenshot_2025-09-04-11-00-15-57_fc704e6b13c4fb26bf5e411f75da84f2" data-caption="Screenshot_2025-09-04-11-00-15-57_fc704e6b13c4fb26bf5e411f75da84f2" loading="lazy">
+
+<h3 id="Charles-SSL-配置"><a href="#Charles-SSL-配置" class="headerlink" title="Charles SSL 配置"></a>Charles SSL 配置</h3><p>找到 Proxy -&gt; SSL proxying settings</p>
 <p>把 Enable SSL proxying 的勾打上，点击左下角的加号，Host 和 Port 都填写 <code>*</code></p>
 <img src="/android_capture/image-20250904110421465.png" class="" title="image-20250904110421465">
-<h3 id="手机端配置">手机端配置</h3>
-<p>手机打开 WLAN 设置，找到你连接的 WiFi 详情，修改代理设置为手动。主机名填写运行 Charles 设备的 IP，端口填写 Charles 的监听端口（默认 8888）。</p>
-<style>.dxtuwfkodstk{zoom:25%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/android_capture/Screenshot_2025-09-04-11-07-59-30_41a74ddf68be21faad2fbbb691b15143.jpg" class="dxtuwfkodstk" alt="Screenshot_2025-09-04-11-07-59-30_41a74ddf68be21faad2fbbb691b15143" data-caption="Screenshot_2025-09-04-11-07-59-30_41a74ddf68be21faad2fbbb691b15143" loading="lazy">
+
+<h3 id="手机端配置"><a href="#手机端配置" class="headerlink" title="手机端配置"></a>手机端配置</h3><p>手机打开 WLAN 设置，找到你连接的 WiFi 详情，修改代理设置为手动。主机名填写运行 Charles 设备的 IP，端口填写 Charles 的监听端口（默认 8888）。</p>
+<style>.saedqdfvertw{zoom:25%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/android_capture/Screenshot_2025-09-04-11-07-59-30_41a74ddf68be21faad2fbbb691b15143.jpg" class="saedqdfvertw" alt="Screenshot_2025-09-04-11-07-59-30_41a74ddf68be21faad2fbbb691b15143" data-caption="Screenshot_2025-09-04-11-07-59-30_41a74ddf68be21faad2fbbb691b15143" loading="lazy">
+
 <p>然后 Charles 会提示你是否允许连接请求，点击 Allow 即可。</p>
-<p>PS: 这里 Charles 的 Access control 有 bug，不论我填 10.2.2.119 还是 10.2.2.0/24 还是 0.0.0.0/24 都不行，只能这样让他弹窗然后点 Allow。这里我手贱点了 Deny 然后怎么样都没法恢复了，只好在手机上换了个 IP。</p>
+<p>PS: 这里 Charles 的 Access control 有 bug，不论我填 10.2.2.119 还是 10.2.2.0&#x2F;24 还是 0.0.0.0&#x2F;24 都不行，只能这样让他弹窗然后点 Allow。这里我手贱点了 Deny 然后怎么样都没法恢复了，只好在手机上换了个 IP。</p>
 <img src="/android_capture/image-20250904113105666.png" class="" title="image-20250904113105666">
+
 <p>到这里你就能截获 SSL 流量了，你可以在 Charles 的主界面的左边的 sitemap 看到有动静。</p>
 <img src="/android_capture/image-20250904121319007.png" class="" title="image-20250904121319007">
+
 <p>不过仅仅抓包对我来说是不够的，我需要使用 Burp 对数据包进行修改。</p>
-<h2 id="Charles-转发到-Burp-配置">Charles 转发到 Burp 配置</h2>
-<p>找到 Proxy -&gt; External proxying settings</p>
+<h2 id="Charles-转发到-Burp-配置"><a href="#Charles-转发到-Burp-配置" class="headerlink" title="Charles 转发到 Burp 配置"></a>Charles 转发到 Burp 配置</h2><p>找到 Proxy -&gt; External proxying settings</p>
 <p>把 Web Proxy (HTTP) 和 Secure Web Proxy 都打上，目的地址填 Burp 的监听地址和端口（默认8080），这里我 Charles 和 Burp 都运行在本机，所以用 <code>127.0.0.1</code>。</p>
 <img src="/android_capture/image-20250904110554415.png" class="" title="image-20250904110554415">
+
 <p>保存之后你就能在 Burp 里面看到数据包了，接下来就是你自己探索的时间了。</p>
 <p>Enjoy~</p>
 <img src="/android_capture/image-20250904111447428.png" class="" title="image-20250904111447428">
-<h2 id="参考资料">参考资料</h2>
-<p><a target="_blank" rel="noopener" href="https://www.ryanshang.com/2024/06/10/Android14%E8%AE%BE%E7%BD%AECharles%E8%AF%81%E4%B9%A6%E4%B8%BA%E7%B3%BB%E7%BB%9F%E6%A0%B9%E8%AF%81%E4%B9%A6/">Android14设置Charles证书为系统根证书</a></p>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.ryanshang.com/2024/06/10/Android14%E8%AE%BE%E7%BD%AECharles%E8%AF%81%E4%B9%A6%E4%B8%BA%E7%B3%BB%E7%BB%9F%E6%A0%B9%E8%AF%81%E4%B9%A6/">Android14设置Charles证书为系统根证书</a></p>
 <p><a target="_blank" rel="noopener" href="https://reqable.com/zh-CN/android/">Reqable</a></p>
 
     
@@ -474,7 +472,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1758796451370"></script>
+    <script async src="/js/copy-codeblock.js?v=1758806526351"></script>
   
 
   
@@ -508,7 +506,7 @@
             <button class="mdui-fab catalog" style="overflow:unset;">
                 <i class="nexmoefont icon-i-catalog"></i>
                 <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Android 抓包配置 (Charles + Burp)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">背景知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%80%E9%9C%80%E8%B5%84%E6%BA%90"><span class="toc-number">1.2.</span> <span class="toc-text">所需资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Charles-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">Charles 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">1.3.1.</span> <span class="toc-text">导出根证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Charles-SSL-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.2.</span> <span class="toc-text">Charles SSL 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E6%9C%BA%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.3.</span> <span class="toc-text">手机端配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Charles-%E8%BD%AC%E5%8F%91%E5%88%B0-Burp-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.</span> <span class="toc-text">Charles 转发到 Burp 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.5.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android-%E6%8A%93%E5%8C%85%E9%85%8D%E7%BD%AE-Charles-Burp"><span class="toc-number">1.</span> <span class="toc-text">Android 抓包配置 (Charles + Burp)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">背景知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%80%E9%9C%80%E8%B5%84%E6%BA%90"><span class="toc-number">1.2.</span> <span class="toc-text">所需资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Charles-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">Charles 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">1.3.1.</span> <span class="toc-text">导出根证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Charles-SSL-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.2.</span> <span class="toc-text">Charles SSL 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E6%9C%BA%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.3.</span> <span class="toc-text">手机端配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Charles-%E8%BD%AC%E5%8F%91%E5%88%B0-Burp-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.</span> <span class="toc-text">Charles 转发到 Burp 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.5.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol>
                 </div>
             </button>
             

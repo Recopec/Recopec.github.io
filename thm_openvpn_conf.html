@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-<meta name="description" content="TryHackMe OpenVPN 配置优化指北 前言 TryHackMe 是一个好平台，我已经在上面玩了有三个月的时间了，Free Path 走完之后就开了个会员，跟着把红队路线做完了，同时还完成了个 Offensive Pentesting。现在没开会员了，在刷免费的房间，刷完就转战 HTB 咯~        在我刚开始学习 Free Path 的时候，每天都是用的 Attack Box 1">
+<meta name="description" content="TryHackMe OpenVPN 配置优化指北前言TryHackMe 是一个好平台，我已经在上面玩了有三个月的时间了，Free Path 走完之后就开了个会员，跟着把红队路线做完了，同时还完成了个 Offensive Pentesting。现在没开会员了，在刷免费的房间，刷完就转战 HTB 咯~         在我刚开始学习 Free Path 的时候，每天都是用的 Attack Box 1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TryHackMe OpenVPN 配置优化指北">
 <meta property="og:url" content="https://blog.irec.moe/thm_openvpn_conf.html">
 <meta property="og:site_name" content="Recopec 的博客">
-<meta property="og:description" content="TryHackMe OpenVPN 配置优化指北 前言 TryHackMe 是一个好平台，我已经在上面玩了有三个月的时间了，Free Path 走完之后就开了个会员，跟着把红队路线做完了，同时还完成了个 Offensive Pentesting。现在没开会员了，在刷免费的房间，刷完就转战 HTB 咯~        在我刚开始学习 Free Path 的时候，每天都是用的 Attack Box 1">
+<meta property="og:description" content="TryHackMe OpenVPN 配置优化指北前言TryHackMe 是一个好平台，我已经在上面玩了有三个月的时间了，Free Path 走完之后就开了个会员，跟着把红队路线做完了，同时还完成了个 Offensive Pentesting。现在没开会员了，在刷免费的房间，刷完就转战 HTB 咯~         在我刚开始学习 Free Path 的时候，每天都是用的 Attack Box 1">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/OpenVPN_TLS_Failed.png">
 <meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/Clash_Verge_Setting.png">
@@ -54,7 +54,7 @@
 <meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/UU-8.png">
 <meta property="og:image" content="https://blog.irec.moe/thm_openvpn_conf/UU-9.png">
 <meta property="article:published_time" content="2025-09-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-25T10:33:59.581Z">
+<meta property="article:modified_time" content="2025-09-25T13:21:38.713Z">
 <meta property="article:author" content="Recopec">
 <meta property="article:tag" content="OpenVPN">
 <meta property="article:tag" content="机场">
@@ -65,9 +65,9 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758796452017">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1758806527291">
 
-<link rel="stylesheet" href="/css/style.css?v=1758796452018">
+<link rel="stylesheet" href="/css/style.css?v=1758806527291">
 
 
 
@@ -79,7 +79,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1758796452018"></script>
+<script async src="/js/app.js?v=1758806527291"></script>
 
  
 
@@ -408,7 +408,7 @@
             <a class="nexmoefont icon-appstore-fill -link" href="/categories/THM/">THM</a>
         
         
-    <a><i class="nexmoefont icon-areachart"></i>约8.4k字</a>
+    <a><i class="nexmoefont icon-areachart"></i>约8.5k字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要32分钟</a>
 
     </div>
@@ -419,83 +419,90 @@
     
 </div>
 
-    <h1>TryHackMe OpenVPN 配置优化指北</h1>
-<h2 id="前言">前言</h2>
-<p>TryHackMe 是一个好平台，我已经在上面玩了有三个月的时间了，Free Path 走完之后就开了个会员，跟着把红队路线做完了，同时还完成了个 <a target="_blank" rel="noopener" href="https://tryhackme.com/path/outline/pentesting">Offensive Pentesting</a>。现在没开会员了，在刷免费的房间，刷完就转战 HTB 咯~</p>
+    <h1 id="TryHackMe-OpenVPN-配置优化指北"><a href="#TryHackMe-OpenVPN-配置优化指北" class="headerlink" title="TryHackMe OpenVPN 配置优化指北"></a>TryHackMe OpenVPN 配置优化指北</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>TryHackMe 是一个好平台，我已经在上面玩了有三个月的时间了，Free Path 走完之后就开了个会员，跟着把红队路线做完了，同时还完成了个 <a target="_blank" rel="noopener" href="https://tryhackme.com/path/outline/pentesting">Offensive Pentesting</a>。现在没开会员了，在刷免费的房间，刷完就转战 HTB 咯~</p>
 <div style="text-align: center;">
     <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4987810" style='border:none; width:400px; height:110px;'></iframe>
 </div>
+
 <p>在我刚开始学习 Free Path 的时候，每天都是用的 Attack Box 1 小时的免费时长，把每个前置任务点做完之后才敢开机器开打（1h 一天是真的不够玩）。免费路线刷完了，就开了个会员开始付费路线的学习。在学习的过程中愈发觉得 Attack Box 不够用，于是就转战本地的攻击机，选的 <a href="www.kali.org">Kali</a>，当然你用别的比如 <a target="_blank" rel="noopener" href="https://parrotsec.org/">Parrot</a> 也行。</p>
 <p>THM 为了安全考虑，是不会开放他们的机器到公网的，因为那些靶机丢到公网分分钟都会被橄榄，但是用本地的攻击机的话，是需要连接到 THM 的内网的，THM 提供了 <a target="_blank" rel="noopener" href="https://openvpn.net/">OpenVPN</a> 这种方式接入他们的内网。</p>
-<h2 id="通过-OpenVPN-接入-THM">通过 OpenVPN 接入 THM</h2>
-<p>THM 提供了一个<a target="_blank" rel="noopener" href="https://tryhackme.com/room/OpenVPN">房间</a>来讲述配置如何配置 OpenVPN，但是对于我们国内用户来说是不适用的。</p>
+<h2 id="通过-OpenVPN-接入-THM"><a href="#通过-OpenVPN-接入-THM" class="headerlink" title="通过 OpenVPN 接入 THM"></a>通过 OpenVPN 接入 THM</h2><p>THM 提供了一个<a target="_blank" rel="noopener" href="https://tryhackme.com/room/OpenVPN">房间</a>来讲述配置如何配置 OpenVPN，但是对于我们国内用户来说是不适用的。</p>
 <p>由于众所周知的原因，OpenVPN 的流量特征已经被精准识别了，如果直接使用下载下来的配置文件，通常在使用一段时间后你会发现连接被掐了，或者根本连不上，报错 <code>TLS handshake failed</code>，如下图。</p>
 <blockquote>
-<p>2025-09-20 00:38:23 TLS Error: TLS key negotiation failed to occur within 60 seconds (check your network connectivity)<br>
-2025-09-20 00:38:23 TLS Error: TLS handshake failed</p>
+<p>2025-09-20 00:38:23 TLS Error: TLS key negotiation failed to occur within 60 seconds (check your network connectivity)<br>2025-09-20 00:38:23 TLS Error: TLS handshake failed</p>
 </blockquote>
-<style>.odgvdanrbxux{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/OpenVPN_TLS_Failed.png" class="odgvdanrbxux" alt="OpenVPN_TLS_Failed" data-caption="OpenVPN_TLS_Failed" loading="lazy">
+<style>.ngpgngrudbxt{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/OpenVPN_TLS_Failed.png" class="ngpgngrudbxt" alt="OpenVPN_TLS_Failed" data-caption="OpenVPN_TLS_Failed" loading="lazy">
+
 <p>所以你需要给 OpenVPN 再嵌套一层<strong>代理</strong>，让你去往 THM 服务器的流量经过你的代理节点，这就是我们要做的。</p>
-<h3 id="我的使用方案">我的使用方案</h3>
-<p>首先分享一下我的使用方案吧，我的主力环境是 Windows，Kali 攻击机是跑在 Windows 里面的。</p>
+<h3 id="我的使用方案"><a href="#我的使用方案" class="headerlink" title="我的使用方案"></a>我的使用方案</h3><p>首先分享一下我的使用方案吧，我的主力环境是 Windows，Kali 攻击机是跑在 Windows 里面的。</p>
 <p>Windows 的 OpenVPN 用 EU-VIP-2，连接跑在 Windows 上的 Clash。</p>
 <p>Kali 里面的 OpenVPN 用 EU-VIP-1，连接跑在 Windows 上的 Clash。</p>
 <p>这样的话，主机和攻击机都能作为单独的 IP 连进 THM 的内网，如果仅仅只是主机上单独跑一个 OpenVPN 的话，攻击机用主机 NAT 之后的网络，有些地方会挺受限的（需要单独配置端口转发），所以最好是每个端都单独跑一个 OpenVPN。</p>
-<h4 id="Windows-配置">Windows 配置</h4>
-<p>我使用的代理软件是 <a target="_blank" rel="noopener" href="https://github.com/Clash-verge-rev/Clash-verge-rev">Clash Verge</a>，如果你和我是一样的，且你没有改动配置文件，你可以照抄我的配置。</p>
+<h4 id="Windows-配置"><a href="#Windows-配置" class="headerlink" title="Windows 配置"></a>Windows 配置</h4><p>我使用的代理软件是 <a target="_blank" rel="noopener" href="https://github.com/Clash-verge-rev/Clash-verge-rev">Clash Verge</a>，如果你和我是一样的，且你没有改动配置文件，你可以照抄我的配置。</p>
 <p>首先需要找到你的代理软件的设置，打开局域网连接（或者是 Allow LAN 之类的设置），这是让你局域网的其他机器能连接到你的 Windows 机器的必要条件，然后在找到你的端口设置，记住他（默认是 7897），下图已圈出需要注意的地方。</p>
-<style>.pkhxuhvshgmb{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Clash_Verge_Setting.png" class="pkhxuhvshgmb" alt="Clash_Verge_Setting" data-caption="Clash_Verge_Setting" loading="lazy">
+<style>.ohrtbjpsltkt{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Clash_Verge_Setting.png" class="ohrtbjpsltkt" alt="Clash_Verge_Setting" data-caption="Clash_Verge_Setting" loading="lazy">
+
 <p>其他代理软件也是类似的设置，如下是 <a target="_blank" rel="noopener" href="https://github.com/2dust/v2rayN">V2rayN</a> 的配置，记住监听的端口号就行。</p>
-<style>.kmcywceegvyi{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/V2rayN_Setting.png" class="kmcywceegvyi" alt="V2rayN_Setting" data-caption="V2rayN_Setting" loading="lazy">
+<style>.boyvduceqhng{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/V2rayN_Setting.png" class="boyvduceqhng" alt="V2rayN_Setting" data-caption="V2rayN_Setting" loading="lazy">
+
 <p>配置好了之后，就是配置 OpenVPN 本体了，首先右键他的图标 -&gt; 选项 -&gt; 代理，选择手动设置，地址填写你电脑的 IP（本机填写 127.0.0.1），端口就是你上面记住的监听端口，我的设置如下。</p>
-<style>.lcoysyayksfh{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/OpenVPN_Proxy_Setting.png" class="lcoysyayksfh" alt="OpenVPN_Proxy_Setting" data-caption="OpenVPN_Proxy_Setting" loading="lazy">
+<style>.ntbpvscndoij{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/OpenVPN_Proxy_Setting.png" class="ntbpvscndoij" alt="OpenVPN_Proxy_Setting" data-caption="OpenVPN_Proxy_Setting" loading="lazy">
+
 <p>点击确定即可，至此，Windows 端的 OpenVPN 配置已经结束，右键托盘图标，选择导入的配置文件连接即可。</p>
-<style>.wbbnfbhftiyy{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/OpenVPN-1.png" class="wbbnfbhftiyy" alt="OpenVPN-1" data-caption="OpenVPN-1" loading="lazy">
+<style>.ruishrxxzikw{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/OpenVPN-1.png" class="ruishrxxzikw" alt="OpenVPN-1" data-caption="OpenVPN-1" loading="lazy">
+
 <p>若连接成功，会弹窗提示连接成功，以及你分配到的 THM 内网 IP，托盘图标的显示器背景变绿。</p>
-<style>.ppxeanjjtkbz{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/OpenVPN-2.png" class="ppxeanjjtkbz" alt="OpenVPN-2" data-caption="OpenVPN-2" loading="lazy">
-<p>可以打开 <a target="_blank" rel="noopener" href="http://10.10.10.10">http://10.10.10.10</a> 测试是否连接成功，如果成功连接，会看到你的内网 IP 和一个 flag，如下图所示：</p>
-<style>.stlsgemvdopv{zoom: 25%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/THM_10.10.10.10_Succ.png" class="stlsgemvdopv" alt="THM_10.10.10.10_Succ" data-caption="THM_10.10.10.10_Succ" loading="lazy">
+<style>.cfkdvzetsbte{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/OpenVPN-2.png" class="cfkdvzetsbte" alt="OpenVPN-2" data-caption="OpenVPN-2" loading="lazy">
+
+<p>可以打开 <a target="_blank" rel="noopener" href="http://10.10.10.10/">http://10.10.10.10</a> 测试是否连接成功，如果成功连接，会看到你的内网 IP 和一个 flag，如下图所示：</p>
+<style>.dpfbrhmcrbnr{zoom: 25%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/THM_10.10.10.10_Succ.png" class="dpfbrhmcrbnr" alt="THM_10.10.10.10_Succ" data-caption="THM_10.10.10.10_Succ" loading="lazy">
+
 <p>同时你也可以 <code>ping 10.10.10.10</code>，查看你电脑到 THM 服务器的延迟，通常 200ms 以内就算比较好了。如果你的延迟高于 300ms，后面会告诉你怎么解决。</p>
-<style>.dkhvphsxwwfe{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/THM_ping.png" class="dkhvphsxwwfe" alt="THM_ping" data-caption="THM_ping" loading="lazy">
-<h4 id="Linux-Kali-配置">Linux(Kali) 配置</h4>
-<p>我的环境是 VMware + Kali，如果你的和我一样，可以照抄。</p>
+<style>.cumqwxdwwbtb{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/THM_ping.png" class="cumqwxdwwbtb" alt="THM_ping" data-caption="THM_ping" loading="lazy">
+
+<h4 id="Linux-Kali-配置"><a href="#Linux-Kali-配置" class="headerlink" title="Linux(Kali) 配置"></a>Linux(Kali) 配置</h4><p>我的环境是 VMware + Kali，如果你的和我一样，可以照抄。</p>
 <p>VMware 下载地址：<a target="_blank" rel="noopener" href="https://www.423down.com/14542.html">423down - VMware Workstation PRO_v17.6.4_正式版</a></p>
 <p>我假定你已经导入好虚拟机，并且已经成功开机了，如果你没有完成到这一步，请自行解决。</p>
-<h5 id="获取通信网卡-IP">获取通信网卡 IP</h5>
-<p>在 VMware 的主界面，点击编辑 -&gt; 虚拟网络编辑器</p>
-<style>.dostkwgxokfw{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/VMware_1.png" class="dostkwgxokfw" alt="VMware_1" data-caption="VMware_1" loading="lazy">
+<h5 id="获取通信网卡-IP"><a href="#获取通信网卡-IP" class="headerlink" title="获取通信网卡 IP"></a>获取通信网卡 IP</h5><p>在 VMware 的主界面，点击编辑 -&gt; 虚拟网络编辑器</p>
+<style>.cokpyjufbwen{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/VMware_1.png" class="cokpyjufbwen" alt="VMware_1" data-caption="VMware_1" loading="lazy">
+
 <p>打开之后选择 NAT 类型的网卡，找到<strong>子网 IP</strong> 这一项，记住他。</p>
-<style>.tgqdsccncpvc{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/VMware_2.png" class="tgqdsccncpvc" alt="VMware_2" data-caption="VMware_2" loading="lazy">
+<style>.iptljkohnomm{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/VMware_2.png" class="iptljkohnomm" alt="VMware_2" data-caption="VMware_2" loading="lazy">
+
 <p>在默认设置下，你的电脑的给 VMware NAT 网卡的 IP 是 <strong>192.168.x.1</strong>，比如说我这里显示的是 192.168.244.0，我默认的 NAT 网卡的 IP 就是 192.168.244.1，你也可以通过多种方式去查看他，比如说去控制面板，或是用 <code>ipconfig</code> 等。</p>
-<style>.pwqtrstsvgzv{zoom:33%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/VMware_3.png" class="pwqtrstsvgzv" alt="VMware_3" data-caption="VMware_3" loading="lazy">
-<style>.lbxilvnbqyof{zoom: 25%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/VMware_4.png" class="lbxilvnbqyof" alt="VMware_4" data-caption="VMware_4" loading="lazy">
+<style>.jlrjrewlxzfb{zoom:33%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/VMware_3.png" class="jlrjrewlxzfb" alt="VMware_3" data-caption="VMware_3" loading="lazy">
+
+<style>.kpwxgrxfcanc{zoom: 25%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/VMware_4.png" class="kpwxgrxfcanc" alt="VMware_4" data-caption="VMware_4" loading="lazy">
+
 <p>如果你是桥接模式，就是你<strong>桥接的那张网卡</strong>在你电脑上获取的 IP。我们的最终目的是找到虚拟机能和你电脑通信的网卡的 IP，从而能连接到我们宿主机上的代理软件。</p>
-<h5 id="配置-Kali-上的-OpenVPN">配置 Kali 上的 OpenVPN</h5>
-<p>我们目前掌握的信息：宿主机和虚拟机通信模式是 NAT，NAT 网卡的 IP 是 <code>192.168.244.1</code>，代理软件的监听端口是 <code>7897</code>。</p>
+<h5 id="配置-Kali-上的-OpenVPN"><a href="#配置-Kali-上的-OpenVPN" class="headerlink" title="配置 Kali 上的 OpenVPN"></a>配置 Kali 上的 OpenVPN</h5><p>我们目前掌握的信息：宿主机和虚拟机通信模式是 NAT，NAT 网卡的 IP 是 <code>192.168.244.1</code>，代理软件的监听端口是 <code>7897</code>。</p>
 <p>启动虚拟机，首先你需要把你的从 THM 获取到的配置文件复制到你 Kali 的随便一个目录下，如果复制不了，一般是 <code>vmware-tools</code> 有问题，如果你是直接用<a target="_blank" rel="noopener" href="https://www.kali.org/get-kali/#kali-virtual-machines">官方提供的 Kali VMware 镜像</a>是不会出现这个问题的。</p>
-<style>.ikmsltxdaznx{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/kali_1.png" class="ikmsltxdaznx" alt="kali_1" data-caption="kali_1" loading="lazy">
+<style>.rjinpijzdljb{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/kali_1.png" class="rjinpijzdljb" alt="kali_1" data-caption="kali_1" loading="lazy">
+
 <p>打开你刚刚复制进去配置文件，增加下面这一行，这是连接到你主机上代理软件上的 socks 监听端口的命令。</p>
 <figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">socks-proxy YOUR_IP_ADDRES 7897</span></span></code></pre></div></div></figure>
-<style>.fsrbhsgngscn{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/kali_2.png" class="fsrbhsgngscn" alt="kali_2" data-caption="kali_2" loading="lazy">
+
+<style>.mczqgyymvfsf{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/kali_2.png" class="mczqgyymvfsf" alt="kali_2" data-caption="kali_2" loading="lazy">
+
 <p>或者你可以用这段命令，直接写入到你的配置文件中，这一行在哪无所谓，只要在配置文件中，就能成功被应用。</p>
-<figure class="shiki sh"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #56B6C2">echo</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">&#39;socks-proxy YOUR_IP_ADDRESS 7897&#39;</span><span style="color: #ABB2BF"> &gt; </span><span style="color: #98C379">./YOUR_CONF.ovpn</span></span></code></pre></div></div></figure>
+<figure class="shiki sh"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #56B6C2">echo</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">&#39;socks-proxy YOUR_IP_ADDRESS 7897&#39;</span><span style="color: #ABB2BF"> &gt;&gt; </span><span style="color: #98C379">./YOUR_CONF.ovpn</span></span></code></pre></div></div></figure>
+
 <p>最后用这行命令启动在 Kali 上的 OpenVPN。</p>
 <figure class="shiki sh"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #61AFEF">sudo</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">openvpn</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">./YOUR_CONF.ovpn</span></span></code></pre></div></div></figure>
+
 <p>成功连接会看到如下提示：</p>
-<style>.wjmxfnzqkiri{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/kali_3.png" class="wjmxfnzqkiri" alt="kali_3" data-caption="kali_3" loading="lazy">
+<style>.uhkwaftlyjqs{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/kali_3.png" class="uhkwaftlyjqs" alt="kali_3" data-caption="kali_3" loading="lazy">
+
 <p>可以看到 OpenVPN 自动帮你加了去往靶机 IP 段的路由表，这时你就可以 <code>ping 10.10.10.10</code> 测试一下看通不通。</p>
-<h4 id="可能碰到的问题">可能碰到的问题</h4>
-<p>到这里，如果你碰到了如下两个问题，可以参照着解决：</p>
+<h4 id="可能碰到的问题"><a href="#可能碰到的问题" class="headerlink" title="可能碰到的问题"></a>可能碰到的问题</h4><p>到这里，如果你碰到了如下两个问题，可以参照着解决：</p>
 <ol>
-<li>OpenVPN 连不上，提示 <code>TLS Error: TLS key negotiation failed to occur within 60 seconds (check your network connectivity)</code>
-<ul>
+<li>OpenVPN 连不上，提示 <code>TLS Error: TLS key negotiation failed to occur within 60 seconds (check your network connectivity)</code><ul>
 <li>你用的节点<strong>不支持 UDP</strong>，需要更换支持 UDP 的节点</li>
 <li>检查代理软件的监听端口</li>
 <li>检查你的代理软件的规则，是否开了仅常用端口走代理。THM 用的端口是 1194，需要自行修改规则，<strong>后文会附解决办法</strong></li>
 </ul>
 </li>
-<li>Windows 能连上，但是 Linux 连接不上
-<ul>
+<li>Windows 能连上，但是 Linux 连接不上<ul>
 <li>检查你的虚拟机是否能正常上网，<code>ping baidu.com</code></li>
 <li>检查代理软件是否打开了 Allow LAN（允许局域网连接）之类的选项</li>
 <li>检查你本机和虚拟机通信的网卡，确定网卡 IP 正确</li>
@@ -503,36 +510,33 @@
 </ul>
 </li>
 </ol>
-<h5 id="代理规则设置">代理规则设置</h5>
-<p>一般来说，大多数的配置文件都会加入一个 <code>🐟 漏网之鱼</code> <strong>类似这样的规则组</strong>去兜底访问<strong>非标端口</strong>需要代理的场景，请你检查这个代理组是否设置走代理。如果你通过切换解决了，那恭喜你，不用跟着下面操作了。</p>
+<h5 id="代理规则设置"><a href="#代理规则设置" class="headerlink" title="代理规则设置"></a>代理规则设置</h5><p>一般来说，大多数的配置文件都会加入一个 <code>🐟 漏网之鱼</code> <strong>类似这样的规则组</strong>去兜底访问<strong>非标端口</strong>需要代理的场景，请你检查这个代理组是否设置走代理。如果你通过切换解决了，那恭喜你，不用跟着下面操作了。</p>
 <p>编辑你的配置文件，找到 <code>rules:</code> 开头，加上这一行。</p>
 <figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">- DST-PORT,1194,🚀 节点选择</span></span></code></pre></div></div></figure>
-<style>.ximlmtitvtjo{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Clash_rule.png" class="ximlmtitvtjo" alt="Clash_rule" data-caption="Clash_rule" loading="lazy">
+
+<style>.afqzocpgiqvd{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Clash_rule.png" class="afqzocpgiqvd" alt="Clash_rule" data-caption="Clash_rule" loading="lazy">
+
 <p>最后面的 <code>🚀 节点选择</code> 是你的代理组的名字，如果你的配置文件和我不一样，需要对应着修改，不然会报错。</p>
-<style>.qkpvbxcorbbv{zoom: 50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Clash_Tab.png" class="qkpvbxcorbbv" alt="Clash_Tab" data-caption="Clash_Tab" loading="lazy">
+<style>.twnmduyuecuf{zoom: 50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Clash_Tab.png" class="twnmduyuecuf" alt="Clash_Tab" data-caption="Clash_Tab" loading="lazy">
+
 <p>还有要注意的是，你修改过的 Clash 配置文件可能过一会就被替换掉了，这是自动更新订阅的原因，可以改成不自动更新订阅。也可以使用订阅聚合配置文件进行使用，这是我的一个<a target="_blank" rel="noopener" href="https://gist.github.com/Recopec/a88559ceba69f48927da8105cf1084c7">模板</a>。网上教程很多，请自行查阅修改。</p>
 <p>关于其他软件的设置，请自行查阅解决，在此不赘述。</p>
-<h2 id="网络优化">网络优化</h2>
-<p>首先想要拥有良好的打靶体验，你需要低 + 稳定的 <a target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/learning/cdn/glossary/round-trip-time-rtt/">RTT</a>（round-trip time）。通过本节的学习，你会得到 200ms 以内的 RTT，如果你的延迟是这个数，或者你觉得你现在的体验完全足够你使用，可以不用往下看了。</p>
-<h3 id="IP-路由原理">IP 路由原理</h3>
-<p>在深入探讨如何优化网络之前，我们首先需要理解一个核心概念：<strong>路由</strong>。</p>
+<h2 id="网络优化"><a href="#网络优化" class="headerlink" title="网络优化"></a>网络优化</h2><p>首先想要拥有良好的打靶体验，你需要低 + 稳定的 <a target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/learning/cdn/glossary/round-trip-time-rtt/">RTT</a>（round-trip time）。通过本节的学习，你会得到 200ms 以内的 RTT，如果你的延迟是这个数，或者你觉得你现在的体验完全足够你使用，可以不用往下看了。</p>
+<h3 id="IP-路由原理"><a href="#IP-路由原理" class="headerlink" title="IP 路由原理"></a>IP 路由原理</h3><p>在深入探讨如何优化网络之前，我们首先需要理解一个核心概念：<strong>路由</strong>。</p>
 <p>很多人误以为，网络连接是简单的“点对点”直连。然而，真实的互联网世界要复杂得多。你的网络数据包从你的电脑出发，抵达 TryHackMe 的服务器，通常需要穿越多个国家，甚至跨越多个大洲。这个过程就像是一封信件在国际间旅行，它不会直接从你家飞到目的地，而是会经过多个邮政中转站。在网络中，这些“中转站”就是<strong>路由器（Router）</strong>，而路由器之间如何选择路径，则是由<strong>路由协议</strong>决定的。</p>
 <p>其中最重要、最复杂的协议就是 <strong>BGP（Border Gateway Protocol）</strong>。简单来说，BGP 就像是全球各大网络运营商（例如中国电信、中国移动、AT&amp;T 等）之间达成的一套“交通规则”，它决定了数据包如何跨越不同的网络，选择最佳的路径。运营商之间通过 <strong>Peer（对等互联）</strong> 的方式交换网络路由信息，共同构成了整个互联网的骨干。</p>
 <p>但问题就出在这里：运营商出于商业考量，Peer 线路的质量和优先级并不一致。你的数据包很可能因为运营商之间的利益关系或网络配置，被安排了一条“绕远路”。例如，你身在中国，想要访问欧洲的 TryHackMe 服务器，理想情况下应该走一条最近的路径。但实际情况可能是，你的数据包先绕到了日本，再去了美国，最后才抵达欧洲，走了很多不必要的<strong>跳数（Hop）</strong>，导致延迟居高不下。</p>
-<h4 id="CN2、CMI">CN2、CMI</h4>
-<ul>
+<h4 id="CN2、CMI"><a href="#CN2、CMI" class="headerlink" title="CN2、CMI"></a>CN2、CMI</h4><ul>
 <li><strong>CN2（ChinaNet Next Generation）：</strong> 这是中国电信旗下的高端骨干网络。与传统的中国电信 163 骨干网相比，CN2 的路由节点更少，网络拥塞更低。</li>
 <li><strong>CMI（China Mobile International）：</strong> 这是中国移动的国际出口网络。近年来，CMI 线路的质量有了显著提升，尤其是在连接香港、日本、新加坡等地的国际方向上，表现非常出色。</li>
 </ul>
 <p>我们的最终目的是：用最优的路由，把去靶机的路<strong>拉直</strong>。</p>
-<h3 id="接入区域选择">接入区域选择</h3>
-<h4 id="美东靶机">美东靶机</h4>
-<p>THM 在 2025 年 8 月的时候悄悄上架了 N. Virginia（弗吉尼亚州） 的靶机，也就是 AWS 的 us-east-1 ，你可以在你的账户设置里面设置靶机区域。</p>
-<style>.pxnqilmveghy{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/THM_Region.png" class="pxnqilmveghy" alt="THM_Region" data-caption="THM_Region" loading="lazy">
+<h3 id="接入区域选择"><a href="#接入区域选择" class="headerlink" title="接入区域选择"></a>接入区域选择</h3><h4 id="美东靶机"><a href="#美东靶机" class="headerlink" title="美东靶机"></a>美东靶机</h4><p>THM 在 2025 年 8 月的时候悄悄上架了 N. Virginia（弗吉尼亚州） 的靶机，也就是 AWS 的 us-east-1 ，你可以在你的账户设置里面设置靶机区域。</p>
+<style>.tgnkvdqibjpe{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/THM_Region.png" class="tgnkvdqibjpe" alt="THM_Region" data-caption="THM_Region" loading="lazy">
+
 <p>从大陆到美西最快是 110ms 左右，而美西到美东需要 60ms（参考 <a target="_blank" rel="noopener" href="https://www.cloudping.co/">AWS Latency Monitoring</a>），加起来就是 170ms 打底了，这还是在理论情况下。在我实战中，打这个区域的靶机 RTT 最快是 220ms。</p>
 <p>所以这个新上架的区域就不考虑了，我们能选的只有<strong>欧洲区域的靶机</strong>，经过合理的优化达到 180ms 左右是不难的。</p>
-<h4 id="THM-接入节点">THM 接入节点</h4>
-<p><a target="_blank" rel="noopener" href="https://tryhackme.com/manage-account/access-open-vpn">THM 的 OpenVPN </a>提供了以下地区的接入节点：</p>
+<h4 id="THM-接入节点"><a href="#THM-接入节点" class="headerlink" title="THM 接入节点"></a>THM 接入节点</h4><p><a target="_blank" rel="noopener" href="https://tryhackme.com/manage-account/access-open-vpn">THM 的 OpenVPN </a>提供了以下地区的接入节点：</p>
 <table>
 <thead>
 <tr>
@@ -541,8 +545,7 @@
 <th>AWS region</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>EU</td>
 <td>欧洲 - 爱尔兰</td>
 <td>eu-west-1</td>
@@ -562,61 +565,51 @@
 <td>印度 - 孟买</td>
 <td>ap-south-1</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>偷偷提一嘴，THM 的 OpenVPN 支持多个配置文件同时连接，但是不支持<strong>单个配置文件多个客户端</strong>连接。每个配置文件<strong>分配的 IP 都是不同的</strong>，可以试一下那几个配置文件有没有分到<strong>好记的 IP</strong>，就用那个配置文件作为主力使用（EU 有 6 个配置文件）。</p>
-<h4 id="测试-RTT">测试 RTT</h4>
-<p>你可以通过 <a target="_blank" rel="noopener" href="https://awsspeedtest.com/">AWS Speed Test</a> 测试你本地到 AWS 的每个区域的延迟。</p>
+<h4 id="测试-RTT"><a href="#测试-RTT" class="headerlink" title="测试 RTT"></a>测试 RTT</h4><p>你可以通过 <a target="_blank" rel="noopener" href="https://awsspeedtest.com/">AWS Speed Test</a> 测试你本地到 AWS 的每个区域的延迟。</p>
 <p>测试到 eu-west-1 的延时 - 10ms 左右就是你最终到靶机的延迟，我也不知道为什么这个网站测试出来的 RTT 偏大，反正最终你连上之后 <code>ping 10.10.10.10</code> 就是了。</p>
-<style>.bcuvgkmhetzs{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/AWS_ping.png" class="bcuvgkmhetzs" alt="AWS_ping" data-caption="AWS_ping" loading="lazy">
-<h3 id="线路优化原理">线路优化原理</h3>
-<p>在开头讲述了路由这个概念，我们现在的目标就是通过对线路的分析，挑选出一条最适合我们的路。</p>
-<h4 id="线路分析">线路分析</h4>
-<p>欧洲的靶机是在 eu-west-1，也就是爱尔兰，而我们国内到欧洲比较好的线路方案有两种：</p>
+<style>.vwugugxhpkrn{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/AWS_ping.png" class="vwugugxhpkrn" alt="AWS_ping" data-caption="AWS_ping" loading="lazy">
+
+<h3 id="线路优化原理"><a href="#线路优化原理" class="headerlink" title="线路优化原理"></a>线路优化原理</h3><p>在开头讲述了路由这个概念，我们现在的目标就是通过对线路的分析，挑选出一条最适合我们的路。</p>
+<h4 id="线路分析"><a href="#线路分析" class="headerlink" title="线路分析"></a>线路分析</h4><p>欧洲的靶机是在 eu-west-1，也就是爱尔兰，而我们国内到欧洲比较好的线路方案有两种：</p>
 <ol>
-<li>
-<p><strong>京德专线/优化线路 120ms 左右</strong></p>
+<li><p><strong>京德专线&#x2F;优化线路 120ms 左右</strong></p>
 <p>这是北京联通 -&gt; Misaka 德国法兰克福的优化线路，联通移动最快 120ms，电信慢一些 160ms。</p>
-<style>.mmvjeuecnglq{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/MTR_%E5%8C%97%E4%BA%AC%E8%81%94%E9%80%9A%E5%BE%B7%E5%9B%BD.png" class="mmvjeuecnglq" alt="北京联通 - Misaka 德国" data-caption="北京联通 - Misaka 德国" loading="lazy">
+<style>.xjthqiyxijen{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/MTR_%E5%8C%97%E4%BA%AC%E8%81%94%E9%80%9A%E5%BE%B7%E5%9B%BD.png" class="xjthqiyxijen" alt="北京联通 - Misaka 德国" data-caption="北京联通 - Misaka 德国" loading="lazy">
+
 <blockquote>
 <p>使用 <a target="_blank" rel="noopener" href="https://www.itdog.cn/">https://www.itdog.cn/</a> 测试</p>
 </blockquote>
 <p>专线和优化线路的还有一个区别就是，专线不需要考虑出去的是哪条线路，只需要考虑国内 -&gt; 入口机器的延迟即可。而优化线路看是哪家运营商，走哪家运营商的优化线路，差异比较大，不过也可以套一个前置解决。</p>
 </li>
-<li>
-<p><strong>粤港入口 -&gt; 香港 RETN -&gt; 欧洲，150ms</strong></p>
+<li><p><strong>粤港入口 -&gt; 香港 RETN -&gt; 欧洲，150ms</strong></p>
 <p>算上入口物理延迟 160ms 左右，通过 RETN 的 <a target="_blank" rel="noopener" href="https://lg.retn.net/">Looking Glass</a> 测试出来香港到爱尔兰是 173ms。</p>
 </li>
 </ol>
 <p>根据这两条<strong>基础线路</strong>，针对不同区域的人群就有了不同的推荐。</p>
-<h4 id="区域推荐">区域推荐</h4>
-<h5 id="华北区域">华北区域</h5>
-<p>如果你在<strong>北方</strong>，不管是从物理链路还是实际线路，就只能选择<strong>京德方案</strong>了。我们的最终目的都是想把<strong>线路拉直</strong>，也就是到我们目的地走最短的线路。</p>
-<p><strong>理论极限：北京 -&gt; 德国 120ms + 德国 -&gt; 爱尔兰 25ms = 145ms</strong></p>
-<h5 id="华中华东区域">华中华东区域</h5>
-<p>推荐京德，因为离北京近。</p>
-<p><strong>理论值：华中 -&gt; 北京 10 - 20ms + 北京 -&gt; 德国 120ms + 德国 -&gt; 爱尔兰 25ms = 155 - 165ms</strong></p>
-<h5 id="华西区域">华西区域</h5>
-<p>据说有乌鲁木齐的出口，但是我没见到过，这一片还是推荐京德。</p>
-<p><strong>理论值：华西 -&gt; 北京 20 - 40ms + 北京 -&gt; 德国 120ms + 德国 -&gt; 爱尔兰 25ms = 155 - 175ms</strong></p>
-<h5 id="广东-华南">广东/华南</h5>
-<p>但是你在广东的话，情况就不一样了，因为 <strong>广东 -&gt; 北京 30ms + 京德 120ms + 德国 -&gt; 爱尔兰 25ms = 175ms</strong></p>
+<h4 id="区域推荐"><a href="#区域推荐" class="headerlink" title="区域推荐"></a>区域推荐</h4><h5 id="华北区域"><a href="#华北区域" class="headerlink" title="华北区域"></a>华北区域</h5><p>如果你在<strong>北方</strong>，不管是从物理链路还是实际线路，就只能选择<strong>京德方案</strong>了。我们的最终目的都是想把<strong>线路拉直</strong>，也就是到我们目的地走最短的线路。</p>
+<p><strong>理论极限：北京 -&gt; 德国 120ms + 德国 -&gt; 爱尔兰 25ms &#x3D; 145ms</strong></p>
+<h5 id="华中华东区域"><a href="#华中华东区域" class="headerlink" title="华中华东区域"></a>华中华东区域</h5><p>推荐京德，因为离北京近。</p>
+<p><strong>理论值：华中 -&gt; 北京 10 - 20ms + 北京 -&gt; 德国 120ms + 德国 -&gt; 爱尔兰 25ms &#x3D; 155 - 165ms</strong></p>
+<h5 id="华西区域"><a href="#华西区域" class="headerlink" title="华西区域"></a>华西区域</h5><p>据说有乌鲁木齐的出口，但是我没见到过，这一片还是推荐京德。</p>
+<p><strong>理论值：华西 -&gt; 北京 20 - 40ms + 北京 -&gt; 德国 120ms + 德国 -&gt; 爱尔兰 25ms &#x3D; 155 - 175ms</strong></p>
+<h5 id="广东-华南"><a href="#广东-华南" class="headerlink" title="广东&#x2F;华南"></a>广东&#x2F;华南</h5><p>但是你在广东的话，情况就不一样了，因为 <strong>广东 -&gt; 北京 30ms + 京德 120ms + 德国 -&gt; 爱尔兰 25ms &#x3D; 175ms</strong></p>
 <p>下图是优化线路的京德，可以看到广州 -&gt; 北京的 RTT 是 35ms，到德国 175ms 左右，再从德国到爱尔兰的靶机接近 200ms 了（我实测 180 - 200ms 左右，看时段）。</p>
-<style>.ptbjvdrcjgrw{zoom: 50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/MTR_%E5%B9%BF%E4%B8%9C%E7%A7%BB%E5%8A%A8%E5%BE%B7%E5%9B%BD.png" class="ptbjvdrcjgrw" alt="Misaka 京德优化线路" data-caption="Misaka 京德优化线路" loading="lazy">
-<p>而走香港 RETN 的话，可能是 <strong>本地 -&gt; 粤港入口 10 - 5ms + 香港 -&gt; 爱尔兰走 RETN 173ms = 178ms</strong>，两者的 RTT 差不多，所以不如走有优化的 RETN 了（更有性价比+更快）。</p>
+<style>.zsnqicsdwlpl{zoom: 50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/MTR_%E5%B9%BF%E4%B8%9C%E7%A7%BB%E5%8A%A8%E5%BE%B7%E5%9B%BD.png" class="zsnqicsdwlpl" alt="Misaka 京德优化线路" data-caption="Misaka 京德优化线路" loading="lazy">
+
+<p>而走香港 RETN 的话，可能是 <strong>本地 -&gt; 粤港入口 10 - 5ms + 香港 -&gt; 爱尔兰走 RETN 173ms &#x3D; 178ms</strong>，两者的 RTT 差不多，所以不如走有优化的 RETN 了（更有性价比+更快）。</p>
 <p>湖南广西这类地区的话，就看你自己的选择了，其实位置挺尴尬的，选京德和香港 RETN 都可以。</p>
-<h4 id="并不是优化线路就一定好">并不是优化线路就一定好</h4>
-<p>当你获得了一条看似完美的优化线路，你可能会发现延迟（<strong>RTT</strong>）很低，但连接依旧不够稳定，时常感到卡顿。这背后一个常常被忽视的因素，就是 <strong>Jitter（网络抖动）</strong>。</p>
-<p>尽管大多数线路会尽量优化这项指标，但是由于各家的预算不一，可能会碰到入口/线路拥塞，导致卡顿。所以仅仅追求低延迟是不够的，你还需要确保这条线路能够提供<strong>稳定、低抖动</strong>的传输质量。</p>
-<h3 id="机场-线路选择">机场/线路选择</h3>
-<p>有了前文的铺垫，相信师傅们对如何<strong>优化到靶机的网络线路</strong>已经有了一定的了解了。</p>
+<h4 id="并不是优化线路就一定好"><a href="#并不是优化线路就一定好" class="headerlink" title="并不是优化线路就一定好"></a>并不是优化线路就一定好</h4><p>当你获得了一条看似完美的优化线路，你可能会发现延迟（<strong>RTT</strong>）很低，但连接依旧不够稳定，时常感到卡顿。这背后一个常常被忽视的因素，就是 <strong>Jitter（网络抖动）</strong>。</p>
+<p>尽管大多数线路会尽量优化这项指标，但是由于各家的预算不一，可能会碰到入口&#x2F;线路拥塞，导致卡顿。所以仅仅追求低延迟是不够的，你还需要确保这条线路能够提供<strong>稳定、低抖动</strong>的传输质量。</p>
+<h3 id="机场-线路选择"><a href="#机场-线路选择" class="headerlink" title="机场&#x2F;线路选择"></a>机场&#x2F;线路选择</h3><p>有了前文的铺垫，相信师傅们对如何<strong>优化到靶机的网络线路</strong>已经有了一定的了解了。</p>
 <p>对于师傅们我更建议是选择一个好的机场，可以参考<a target="_blank" rel="noopener" href="https://www.haitunt.org/hj.html">沪日&amp;中欧 天梯表</a>去选择机场，当然单独买线路或者 VPS 搭也是可以的。对我来说我比较适合机场，因为折腾这些需要大量的时间还有钱。（摊手</p>
-<h4 id="如何选购">如何选购</h4>
-<p>因为前面打靶机卡死我了，我硬是怼着美东 230ms 的延迟打了半个月。最近查了大量的资料，也找了很多家的测评，总结了下面的选购经验：</p>
+<h4 id="如何选购"><a href="#如何选购" class="headerlink" title="如何选购"></a>如何选购</h4><p>因为前面打靶机卡死我了，我硬是怼着美东 230ms 的延迟打了半个月。最近查了大量的资料，也找了很多家的测评，总结了下面的选购经验：</p>
 <p>看测速图<strong>德国、荷兰、伦敦</strong>的节点，如果有<strong>爱尔兰</strong>的更好，靶机就在家门口。</p>
 <p>同时注意测速<strong>后端地区</strong>，如果和你的地区和运营商一致，那么恭喜你，这就是你的真实体验。如果地区不一样但是你和他的物理距离不远，并且是同一运营商。比如说测速机是东莞电信，而你用的是阳江电信，这也能作为你的参考。因为这些线路的好坏<strong>受运营商影响非常大</strong>，所以必须要<strong>特别注意</strong>。</p>
-<style>.dspkesqhqtce{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Flower_1.png" class="dspkesqhqtce" alt="Flower_1" data-caption="Flower_1" loading="lazy">
-<p>找到和你类似地区/运营商的测速图了之后，主要是看里面的 <strong>RTT 参数</strong>，这就是决定你的体验的关键，比如说下图的 RTT 是 124，Jitter 是 4.9，很优秀了。</p>
+<style>.ycnmfbkqlraj{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Flower_1.png" class="ycnmfbkqlraj" alt="Flower_1" data-caption="Flower_1" loading="lazy">
+
+<p>找到和你类似地区&#x2F;运营商的测速图了之后，主要是看里面的 <strong>RTT 参数</strong>，这就是决定你的体验的关键，比如说下图的 RTT 是 124，Jitter 是 4.9，很优秀了。</p>
 <table>
 <thead>
 <tr>
@@ -624,8 +617,7 @@
 <th>RTT 下限</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>华北地区 -&gt; 德国、荷兰、伦敦</td>
 <td>160</td>
 </tr>
@@ -637,146 +629,123 @@
 <td>华南地区 -&gt; 德国、荷兰、伦敦</td>
 <td>200</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>有些测速图是没有 RTT 标准差这一项的，下面的图是连通性测试，大多你能看到的测速图都是测速+解锁流媒体测试。</p>
-<style>.ubkizogfazur{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Flower_2.jpg" class="ubkizogfazur" alt="Flower_2" data-caption="Flower_2" loading="lazy">
+<style>.yxetykqkpvtg{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Flower_2.jpg" class="yxetykqkpvtg" alt="Flower_2" data-caption="Flower_2" loading="lazy">
+
 <p>还有要注意的就是测速的时间了，一般晚上 18 - 24 这个时间段是高峰期，测速时间在这个时间段更能看出来实力。</p>
-<p>最后一点，线路是有时效性，可能用着用着线路就因为不可抗力的原因切了也有可能，建议在购买的时候不要买长期的，建议月/季付，确定稳定再长期购买。</p>
+<p>最后一点，线路是有时效性，可能用着用着线路就因为不可抗力的原因切了也有可能，建议在购买的时候不要买长期的，建议月&#x2F;季付，确定稳定再长期购买。</p>
 <hr>
-<h4 id="个人体验">个人体验</h4>
-<p>下面是我体验过的，还算 OK 的机场。</p>
-<h5 id="FlowerCloud-专线">FlowerCloud #专线</h5>
-<p>🌷有京德专线，国内通过北京华为云接入。延迟很好看，但是 UDP 的线路有问题，延迟很高还丢包。TCP 没问题，THM AD 域的网络的配置文件是走的 TCP 1194 过去的，可以低延迟愉快玩耍 AD 域，<strong>实际体验 &lt; 180ms + 稳</strong>。</p>
+<h4 id="个人体验"><a href="#个人体验" class="headerlink" title="个人体验"></a>个人体验</h4><p>下面是我体验过的，还算 OK 的机场。</p>
+<h5 id="FlowerCloud-专线"><a href="#FlowerCloud-专线" class="headerlink" title="FlowerCloud #专线"></a>FlowerCloud #专线</h5><p>🌷有京德专线，国内通过北京华为云接入。延迟很好看，但是 UDP 的线路有问题，延迟很高还丢包。TCP 没问题，THM AD 域的网络的配置文件是走的 TCP 1194 过去的，可以低延迟愉快玩耍 AD 域，<strong>实际体验 &lt; 180ms + 稳</strong>。</p>
 <p>还有就是有半个 RETN 优化过的香港，爱尔兰 -&gt; RETN -&gt; HKIX 165ms，<strong>实际体验 &lt; 195ms + 稳</strong>。</p>
 <p>注册链接：<a target="_blank" rel="noopener" href="https://api-flowercloud.com/aff.php?aff=7100">flowercloud</a></p>
-<h5 id="ctc02-直连优化">ctc02 #直连优化</h5>
-<p>ctc02 就是我前面放的 MTR 图的那家，德国节点用的 Misaka 优化过的线路，走京德，如果你在北京的话应该很爽了，150ms 打靶不是梦。<strong>实际体验 180 - 200ms + 稳 / 高峰期没法用</strong>。</p>
+<h5 id="ctc02-直连优化"><a href="#ctc02-直连优化" class="headerlink" title="ctc02 #直连优化"></a>ctc02 #直连优化</h5><p>ctc02 就是我前面放的 MTR 图的那家，德国节点用的 Misaka 优化过的线路，走京德，如果你在北京的话应该很爽了，150ms 打靶不是梦。<strong>实际体验 180 - 200ms + 稳 &#x2F; 高峰期没法用</strong>。</p>
 <p>而他的其他线路就比较没用了，他全是直连优化线路，线路质量挺好的。不过我主力是花云，所以我基本用不上。</p>
 <p>这家挺便宜的，42块钱能买一年。我是买来测试德国节点用的，<strong>最主要的问题是高峰期 RTT 会爆炸💥</strong>，当个备用用还是 OK 的。</p>
 <p>注册链接：<a target="_blank" rel="noopener" href="https://www.ctc.run/#/register?code=4XF32kzm">ctc02</a> 优惠码：<code>20%OFF</code></p>
-<h4 id="顶流线路">顶流线路</h4>
-<p>我在前面提到的<a target="_blank" rel="noopener" href="https://www.haitunt.org/hj.html">天梯图</a>的群里潜伏，从他们3月13日的<a target="_blank" rel="noopener" href="https://t.me/haitunspeed/1169948">讨论</a>中找到了如下信息：</p>
-<style>.mbqbcsjeqzms{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_ALL.png" class="mbqbcsjeqzms" alt="顶级_ALL" data-caption="顶级_ALL" loading="lazy">
+<h4 id="顶流线路"><a href="#顶流线路" class="headerlink" title="顶流线路"></a>顶流线路</h4><p>我在前面提到的<a target="_blank" rel="noopener" href="https://www.haitunt.org/hj.html">天梯图</a>的群里潜伏，从他们3月13日的<a target="_blank" rel="noopener" href="https://t.me/haitunspeed/1169948">讨论</a>中找到了如下信息：</p>
+<style>.pdxcgjhmiquw{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_ALL.png" class="pdxcgjhmiquw" alt="顶级_ALL" data-caption="顶级_ALL" loading="lazy">
+
 <p>这张图可以看出来这几家都挺厉害的，都是一线机场，都是买不起的（</p>
 <p>注意测速点是在北京，而里面的节点是走的中转，实际的 RTT 要减去 北京 - 对应地区的 RTT。</p>
-<p><strong>其价格分别是：Nex 55/月，Dler 999/年，TAG 160/季，AIFUN 18.8/月，MESL 155/年。</strong></p>
+<p><strong>其价格分别是：Nex 55&#x2F;月，Dler 999&#x2F;年，TAG 160&#x2F;季，AIFUN 18.8&#x2F;月，MESL 155&#x2F;年。</strong></p>
 <p>这之中 TAG 和 MESL 的节点覆盖是最全的，有<strong>爱尔兰</strong>节点。</p>
 <ul>
-<li>
-<p>鹿语云 北京测速</p>
-<p>看到一个非常牛逼的机场，但是听说挺贵的。<style>.tofisbcghktj{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E9%B9%BF%E8%AF%AD%E4%BA%91.png" class="tofisbcghktj" alt="顶级_鹿语云" data-caption="顶级_鹿语云" loading="lazy"></p>
+<li><p>鹿语云 北京测速</p>
+<p>看到一个非常牛逼的机场，但是听说挺贵的。<style>.lkoytvjohugd{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E9%B9%BF%E8%AF%AD%E4%BA%91.png" class="lkoytvjohugd" alt="顶级_鹿语云" data-caption="顶级_鹿语云" loading="lazy"></p>
 <p>在他们讨论完的两天后就被清退了hhhh，3月13讨论的，3月15亖的。</p>
-<style>.gdrmwlnyhfnk{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E5%A4%A9%E6%A2%AF%E5%9B%BE-%E9%B9%BF%E8%AF%AD%E4%BA%91%E6%B8%85%E9%80%80.png" class="gdrmwlnyhfnk" alt="顶级_天梯图-鹿语云清退" data-caption="顶级_天梯图-鹿语云清退" loading="lazy">
+<style>.ikkwdkcgdkom{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E5%A4%A9%E6%A2%AF%E5%9B%BE-%E9%B9%BF%E8%AF%AD%E4%BA%91%E6%B8%85%E9%80%80.png" class="ikkwdkcgdkom" alt="顶级_天梯图-鹿语云清退" data-caption="顶级_天梯图-鹿语云清退" loading="lazy">
 </li>
-<li>
-<p>花云 北京测速</p>
-<style>.vdniiuhvwxok{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E8%8A%B1%E4%BA%91%E5%8C%97%E4%BA%AC%E6%B5%8B%E9%80%9F.jpg" class="vdniiuhvwxok" alt="顶级_花云北京测速" data-caption="顶级_花云北京测速" loading="lazy">
+<li><p>花云 北京测速</p>
+<style>.grizgyqluffq{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E8%8A%B1%E4%BA%91%E5%8C%97%E4%BA%AC%E6%B5%8B%E9%80%9F.jpg" class="grizgyqluffq" alt="顶级_花云北京测速" data-caption="顶级_花云北京测速" loading="lazy">
+
 </li>
-<li>
-<p>花云 深圳电信 - 荷兰</p>
-<style>.vytxfeupvnkf{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E8%8A%B1%E4%BA%91%E6%B7%B1%E5%9C%B3%E7%94%B5%E4%BF%A1-%E8%8D%B7%E5%85%B0.png" class="vytxfeupvnkf" alt="顶级_花云深圳电信-荷兰" data-caption="顶级_花云深圳电信-荷兰" loading="lazy">
+<li><p>花云 深圳电信 - 荷兰</p>
+<style>.dplhdkbvtufw{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E8%8A%B1%E4%BA%91%E6%B7%B1%E5%9C%B3%E7%94%B5%E4%BF%A1-%E8%8D%B7%E5%85%B0.png" class="dplhdkbvtufw" alt="顶级_花云深圳电信-荷兰" data-caption="顶级_花云深圳电信-荷兰" loading="lazy">
+
 </li>
-<li>
-<p>绿叶 深圳电信 - 荷兰</p>
-<style>.uvcipwsiivgl{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E7%BB%BF%E5%8F%B6%E6%B7%B1%E5%9C%B3%E7%94%B5%E4%BF%A1-%E8%8D%B7%E5%85%B0.png" class="uvcipwsiivgl" alt="顶级_绿叶深圳电信-荷兰" data-caption="顶级_绿叶深圳电信-荷兰" loading="lazy">
-</li>
+<li><p>绿叶 深圳电信 - 荷兰</p>
+<style>.dlhqgveqsfyz{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E9%A1%B6%E7%BA%A7_%E7%BB%BF%E5%8F%B6%E6%B7%B1%E5%9C%B3%E7%94%B5%E4%BF%A1-%E8%8D%B7%E5%85%B0.png" class="dlhqgveqsfyz" alt="顶级_绿叶深圳电信-荷兰" data-caption="顶级_绿叶深圳电信-荷兰" loading="lazy"></li>
 </ul>
-<h3 id="总结">总结</h3>
-<p>如果你是懒狗，又不太在意预算的话，无脑看<a target="_blank" rel="noopener" href="https://www.haitunt.org/hj.html">天梯图</a>，挑一家买就完事。极致优化线路/专线的价格不是一般机场能承受的起的，而对这种线路有需求的人又是少数，基本上小机场不会上这种线路，只有大机场才有，所以相应套餐的价格也是偏高的（一分钱一分货）。</p>
-<style>.cxtpohprrrnd{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E5%A4%A9%E6%A2%AF%E5%9B%BE.png" class="cxtpohprrrnd" alt="天梯图" data-caption="天梯图" loading="lazy">
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>如果你是懒狗，又不太在意预算的话，无脑看<a target="_blank" rel="noopener" href="https://www.haitunt.org/hj.html">天梯图</a>，挑一家买就完事。极致优化线路&#x2F;专线的价格不是一般机场能承受的起的，而对这种线路有需求的人又是少数，基本上小机场不会上这种线路，只有大机场才有，所以相应套餐的价格也是偏高的（一分钱一分货）。</p>
+<style>.czlmgifghuln{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/%E5%A4%A9%E6%A2%AF%E5%9B%BE.png" class="czlmgifghuln" alt="天梯图" data-caption="天梯图" loading="lazy">
+
 <p>鹿语云已经下架了，那个 <code>$d</code> 不知道是什么玩意，找了一下也没有有价值的信息</p>
 <p>上榜的价格如下：</p>
 <ul>
-<li>VikingLinks 35/月</li>
-<li>xipcloud 400/年</li>
-<li>tag 160/季</li>
-<li>花云 128/年</li>
+<li>VikingLinks 35&#x2F;月</li>
+<li>xipcloud 400&#x2F;年</li>
+<li>tag 160&#x2F;季</li>
+<li>花云 128&#x2F;年</li>
 </ul>
 <p>上面这四家我都会买一遍体验一下，如果花云能解决 UDP TCP RTT 不一致的问题就好了（我已经发了工单），我猜是 UDP 过去走了不同的线路，或者没走专线。</p>
 <p><strong>2025-09-20 回复：没法解决</strong></p>
-<style>.pypjddqsumki{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Flower_UDP_%E4%BB%A3%E7%90%86%E6%97%A0%E6%B3%95%E8%A7%A3%E5%86%B3.png" class="pypjddqsumki" alt="Flower_UDP_代理无法解决" data-caption="Flower_UDP_代理无法解决" loading="lazy">
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-236957-1">日本到美国的线路是怎么走的呢？是往亚洲还是往太平洋？</a></p>
+<style>.gtmqisupnjmn{}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/Flower_UDP_%E4%BB%A3%E7%90%86%E6%97%A0%E6%B3%95%E8%A7%A3%E5%86%B3.png" class="gtmqisupnjmn" alt="Flower_UDP_代理无法解决" data-caption="Flower_UDP_代理无法解决" loading="lazy">
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-236957-1">日本到美国的线路是怎么走的呢？是往亚洲还是往太平洋？</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-303353-1">有美东的优化线路机吗？纽约延迟最低多少？</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-303353-1">有美东的优化线路机吗？纽约延迟最低多少？</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-416366-1">其实JP地理位置比SG更好</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-416366-1">其实JP地理位置比SG更好</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/695121">中德最低延迟该怎么走？</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/695121">中德最低延迟该怎么走？</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-303373-1">Bage VPS HK Lite 与 HK Standard 欧洲路由(RETN)详细对比 (补充Akile retn对比)</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-303373-1">Bage VPS HK Lite 与 HK Standard 欧洲路由(RETN)详细对比 (补充Akile retn对比)</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-331639-1">简单汇总下个人所了解的几个方向稳定的优化线路方式（主观）</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-331639-1">简单汇总下个人所了解的几个方向稳定的优化线路方式（主观）</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-193599-1">请教一下广东联通小鸡到德国延迟140ms，走的物理线路可能是哪根呢（附路由）</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-193599-1">请教一下广东联通小鸡到德国延迟140ms，走的物理线路可能是哪根呢（附路由）</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-204148-1">Misaka德国柏林 测评</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-204148-1">Misaka德国柏林 测评</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-450702-1">测评留档Misaka Berlin柏林CN2 10.50 USD / mo</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-450702-1">测评留档Misaka Berlin柏林CN2 10.50 USD &#x2F; mo</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-280170-1">求推荐去欧洲低延迟的方案 玩游戏和语音用</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-280170-1">求推荐去欧洲低延迟的方案 玩游戏和语音用</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://retn.net/cn/network/network-map">RETN POP-MAP</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://retn.net/cn/network/network-map">RETN POP-MAP</a></p>
 </li>
 </ul>
-<h3 id="测试工具">测试工具</h3>
-<ul>
-<li>
-<p><a target="_blank" rel="noopener" href="https://lg.retn.net/">RETN Looking Glass</a></p>
+<h3 id="测试工具"><a href="#测试工具" class="headerlink" title="测试工具"></a>测试工具</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://lg.retn.net/">RETN Looking Glass</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.itdog.cn/">IT Dog</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.itdog.cn/">IT Dog</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://www.cloudping.co/">AWS Latency Monitoring</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.cloudping.co/">AWS Latency Monitoring</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://awsspeedtest.com/">AWS Speed Test</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://awsspeedtest.com/">AWS Speed Test</a></p>
 </li>
 </ul>
-<h3 id="测速站">测速站</h3>
-<ul>
+<h3 id="测速站"><a href="#测速站" class="headerlink" title="测速站"></a>测速站</h3><ul>
 <li><a target="_blank" rel="noopener" href="https://duangks.com/">性价比机场测速</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.duyaoss.com/">DuyaoSS-机场测速和简介</a></li>
 </ul>
-<h1>番外</h1>
-<p>在写完本文一天后，我突发奇想，THM 用的是 AWS，而 AWS 是全球最大的云服务器提供商，非常多的游戏都是用的他家的服务器，那是否我们可以利用网游加速器，来实现加速我们的 THM 呢？</p>
-<h2 id="利用网游加速器">利用网游加速器</h2>
-<p>网游加速器相信师傅们都用过吧，这些加速器厂商为了游戏玩家都会把线路优化到极致，所以我们就可以利用他的加速，把我们到 THM 服务器的连接加速上，达到最优的打靶体验。</p>
+<h1 id="番外"><a href="#番外" class="headerlink" title="番外"></a>番外</h1><p>在写完本文一天后，我突发奇想，THM 用的是 AWS，而 AWS 是全球最大的云服务器提供商，非常多的游戏都是用的他家的服务器，那是否我们可以利用网游加速器，来实现加速我们的 THM 呢？</p>
+<h2 id="利用网游加速器"><a href="#利用网游加速器" class="headerlink" title="利用网游加速器"></a>利用网游加速器</h2><p>网游加速器相信师傅们都用过吧，这些加速器厂商为了游戏玩家都会把线路优化到极致，所以我们就可以利用他的加速，把我们到 THM 服务器的连接加速上，达到最优的打靶体验。</p>
 <p>本文以 UU 加速器为例，寻找利用他的方法。</p>
-<h3 id="网游加速器介绍">网游加速器介绍</h3>
-<p>大多数网游加速器都是通过国内服务器做中转来给国内用户接入，<strong>国内服务器到国外的落地机</strong>之间这条线路做好优化，体验就挺好了。</p>
+<h3 id="网游加速器介绍"><a href="#网游加速器介绍" class="headerlink" title="网游加速器介绍"></a>网游加速器介绍</h3><p>大多数网游加速器都是通过国内服务器做中转来给国内用户接入，<strong>国内服务器到国外的落地机</strong>之间这条线路做好优化，体验就挺好了。</p>
 <p>而有些加速器甚至连国内的运营商都考虑到了，做了多线接入，这就保证了用户这边不论用的是哪家运营商，都是享受着最佳的路线过去的。国内 + 国外的线路都考虑到了，用户体验才会优秀嘛。</p>
 <p>这里以 UU 加速器加速 APEX 的欧服节点为例，可以看到下面显示的游戏延迟为 154ms，这是到德国的延迟。</p>
 <img src="/thm_openvpn_conf/UU-1.png" class="" title="UU-1">
+
 <p>使用 System Informer 抓出来加速节点的 IP，UU 加速器一般连接着的节点会有两个 TCP 连接，端口号一个1k+，另一个2k+，很好分辨。其他加速器厂商就不清楚了。</p>
 <img src="/thm_openvpn_conf/UU-2.png" class="" title="UU-2">
+
 <p>使用 OpenTrace 进行路由追踪到中转服务器的链路，我本地 - 北京的中转服务器大约是 42ms，而加速器加速界面显示的延迟为 154ms，即中德之间的延迟为 112ms，和前面分析的差不多。</p>
 <img src="/thm_openvpn_conf/UU-3.png" class="" title="UU-3">
+
 <p>如果能利用这条线路去访问爱尔兰的话，延迟应该是 178ms（后文会做验证）。</p>
-<h3 id="加速模式">加速模式</h3>
-<p>常见的网游加速器给游戏加速有两种手段，一种是劫持进程，即<strong>进程模式</strong>，还有一种则是虚拟一块网卡，全局代理三层流量，即<strong>路由模式</strong>。</p>
+<h3 id="加速模式"><a href="#加速模式" class="headerlink" title="加速模式"></a>加速模式</h3><p>常见的网游加速器给游戏加速有两种手段，一种是劫持进程，即<strong>进程模式</strong>，还有一种则是虚拟一块网卡，全局代理三层流量，即<strong>路由模式</strong>。</p>
 <p>这里不会详细介绍他们的实现原理，两种方法都有利用他们的办法。</p>
 <p>利用进程模式，我们可以对他们要加速的游戏进行注入，把我们的代理程序注入到游戏进程里，再连接那个代理端口，游戏加速器会帮我们“加速“我们注入进去的那个程序，实现加速我们访问服务器的链路。</p>
 <p>而路由模式就很简单了，因为他直接开了一块网卡，相当于三层隧道了。所以我们只需要一点小小的改动，就能利用上，本节会以此来叙述。</p>
-<h3 id="观察加速行为">观察加速行为</h3>
-<p>这里还是以 UU 加速器为例，在 “区服、节点选择” 的节点选项卡中，过滤<strong>路由模式</strong>的节点，点击立即加速。</p>
-<style>.blwfrogeeedh{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/UU-4.png" class="blwfrogeeedh" alt="UU-4" data-caption="UU-4" loading="lazy">
+<h3 id="观察加速行为"><a href="#观察加速行为" class="headerlink" title="观察加速行为"></a>观察加速行为</h3><p>这里还是以 UU 加速器为例，在 “区服、节点选择” 的节点选项卡中，过滤<strong>路由模式</strong>的节点，点击立即加速。</p>
+<style>.pdmizlcgouje{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/UU-4.png" class="pdmizlcgouje" alt="UU-4" data-caption="UU-4" loading="lazy">
+
 <p>在控制面板 - 网络连接里面可以看到，UU 加速器新建了一块 <code>UU Wintun Tunnel</code> 的网卡。</p>
-<style>.inyebcpevgut{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/UU-5.png" class="inyebcpevgut" alt="UU-5" data-caption="UU-5" loading="lazy">
+<style>.pbwxkqlhzxro{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/UU-5.png" class="pbwxkqlhzxro" alt="UU-5" data-caption="UU-5" loading="lazy">
+
 <p>而 UU 加速器是怎么样让我们游戏的流量经过这块网卡呢？想必聪明的你们已经想到了，<strong>路由表</strong>。</p>
 <p>UU 加速器并不会加一条 <code>0.0.0.0</code> 的路由，相反，他很聪明。他把游戏的所有服务器的 IP 段都抓出来了，加进我们电脑的路由表中。</p>
 <p>你可以使用 <code>route PRINT</code> 查看：</p>
@@ -792,15 +761,18 @@
 <span class="line"><span style="color: #abb2bf">      3.1.250.122  255.255.255.255      172.19.84.1    172.19.84.237    100</span></span>
 <span class="line"><span style="color: #abb2bf">         3.12.0.0      255.255.0.0      172.19.84.1    172.19.84.237    100</span></span>
 <span class="line"><span style="color: #abb2bf">...</span></span></code></pre></div></div></figure>
+
 <p>这里只截取了一小部分，完整的路由表有 2000 多条。</p>
 <p>很可惜，我翻了一下，路由分得很细，并没有大段大段的块，我把 THM 的 6 个欧洲的节点都看了，都不在里面。刚开始还想直接起飞呢。下图是离得比较近的一个。</p>
-<style>.ngbzsoocgokv{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/UU-6.png" class="ngbzsoocgokv" alt="UU-6" data-caption="UU-6" loading="lazy">
-<h3 id="修改路由表">修改路由表</h3>
-<p>既然没有我们的路由，那我们就加一个嘛，Windows 系统加路由表的语法如下</p>
+<style>.fotjgfmshndk{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/UU-6.png" class="fotjgfmshndk" alt="UU-6" data-caption="UU-6" loading="lazy">
+
+<h3 id="修改路由表"><a href="#修改路由表" class="headerlink" title="修改路由表"></a>修改路由表</h3><p>既然没有我们的路由，那我们就加一个嘛，Windows 系统加路由表的语法如下</p>
 <figure class="shiki cmd"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #ABB2BF">route </span><span style="color: #56B6C2">ADD</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">157.0.0.0</span><span style="color: #ABB2BF"> MASK </span><span style="color: #D19A66">255.0.0.0</span><span style="color: #ABB2BF">  </span><span style="color: #D19A66">157.55.80.1</span><span style="color: #ABB2BF"> METRIC </span><span style="color: #D19A66">3</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">IF</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">2</span></span></code></pre></div></div></figure>
+
 <p>我们就构造一个出来</p>
 <figure class="shiki cmd"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #ABB2BF">route </span><span style="color: #56B6C2">ADD</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">18.202.129.195</span><span style="color: #ABB2BF"> MASK </span><span style="color: #D19A66">255.255.255.255</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">172.19.84.1</span></span>
 <span class="line"><span style="color: #ABB2BF">操作完成!</span></span></code></pre></div></div></figure>
+
 <p>直接开 ping！</p>
 <figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">C:\Users\Recopec&gt;ping 18.202.129.195</span></span>
 <span class="line"><span style="color: #abb2bf"></span></span>
@@ -809,9 +781,11 @@
 <span class="line"><span style="color: #abb2bf">请求超时。</span></span>
 <span class="line"><span style="color: #abb2bf">请求超时。</span></span>
 <span class="line"><span style="color: #abb2bf">请求超时。</span></span></code></pre></div></div></figure>
+
 <p>哦嚯，不通，抓包看看。</p>
-<style>.dvgeqfbskani{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/UU-7.png" class="dvgeqfbskani" alt="UU-7" data-caption="UU-7" loading="lazy">
-<p>网卡里面可以看到我们发出的 ICMP Echo 数据包，但没有 Echo Reply/Destination Unreachable 之类的回包，就代表<strong>根本没通</strong>！</p>
+<style>.ikbnyvxlbbbl{zoom:50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/UU-7.png" class="ikbnyvxlbbbl" alt="UU-7" data-caption="UU-7" loading="lazy">
+
+<p>网卡里面可以看到我们发出的 ICMP Echo 数据包，但没有 Echo Reply&#x2F;Destination Unreachable 之类的回包，就代表<strong>根本没通</strong>！</p>
 <p>我猜测是他们加速器的服务端做了限制，不仅依赖<strong>客户端这边的路由表</strong>，服务端那边还有一份<strong>白名单路由</strong>。</p>
 <p>我把 THM 的美国和欧洲的所有节点都试了一遍，没法加速。</p>
 <figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">route ADD 3.254.253.220 MASK 255.255.255.255 172.19.84.1</span></span>
@@ -820,9 +794,9 @@
 <span class="line"><span style="color: #abb2bf">route ADD 52.16.156.56 MASK 255.255.255.255 172.19.84.1</span></span>
 <span class="line"><span style="color: #abb2bf">route ADD 54.76.30.11 MASK 255.255.255.255 172.19.84.1</span></span>
 <span class="line"><span style="color: #abb2bf">route ADD 63.35.110.70 MASK 255.255.255.255 172.19.84.1</span></span></code></pre></div></div></figure>
+
 <p>但是在我切换游戏的时候，发现了不一样的行为，每个不同游戏添加的路由表都是不一样的。</p>
-<h3 id="观察不同游戏的路由表">观察不同游戏的路由表</h3>
-<p>我会从 <code>18.200.0.0</code> 这里开始截取 5 个路由，以供进行对比。</p>
+<h3 id="观察不同游戏的路由表"><a href="#观察不同游戏的路由表" class="headerlink" title="观察不同游戏的路由表"></a>观察不同游戏的路由表</h3><p>我会从 <code>18.200.0.0</code> 这里开始截取 5 个路由，以供进行对比。</p>
 <p>这是加速 <strong>APEX</strong> 的</p>
 <figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">    18.204.0.0      255.252.0.0      172.19.84.1    172.19.84.237    100</span></span>
 <span class="line"><span style="color: #abb2bf"> 18.207.13.253  255.255.255.255      172.19.84.1    172.19.84.237      5</span></span>
@@ -830,23 +804,26 @@
 <span class="line"><span style="color: #abb2bf"> 18.208.99.156  255.255.255.255      172.19.84.1    172.19.84.237      5</span></span>
 <span class="line"><span style="color: #abb2bf"> 18.208.109.74  255.255.255.255      172.19.84.1    172.19.84.237    100</span></span>
 <span class="line"><span style="color: #abb2bf">18.209.202.220  255.255.255.255      172.19.84.1    172.19.84.237      5</span></span></code></pre></div></div></figure>
+
 <p><strong>瓦洛兰特</strong></p>
 <figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">    18.201.0.0      255.255.0.0      172.19.83.1    172.19.83.237    100</span></span>
 <span class="line"><span style="color: #abb2bf">    18.204.0.0      255.252.0.0      172.19.83.1    172.19.83.237    100</span></span>
 <span class="line"><span style="color: #abb2bf">18.205.205.190  255.255.255.255      172.19.83.1    172.19.83.237     35</span></span>
 <span class="line"><span style="color: #abb2bf">18.208.112.174  255.255.255.255      172.19.83.1    172.19.83.237     35</span></span>
 <span class="line"><span style="color: #abb2bf"> 18.210.130.43  255.255.255.255      172.19.83.1    172.19.83.237     35</span></span></code></pre></div></div></figure>
+
 <p><strong>PUBG</strong></p>
 <figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">  18.204.0.0      255.252.0.0      172.19.84.1    172.19.84.237    100</span></span>
 <span class="line"><span style="color: #abb2bf">18.204.57.43  255.255.255.255      172.19.84.1    172.19.84.237      5</span></span>
 <span class="line"><span style="color: #abb2bf">  18.208.0.0      255.248.0.0      172.19.84.1    172.19.84.237    100</span></span>
 <span class="line"><span style="color: #abb2bf">  18.216.0.0      255.252.0.0      172.19.84.1    172.19.84.237    100</span></span>
 <span class="line"><span style="color: #abb2bf">  18.220.0.0      255.252.0.0      172.19.84.1    172.19.84.237    100</span></span></code></pre></div></div></figure>
+
 <p>有没有发现，他们添加的路由表是不一样的，但是有<strong>重叠的部分</strong>。</p>
-<h3 id="验证猜想">验证猜想</h3>
-<p>为了验证上面的猜想，即是否依赖<strong>服务端的白名单路由</strong>，我将会找出未添加到该游戏的 IP 段，而在另一个游戏里面有添加的 IP 段进行测试。</p>
+<h3 id="验证猜想"><a href="#验证猜想" class="headerlink" title="验证猜想"></a>验证猜想</h3><p>为了验证上面的猜想，即是否依赖<strong>服务端的白名单路由</strong>，我将会找出未添加到该游戏的 IP 段，而在另一个游戏里面有添加的 IP 段进行测试。</p>
 <p>这里我挑选的是在瓦洛兰特里面出现的 <code>18.201.0.0/16</code> 进行测试，刚好这是和 THM 同一个服务区的 IP 段。</p>
-<style>.axyujwdwofyc{zoom: 50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/UU-8.png" class="axyujwdwofyc" alt="UU-8" data-caption="UU-8" loading="lazy">
+<style>.xduuqrnwbqic{zoom: 50%;}</style><img onerror="imgOnError(this);" data-fancybox="gallery" src="/thm_openvpn_conf/UU-8.png" class="xduuqrnwbqic" alt="UU-8" data-caption="UU-8" loading="lazy">
+
 <p>首先扫描这里面能 ping 通的主机，为了节省时间，我只扫一个 C 段。</p>
  <figure class="shiki sh"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #7F848E; font-style: italic"># -sn 不扫描端口 -PE ICMP扫描 -n 不进行 DNS 解析 --min-rate 最低速度</span></span>
 <span class="line"><span style="color: #61AFEF">nmap</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">-sn</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">-PE</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">-n</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">18.201</span><span style="color: #98C379">.0.0/24</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">--min-rate=1000</span></span>
@@ -859,6 +836,7 @@
 <span class="line"><span style="color: #61AFEF">Nmap</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">scan</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">report</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">for</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">18.201</span><span style="color: #98C379">.0.201</span></span>
 <span class="line"><span style="color: #61AFEF">Host</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">is</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">up</span><span style="color: #ABB2BF"> (0.23s </span><span style="color: #98C379">latency</span><span style="color: #ABB2BF">).</span></span>
 <span class="line"><span style="color: #61AFEF">Nmap</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">done:</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">256</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">IP</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">addresses</span><span style="color: #ABB2BF"> (3 </span><span style="color: #98C379">hosts</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">up</span><span style="color: #ABB2BF">) scanned </span><span style="color: #C678DD">in</span><span style="color: #ABB2BF"> 1.85 seconds</span></span></code></pre></div></div></figure>
+
 <p><code>18.201.0.14</code> 就你了，首先测试本机直连的 ping 延迟。</p>
 <figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">PS D:\tools&gt; ping 18.201.0.14 -n 10</span></span>
 <span class="line"><span style="color: #abb2bf"></span></span>
@@ -878,8 +856,10 @@
 <span class="line"><span style="color: #abb2bf">    数据包: 已发送 = 10，已接收 = 10，丢失 = 0 (0% 丢失)，</span></span>
 <span class="line"><span style="color: #abb2bf">往返行程的估计时间(以毫秒为单位):</span></span>
 <span class="line"><span style="color: #abb2bf">    最短 = 228ms，最长 = 229ms，平均 = 228ms</span></span></code></pre></div></div></figure>
+
 <p>手动添加路由表</p>
 <figure class="shiki cmd"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #ABB2BF">route </span><span style="color: #56B6C2">ADD</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">18.201.0.14</span><span style="color: #ABB2BF"> MASK </span><span style="color: #D19A66">255.255.255.255</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">172.19.84.1</span></span></code></pre></div></div></figure>
+
 <p>再次 ping 测试</p>
 <figure class="shiki"><div class='codeblock'><div class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div><div class="code"><pre class="shiki one-dark-pro"><code><span class="line"><span style="color: #abb2bf">PS D:\tools&gt; ping 18.201.0.14 -n 10</span></span>
 <span class="line"><span style="color: #abb2bf"></span></span>
@@ -899,12 +879,13 @@
 <span class="line"><span style="color: #abb2bf">    数据包: 已发送 = 10，已接收 = 10，丢失 = 0 (0% 丢失)，</span></span>
 <span class="line"><span style="color: #abb2bf">往返行程的估计时间(以毫秒为单位):</span></span>
 <span class="line"><span style="color: #abb2bf">    最短 = 173ms，最长 = 180ms，平均 = 176ms</span></span></code></pre></div></div></figure>
+
 <p>有效果！说明 UU 加速器依赖的是在服务端的那一份<strong>大的白名单路由表</strong>。而我们测试的 THM 的 IP 段没加进路由，没法用。</p>
 <p>其实我很好奇，难道 AWS 给游戏厂商服务器的段是专用的？不会和现有的重叠吗？我还心存侥幸的以为会有漏网之鱼呢，没想到一个都没有。</p>
 <p>从这份结果就可以验证，从我现在所在区域到 THM 服务器，目前能达到的<strong>最快延迟是 173ms</strong>，和之前猜想 178ms 差不多。</p>
-<h3 id="后记">后记</h3>
-<p>发现了 UU 加速器的一个漏洞，交给网易 SRC 不认。</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>发现了 UU 加速器的一个漏洞，交给网易 SRC 不认。</p>
 <img src="/thm_openvpn_conf/UU-9.png" class="" title="UU-9">
+
 <p>看完我觉得你们应该猜得出来应该怎么利用了，但是我不能说，因为我同意网易 SRC 的用户协议了，怕喜提银手镯。</p>
 <p>如果有其他问题可以联系我讨论，请参考<a href="https://blog.irec.moe/about.html">关于博主</a>。</p>
 
@@ -933,7 +914,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1758796451368"></script>
+    <script async src="/js/copy-codeblock.js?v=1758806526349"></script>
   
 
   
@@ -967,7 +948,7 @@
             <button class="mdui-fab catalog" style="overflow:unset;">
                 <i class="nexmoefont icon-i-catalog"></i>
                 <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">TryHackMe OpenVPN 配置优化指北</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87-OpenVPN-%E6%8E%A5%E5%85%A5-THM"><span class="toc-number">1.2.</span> <span class="toc-text">通过 OpenVPN 接入 THM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%A1%88"><span class="toc-number">1.2.1.</span> <span class="toc-text">我的使用方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Windows-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Windows 配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-Kali-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Linux(Kali) 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E9%80%9A%E4%BF%A1%E7%BD%91%E5%8D%A1-IP"><span class="toc-number">1.2.1.2.1.</span> <span class="toc-text">获取通信网卡 IP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Kali-%E4%B8%8A%E7%9A%84-OpenVPN"><span class="toc-number">1.2.1.2.2.</span> <span class="toc-text">配置 Kali 上的 OpenVPN</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E8%83%BD%E7%A2%B0%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">可能碰到的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E8%A7%84%E5%88%99%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.2.1.3.1.</span> <span class="toc-text">代理规则设置</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">网络优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP-%E8%B7%AF%E7%94%B1%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.1.</span> <span class="toc-text">IP 路由原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CN2%E3%80%81CMI"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">CN2、CMI</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5%E5%8C%BA%E5%9F%9F%E9%80%89%E6%8B%A9"><span class="toc-number">1.3.2.</span> <span class="toc-text">接入区域选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BE%8E%E4%B8%9C%E9%9D%B6%E6%9C%BA"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">美东靶机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#THM-%E6%8E%A5%E5%85%A5%E8%8A%82%E7%82%B9"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">THM 接入节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-RTT"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">测试 RTT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E8%B7%AF%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.3.</span> <span class="toc-text">线路优化原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">线路分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%BA%E5%9F%9F%E6%8E%A8%E8%8D%90"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">区域推荐</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%8E%E5%8C%97%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.3.3.2.1.</span> <span class="toc-text">华北区域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%8E%E4%B8%AD%E5%8D%8E%E4%B8%9C%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.3.3.2.2.</span> <span class="toc-text">华中华东区域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%8E%E8%A5%BF%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.3.3.2.3.</span> <span class="toc-text">华西区域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B9%BF%E4%B8%9C-%E5%8D%8E%E5%8D%97"><span class="toc-number">1.3.3.2.4.</span> <span class="toc-text">广东&#x2F;华南</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B6%E4%B8%8D%E6%98%AF%E4%BC%98%E5%8C%96%E7%BA%BF%E8%B7%AF%E5%B0%B1%E4%B8%80%E5%AE%9A%E5%A5%BD"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">并不是优化线路就一定好</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%9C%BA-%E7%BA%BF%E8%B7%AF%E9%80%89%E6%8B%A9"><span class="toc-number">1.3.4.</span> <span class="toc-text">机场&#x2F;线路选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E8%B4%AD"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">如何选购</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E4%BD%93%E9%AA%8C"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">个人体验</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#FlowerCloud-%E4%B8%93%E7%BA%BF"><span class="toc-number">1.3.4.2.1.</span> <span class="toc-text">FlowerCloud #专线</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ctc02-%E7%9B%B4%E8%BF%9E%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.4.2.2.</span> <span class="toc-text">ctc02 #直连优化</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%B6%E6%B5%81%E7%BA%BF%E8%B7%AF"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">顶流线路</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.5.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.4.</span> <span class="toc-text">参考资料</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7"><span class="toc-number">1.4.1.</span> <span class="toc-text">测试工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E9%80%9F%E7%AB%99"><span class="toc-number">1.4.2.</span> <span class="toc-text">测速站</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">番外</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E7%BD%91%E6%B8%B8%E5%8A%A0%E9%80%9F%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">利用网游加速器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E6%B8%B8%E5%8A%A0%E9%80%9F%E5%99%A8%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.1.1.</span> <span class="toc-text">网游加速器介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E9%80%9F%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.2.</span> <span class="toc-text">加速模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E5%8A%A0%E9%80%9F%E8%A1%8C%E4%B8%BA"><span class="toc-number">2.1.3.</span> <span class="toc-text">观察加速行为</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="toc-number">2.1.4.</span> <span class="toc-text">修改路由表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E4%B8%8D%E5%90%8C%E6%B8%B8%E6%88%8F%E7%9A%84%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="toc-number">2.1.5.</span> <span class="toc-text">观察不同游戏的路由表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E7%8C%9C%E6%83%B3"><span class="toc-number">2.1.6.</span> <span class="toc-text">验证猜想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-number">2.1.7.</span> <span class="toc-text">后记</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TryHackMe-OpenVPN-%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96%E6%8C%87%E5%8C%97"><span class="toc-number">1.</span> <span class="toc-text">TryHackMe OpenVPN 配置优化指北</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87-OpenVPN-%E6%8E%A5%E5%85%A5-THM"><span class="toc-number">1.2.</span> <span class="toc-text">通过 OpenVPN 接入 THM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%A1%88"><span class="toc-number">1.2.1.</span> <span class="toc-text">我的使用方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Windows-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Windows 配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-Kali-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Linux(Kali) 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E9%80%9A%E4%BF%A1%E7%BD%91%E5%8D%A1-IP"><span class="toc-number">1.2.1.2.1.</span> <span class="toc-text">获取通信网卡 IP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Kali-%E4%B8%8A%E7%9A%84-OpenVPN"><span class="toc-number">1.2.1.2.2.</span> <span class="toc-text">配置 Kali 上的 OpenVPN</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E8%83%BD%E7%A2%B0%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">可能碰到的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E8%A7%84%E5%88%99%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.2.1.3.1.</span> <span class="toc-text">代理规则设置</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.</span> <span class="toc-text">网络优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP-%E8%B7%AF%E7%94%B1%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.1.</span> <span class="toc-text">IP 路由原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CN2%E3%80%81CMI"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">CN2、CMI</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5%E5%8C%BA%E5%9F%9F%E9%80%89%E6%8B%A9"><span class="toc-number">1.3.2.</span> <span class="toc-text">接入区域选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BE%8E%E4%B8%9C%E9%9D%B6%E6%9C%BA"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">美东靶机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#THM-%E6%8E%A5%E5%85%A5%E8%8A%82%E7%82%B9"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">THM 接入节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95-RTT"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">测试 RTT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E8%B7%AF%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.3.</span> <span class="toc-text">线路优化原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">线路分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%BA%E5%9F%9F%E6%8E%A8%E8%8D%90"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">区域推荐</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%8E%E5%8C%97%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.3.3.2.1.</span> <span class="toc-text">华北区域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%8E%E4%B8%AD%E5%8D%8E%E4%B8%9C%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.3.3.2.2.</span> <span class="toc-text">华中华东区域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%8E%E8%A5%BF%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.3.3.2.3.</span> <span class="toc-text">华西区域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B9%BF%E4%B8%9C-%E5%8D%8E%E5%8D%97"><span class="toc-number">1.3.3.2.4.</span> <span class="toc-text">广东&#x2F;华南</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B6%E4%B8%8D%E6%98%AF%E4%BC%98%E5%8C%96%E7%BA%BF%E8%B7%AF%E5%B0%B1%E4%B8%80%E5%AE%9A%E5%A5%BD"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">并不是优化线路就一定好</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%9C%BA-%E7%BA%BF%E8%B7%AF%E9%80%89%E6%8B%A9"><span class="toc-number">1.3.4.</span> <span class="toc-text">机场&#x2F;线路选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E8%B4%AD"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">如何选购</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E4%BD%93%E9%AA%8C"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">个人体验</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#FlowerCloud-%E4%B8%93%E7%BA%BF"><span class="toc-number">1.3.4.2.1.</span> <span class="toc-text">FlowerCloud #专线</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ctc02-%E7%9B%B4%E8%BF%9E%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.4.2.2.</span> <span class="toc-text">ctc02 #直连优化</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%B6%E6%B5%81%E7%BA%BF%E8%B7%AF"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">顶流线路</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.5.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.4.</span> <span class="toc-text">参考资料</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7"><span class="toc-number">1.4.1.</span> <span class="toc-text">测试工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E9%80%9F%E7%AB%99"><span class="toc-number">1.4.2.</span> <span class="toc-text">测速站</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%95%AA%E5%A4%96"><span class="toc-number">2.</span> <span class="toc-text">番外</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E7%BD%91%E6%B8%B8%E5%8A%A0%E9%80%9F%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">利用网游加速器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E6%B8%B8%E5%8A%A0%E9%80%9F%E5%99%A8%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.1.1.</span> <span class="toc-text">网游加速器介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E9%80%9F%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.2.</span> <span class="toc-text">加速模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E5%8A%A0%E9%80%9F%E8%A1%8C%E4%B8%BA"><span class="toc-number">2.1.3.</span> <span class="toc-text">观察加速行为</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="toc-number">2.1.4.</span> <span class="toc-text">修改路由表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E4%B8%8D%E5%90%8C%E6%B8%B8%E6%88%8F%E7%9A%84%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="toc-number">2.1.5.</span> <span class="toc-text">观察不同游戏的路由表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E7%8C%9C%E6%83%B3"><span class="toc-number">2.1.6.</span> <span class="toc-text">验证猜想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-number">2.1.7.</span> <span class="toc-text">后记</span></a></li></ol></li></ol></li></ol>
                 </div>
             </button>
             
